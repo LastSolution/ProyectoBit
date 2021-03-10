@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- suppress ALL -->
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/restaurante_salmuera"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Nuevo Restaurante"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:textSize="30dp"
+
+    android:layout_marginTop="100dp"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:textColorHint="@color/design_default_color_primary"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textStyle="bold"
+        android:hint="Nombre"
+        android:id="@+id/etNombre" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:textColorHint="@color/design_default_color_primary"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textStyle="bold"
+        android:hint="Rut"
+        android:id="@+id/etRut" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:textColorHint="@color/design_default_color_primary"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textStyle="bold"
+        android:hint="Tipo"
+        android:id="@+id/EtTipo" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnconectar"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:text="Ingresar"
+        android:textSize="20dp">
+
+    </com.google.android.material.button.MaterialButton>
+
+
+</LinearLayout>
