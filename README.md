@@ -1,2 +1,8 @@
 # ProyectoBit
-Repositorio del grupo Last Solution para el codigo del proyecto bit
+Repositorio del grupo Last Solution para el codigo del proyecto bit 
+
+INSTRUCCIONES PARA CONECTAR CON SQL
+ 
+EJECUTAR EL  ARCHIVO TASTIT .SQL EN SQL PARA CREAR LA BASE DE DATOS 
+LUEGO EN LA CLASE CONEXION COLOCAR LOS DATOS DE SU SERVIDOR 
+
