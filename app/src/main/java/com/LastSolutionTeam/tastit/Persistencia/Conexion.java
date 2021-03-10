@@ -9,7 +9,7 @@ import net.sourceforge.jtds.jdbc.Driver;
 
 public class Conexion {
 
-    private static String I P_PUERTO="";           // IP DE LA PC : PUERTO DE SQL        
+    private static String IP_PUERTO="";           // IP DE LA PC : PUERTO DE SQL        
     private static String DATABASE="";             //NOMBRE DE LA BASE DE DATOS
     private static String INSTANCE="";            //INSTANCIA
     private static String USERNAME="";            // USER
