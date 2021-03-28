@@ -1,5 +1,16 @@
 package com.LastSolutionTeam.tastit.POJO;
 
+import com.LastSolutionTeam.tastit.Persistencia.Conexion;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Date;
+
 public class Usuario {
 
     //atributos
@@ -46,11 +57,159 @@ public class Usuario {
     }
 
     //constructor
-    public Usuario(int pId, String pUser, String pPass, int pTipo, String pRut){
+    public Usuario(int pId, String pUser, String pPass, int pTipo, String pRut) {
         id_usuario = pId;
         username = pUser;
         password = pPass;
         tipo = pTipo;
         rut_empresa = pRut;
     }
+
+    //persistencia
+    private static Usuario CrearObjeto(ResultSet rs) throws SQLException
+    {
+        Usuario user = null;
+        user.username = rs.getString("username");
+        user.password = rs.getString("password");
+        user.tipo = rs.getInt("tipo");
+        user.rut_empresa = rs.getString("empresa");
+        return user;
+    }
+
+    public static void IngresarUsuario(Usuario user) {
+
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "INSERT INTO usuarios (username,password,tipo,empresa) values (?,?,?,?)";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, String.valueOf(user.getId_usuario()));
+            pst.setString(2, user.getUsername());
+            pst.setString(3, user.getPassword());
+            pst.setString(4, String.valueOf(user.getTipo()));
+            pst.setString(5, user.getRut_empresa());
+            int ret = pst.executeUpdate();
+
+            if (ret == 0)
+                throw new RuntimeException("No se pudo ingresar el usuario!");
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+    }
+
+    public static void ModificarUsuario(Usuario user) {
+
+        try {
+            Connection cnn= Conexion.ObtenerConexion();
+            String sql = "UPDATE usuarios " +
+                    "        SET username=?," +
+                    "            password=?," +
+                    "            tipo=?," +
+                    "            empresa=? " +
+                    "        WHERE id_usuario=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, user.getUsername());
+            pst.setString(2, user.getPassword());
+            pst.setString(3, String.valueOf(user.getTipo()));
+            pst.setString(4, user.getRut_empresa());
+            pst.setString(5, String.valueOf(user.getId_usuario()));
+
+            int ret = pst.executeUpdate();
+
+            if (ret == 0)
+                throw new RuntimeException("No se pudo modificar el usuario!");
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+    }
+
+    public static void EliminarUsuario(Usuario user) {
+
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "DELETE usuarios WHERE id_usuario=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, String.valueOf(user.getId_usuario()));
+            int ret = pst.executeUpdate();
+
+            if (ret == 0)
+                throw new RuntimeException("No se pudo eliminar el usuario!");
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+    }
+
+    public static Usuario BuscarUsuario(int id) {
+
+        Usuario user = null;
+
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM usuarios WHERE id_usuario=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, String.valueOf(id));
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                user = CrearObjeto(rs);
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return user;
+    }
+
+    public static Usuario Login(String username, String password) {
+
+        Usuario user = null;
+
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM usuarios WHERE username=? AND password=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setString(2, password);
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                user = CrearObjeto(rs);
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return user;
+    }
+
+
 }

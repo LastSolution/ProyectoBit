@@ -5,6 +5,7 @@ public class Empresa {
     //atributos
     private String rut;
     private String nombre;
+    private String telefono;
     private String correo;
 
     //propiedades
@@ -16,10 +17,17 @@ public class Empresa {
     }
 
     public String getNombre() {
-        return nombre;
+        return telefono;
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return correo;
+    }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getCorreo() {
@@ -30,9 +38,10 @@ public class Empresa {
     }
 
     //constructor
-    public Empresa(String pRut, String pNom, String pCorreo){
+    public Empresa(String pRut, String pNom, String pTel, String pCorreo){
         rut = pRut;
         nombre = pNom;
+        telefono = pTel;
         correo = pCorreo;
     }
 
