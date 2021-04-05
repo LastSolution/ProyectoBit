@@ -4,61 +4,63 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/restaurante_salmuera"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/FondoLogo">
+
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Nuevo Restaurante"
-    android:textColor="@color/black"
+    android:text="INICIAR SESION"
+    android:textColor="@color/LetrasLogo"
     android:textStyle="bold"
     android:gravity="center"
     android:textSize="30dp"
 
-    android:layout_marginTop="100dp"/>
+    android:layout_marginTop="50dp"/>
 
-    <com.google.android.material.textfield.TextInputEditText
+    <ImageView
+        android:layout_width="223dp"
+        android:layout_height="155dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/logotastit" />
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
-        android:textColorHint="@color/design_default_color_primary"
-        android:backgroundTint="@color/design_default_color_primary"
+        android:textColorHint="@color/LetrasLogo"
+        android:backgroundTint="@color/LetrasLogo"
         android:textStyle="bold"
-        android:hint="Nombre"
+        android:hint="Usuario"
+        android:textColor="@color/LetrasLogo"
         android:id="@+id/etNombre" />
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        android:textColorHint="@color/design_default_color_primary"
-        android:backgroundTint="@color/design_default_color_primary"
+        android:textColorHint="@color/LetrasLogo"
+        android:backgroundTint="@color/LetrasLogo"
         android:textStyle="bold"
-        android:hint="Rut"
-        android:id="@+id/etRut" />
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:textColorHint="@color/design_default_color_primary"
-        android:backgroundTint="@color/design_default_color_primary"
-        android:textStyle="bold"
-        android:hint="Tipo"
-        android:id="@+id/EtTipo" />
+        android:textColor="@color/LetrasLogo"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:id="@+id/Pass" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btnconectar"
         android:layout_width="200dp"
         android:layout_height="80dp"
-        android:layout_marginTop="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@color/LetrasLogo"
         android:text="Ingresar"
+        android:textColor="@color/FondoLogo"
         android:textSize="20dp">
 
-    </com.google.android.material.button.MaterialButton>
+    </Button>
 
 
 </LinearLayout>

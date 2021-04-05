@@ -1,5 +1,7 @@
 package com.LastSolutionTeam.tastit.POJO;
 
+import android.content.Context;
+
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
 
 import java.sql.Connection;
@@ -64,22 +66,32 @@ public class Usuario {
         tipo = pTipo;
         rut_empresa = pRut;
     }
+    public Usuario(String pUser, String pPass) {
+
+        username = pUser;
+        password = pPass;
+
+    }
 
     //persistencia
     private static Usuario CrearObjeto(ResultSet rs) throws SQLException
     {
         Usuario user = null;
-        user.username = rs.getString("username");
-        user.password = rs.getString("password");
-        user.tipo = rs.getInt("tipo");
-        user.rut_empresa = rs.getString("empresa");
+
+        user =new Usuario(
+                rs.getInt("id_usuario"),
+                rs.getString("username"),
+                rs.getString("password"),
+                rs.getInt("tipo"),
+                rs.getString("empresa")
+        );
         return user;
     }
 
-    public static void IngresarUsuario(Usuario user) {
+    public static void IngresarUsuario(Usuario user, Context context) {
 
         try {
-            Connection cnn = Conexion.ObtenerConexion();
+            Connection cnn = Conexion.ObtenerConexion(context);
             String sql = "INSERT INTO usuarios (username,password,tipo,empresa) values (?,?,?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, String.valueOf(user.getId_usuario()));
@@ -102,10 +114,10 @@ public class Usuario {
         }
     }
 
-    public static void ModificarUsuario(Usuario user) {
+    public static void ModificarUsuario(Usuario user,Context context) {
 
         try {
-            Connection cnn= Conexion.ObtenerConexion();
+            Connection cnn= Conexion.ObtenerConexion(context);
             String sql = "UPDATE usuarios " +
                     "        SET username=?," +
                     "            password=?," +
@@ -134,10 +146,10 @@ public class Usuario {
         }
     }
 
-    public static void EliminarUsuario(Usuario user) {
+    public static void EliminarUsuario(Usuario user,Context context) {
 
         try {
-            Connection cnn = Conexion.ObtenerConexion();
+            Connection cnn = Conexion.ObtenerConexion(context);
             String sql = "DELETE usuarios WHERE id_usuario=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, String.valueOf(user.getId_usuario()));
@@ -156,12 +168,12 @@ public class Usuario {
         }
     }
 
-    public static Usuario BuscarUsuario(int id) {
+    public static Usuario BuscarUsuario(int id,Context context) {
 
         Usuario user = null;
 
         try {
-            Connection cnn = Conexion.ObtenerConexion();
+            Connection cnn = Conexion.ObtenerConexion(context);
             String sql = "SELECT * FROM usuarios WHERE id_usuario=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, String.valueOf(id));
@@ -169,7 +181,13 @@ public class Usuario {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                user = CrearObjeto(rs);
+                user.id_usuario = rs.getInt(0);
+                user.username = rs.getNString(1);
+                user.password = rs.getNString(2);
+                user.tipo=rs.getInt(3);
+                user.rut_empresa=rs.getNString(4);
+
+
             }
         }
         catch (SQLException ex)
@@ -183,12 +201,12 @@ public class Usuario {
         return user;
     }
 
-    public static Usuario Login(String username, String password) {
+    public static Usuario Login(String username, String password, Context context) {
 
-        Usuario user = null;
 
+        Usuario user=null;
         try {
-            Connection cnn = Conexion.ObtenerConexion();
+            Connection cnn = Conexion.ObtenerConexion(context);
             String sql = "SELECT * FROM usuarios WHERE username=? AND password=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, username);
@@ -197,7 +215,8 @@ public class Usuario {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                user = CrearObjeto(rs);
+                user=CrearObjeto(rs);
+
             }
         }
         catch (SQLException ex)
@@ -209,6 +228,7 @@ public class Usuario {
             //cnn.close();
         }
         return user;
+
     }
 
 

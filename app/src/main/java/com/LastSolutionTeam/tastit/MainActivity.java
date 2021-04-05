@@ -3,17 +3,14 @@ package com.LastSolutionTeam.tastit;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
-import com.LastSolutionTeam.tastit.POJO.Restaurante;
-
-
-
+import com.LastSolutionTeam.tastit.AbmActivity;
+import com.LastSolutionTeam.tastit.POJO.Usuario;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,10 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnconectar;
     EditText etNombre;
-    EditText etRut;
-    EditText etTipo;
-    Restaurante RESTAURANTE;
-
+    EditText etPass;
+    Usuario USUARIO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,34 +28,34 @@ public class MainActivity extends AppCompatActivity {
 
 
         etNombre = (EditText) findViewById(R.id.etNombre);
-        etRut = (EditText) findViewById(R.id.etRut);
-        etTipo = (EditText) findViewById(R.id.EtTipo);
+
+        etPass = (EditText) findViewById(R.id.Pass);
         btnconectar = (Button) findViewById(R.id.btnconectar);
 
         btnconectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String Nombre = etNombre.getText().toString().toUpperCase();
-                String Rut = etRut.getText().toString();
-                String Tipo = etTipo.getText().toString().toUpperCase();
+                String Nombre = etNombre.getText().toString();
 
-                if (VerificarDatos(Nombre, Rut, Tipo))
+                String Pass = etPass.getText().toString();
+
+                if (VerificarDatos(Nombre, Pass))
                 {
-                    RESTAURANTE = new Restaurante(Nombre, Rut, Tipo);
-                    int RESULTADO=Restaurante.IngresarRestaurante(RESTAURANTE);
 
-                    if (RESULTADO == 1)
+                    USUARIO=Usuario.Login(Nombre,Pass,getApplicationContext());
+
+                    if (USUARIO != null )
                     {
                         Toast.makeText(getApplicationContext(), "Ingresado Con Exito", Toast.LENGTH_SHORT).show();
-                        LimpiarDatos();
+                     //   LimpiarDatos();
 
-                    }else if(RESULTADO == 2)
+                        Intent intent = new Intent(v.getContext(), AbmActivity.class);
+                        startActivity(intent);
+
+                    }else
                     {
-                        Toast.makeText(getApplicationContext(), "Error al Ingresar", Toast.LENGTH_SHORT).show();
-                    }else if(RESULTADO == 3)
-                    {
-                        Toast.makeText(getApplicationContext(), "Revise su Conexion a Internet", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "NOMBRE O PASS INCORRECTO", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
@@ -74,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected Boolean VerificarDatos(String NOMBRE, String TIPO, String RUT) {
-        if (NOMBRE.equals("")||TIPO.equals("")||RUT.equals("")) {
+    protected Boolean VerificarDatos(String NOMBRE, String PASS) {
+        if (NOMBRE.equals("")||PASS.equals("")) {
             return false;
         } else {
             return true;
@@ -84,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
     protected void LimpiarDatos()
     {
         etNombre.setText("");
-        etTipo.setText("");
-        etRut.setText("");
+        etPass.setText("");
+
     }
 }
 

@@ -1,6 +1,7 @@
 package com.LastSolutionTeam.tastit.POJO;
 
 import android.app.Activity;
+import android.content.Context;
 import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
@@ -87,12 +88,12 @@ public class Restaurante {
     }
 
 
-    public static int IngresarRestaurante(Restaurante Rest) {
+    public static int IngresarRestaurante(Restaurante Rest, Context context) {
         int ret=0;
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-        Connection Conn=Conexion.ObtenerConexion();
+        Connection Conn=Conexion.ObtenerConexion(context);
 
         if(Conn!=null)
         {
