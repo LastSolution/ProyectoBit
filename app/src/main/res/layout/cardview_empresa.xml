@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="350dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:layout_gravity="center"
-    app:cardBackgroundColor="#140406"
-    card_view:cardCornerRadius="20dp"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    android:elevation="@dimen/cardview_default_elevation"
     card_view:contentPadding="5dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/txtNomEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/LetrasLogo"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
 
@@ -27,7 +26,6 @@
             android:id="@+id/txtRutEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/LetrasLogo"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
 
@@ -35,36 +33,44 @@
             android:id="@+id/txtTelefonoEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/LetrasLogo"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
             >
 
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:text="Modificar"
-                android:textColor="@color/FondoLogo"
-                android:background="@color/LetrasLogo"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"/>
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:textColor="@color/FondoLogo"
-                android:background="@color/LetrasLogo"
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:bottomRightRadius="20dp"
+                android:bottomLeftRadius="20dp"
+                android:topLeftRadius="20dp"
+                android:topRightRadius="20dp"
+                app:icon="@drawable/ic_baseline_refresh_24"
+                android:text="Editar"
+                android:textSize="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="115dp"
+                android:layout_height="35dp"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:bottomRightRadius="20dp"
+                android:bottomLeftRadius="20dp"
+                android:topLeftRadius="20dp"
+                android:topRightRadius="20dp"
+                app:icon="@drawable/ic_baseline_delete_24"
                 android:text="Eliminar"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"/>
+                android:textSize="10dp"
+                 />
 
         </LinearLayout>
 
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

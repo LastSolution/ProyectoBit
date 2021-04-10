@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/edificio_restaurante"
+        android:icon="@drawable/restaurante"
         android:title="Locales" />
 
 

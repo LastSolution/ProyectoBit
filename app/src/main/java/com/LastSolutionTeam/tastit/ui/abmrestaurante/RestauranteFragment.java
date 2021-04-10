@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.LastSolutionTeam.tastit.Adaptadores.EmpresaAdaptador;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -37,7 +40,13 @@ public class RestauranteFragment extends Fragment {
         ListaEmpresas.setLayoutManager(linearLayoutManager);
         ListarEmpresas();
         inicializaAdaptador();
-        
+        FloatingActionButton fab = root.findViewById(R.id.NuevaEmpresa);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(),"Push the boton",Toast.LENGTH_SHORT).show();
+            }
+        });
         return root;
     }
     public void ListarEmpresas(){

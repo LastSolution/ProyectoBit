@@ -3,6 +3,7 @@ package com.LastSolutionTeam.tastit;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,13 +21,13 @@ public class MainActivity extends AppCompatActivity {
     EditText etNombre;
     EditText etPass;
     Usuario USUARIO;
-
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        context=this;
         etNombre = (EditText) findViewById(R.id.etNombre);
 
         etPass = (EditText) findViewById(R.id.Pass);
@@ -43,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 if (VerificarDatos(Nombre, Pass))
                 {
 
-                    USUARIO=Usuario.Login(Nombre,Pass,getApplicationContext());
+                    USUARIO=Usuario.Login(Nombre,Pass,context);
 
                     if (USUARIO != null )
                     {
-                        Toast.makeText(getApplicationContext(), "Ingresado Con Exito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Ingresado Con Exito", Toast.LENGTH_SHORT).show();
                      //   LimpiarDatos();
 
                         Intent intent = new Intent(v.getContext(), AbmActivity.class);
@@ -55,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
                     }else
                     {
-                        Toast.makeText(getApplicationContext(), "NOMBRE O PASS INCORRECTO", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "NOMBRE O PASS INCORRECTO", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
                     {
-                    Toast.makeText(getApplicationContext(), "Ingresar todos los datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Ingresar todos los datos", Toast.LENGTH_SHORT).show();
                     }
 
 
