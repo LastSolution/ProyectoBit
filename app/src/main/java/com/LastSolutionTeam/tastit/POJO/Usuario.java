@@ -1,17 +1,14 @@
 package com.LastSolutionTeam.tastit.POJO;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLData;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Date;
 
 public class Usuario {
 
@@ -19,7 +16,7 @@ public class Usuario {
     private int id_usuario;
     private String username;
     private String password;
-    private int tipo;
+    private String tipo;
     private String rut_empresa;
 
     //propiedades
@@ -44,10 +41,10 @@ public class Usuario {
         this.password = password;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -59,7 +56,7 @@ public class Usuario {
     }
 
     //constructor
-    public Usuario(int pId, String pUser, String pPass, int pTipo, String pRut) {
+    public Usuario(int pId, String pUser, String pPass, String pTipo, String pRut) {
         id_usuario = pId;
         username = pUser;
         password = pPass;
@@ -82,7 +79,7 @@ public class Usuario {
                 rs.getInt("id_usuario"),
                 rs.getString("username"),
                 rs.getString("password"),
-                rs.getInt("tipo"),
+                rs.getString("tipo"),
                 rs.getString("empresa")
         );
         return user;
@@ -91,7 +88,7 @@ public class Usuario {
     public static void IngresarUsuario(Usuario user, Context context) {
 
         try {
-            Connection cnn = Conexion.ObtenerConexion(context);
+            Connection cnn = Conexion.ObtenerConexion();
             String sql = "INSERT INTO usuarios (username,password,tipo,empresa) values (?,?,?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, String.valueOf(user.getId_usuario()));
@@ -114,10 +111,10 @@ public class Usuario {
         }
     }
 
-    public static void ModificarUsuario(Usuario user,Context context) {
+    public static void ModificarUsuario(Usuario user) {
 
         try {
-            Connection cnn= Conexion.ObtenerConexion(context);
+            Connection cnn= Conexion.ObtenerConexion();
             String sql = "UPDATE usuarios " +
                     "        SET username=?," +
                     "            password=?," +
@@ -149,7 +146,7 @@ public class Usuario {
     public static void EliminarUsuario(Usuario user,Context context) {
 
         try {
-            Connection cnn = Conexion.ObtenerConexion(context);
+            Connection cnn = Conexion.ObtenerConexion();
             String sql = "DELETE usuarios WHERE id_usuario=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, String.valueOf(user.getId_usuario()));
@@ -173,7 +170,7 @@ public class Usuario {
         Usuario user = null;
 
         try {
-            Connection cnn = Conexion.ObtenerConexion(context);
+            Connection cnn = Conexion.ObtenerConexion();
             String sql = "SELECT * FROM usuarios WHERE id_usuario=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, String.valueOf(id));
@@ -184,7 +181,7 @@ public class Usuario {
                 user.id_usuario = rs.getInt(0);
                 user.username = rs.getNString(1);
                 user.password = rs.getNString(2);
-                user.tipo=rs.getInt(3);
+                user.tipo=rs.getString(3);
                 user.rut_empresa=rs.getNString(4);
 
 
@@ -206,18 +203,23 @@ public class Usuario {
 
         Usuario user=null;
         try {
-            Connection cnn = Conexion.ObtenerConexion(context);
-            String sql = "SELECT * FROM usuarios WHERE username=? AND password=?";
-            PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setString(2, password);
+            Connection cnn = Conexion.ObtenerConexion();
+            if(cnn!=null){
+                String sql = "SELECT * FROM usuarios WHERE username=? AND password=?";
+                PreparedStatement pst = cnn.prepareStatement(sql);
+                pst.setString(1, username);
+                pst.setString(2, password);
 
-            ResultSet rs = pst.executeQuery();
+                ResultSet rs = pst.executeQuery();
 
-            while(rs.next()){
-                user=CrearObjeto(rs);
+                while(rs.next()){
+                    user=CrearObjeto(rs);
 
+                }
+            }else{
+                Toast.makeText(context,"Error al conectar",Toast.LENGTH_SHORT);
             }
+
         }
         catch (SQLException ex)
         {

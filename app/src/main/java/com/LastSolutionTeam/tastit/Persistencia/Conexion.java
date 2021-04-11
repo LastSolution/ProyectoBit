@@ -11,7 +11,7 @@ import net.sourceforge.jtds.jdbc.Driver;
 
 public class Conexion {
 
-    private static String IP_PUERTO="192.168.1.4:1433";    // IP:PUERTO
+    private static String IP_PUERTO="192.168.1.7:1433";    // IP:PUERTO
     private static String DATABASE ="TastIT";              // BASE DE DATOS
     private static String INSTANCE ="lastsolution";        // INSTANCIA
     private static String USERNAME ="sa";                  // USER
@@ -32,7 +32,7 @@ public class Conexion {
         //constructor
     }
 
-    public static Connection ObtenerConexion(Context context)
+    public static Connection ObtenerConexion()
     {
         try {
             StrictMode.ThreadPolicy policy= new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -42,7 +42,7 @@ public class Conexion {
         }
         catch (Exception Ex)
         {
-            Toast.makeText(context, "Conexion con servidor fallida", Toast.LENGTH_SHORT).show();
+
             Log.w("Error connection", "" + Ex.getStackTrace().toString() );
         }
         return cnn;

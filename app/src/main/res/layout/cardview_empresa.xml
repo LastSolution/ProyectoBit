@@ -8,34 +8,62 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:layout_gravity="center"
-    app:cardCornerRadius="@dimen/cardview_default_radius"
-    android:elevation="@dimen/cardview_default_elevation"
+    app:cardCornerRadius="20dp"
+    android:elevation="15dp"
     card_view:contentPadding="5dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="9dp"
+                android:src="@drawable/logotastit"/>
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+
         <TextView
             android:id="@+id/txtNomEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:text="Nombre"/>
 
         <TextView
             android:id="@+id/txtRutEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Rut"/>
 
         <TextView
             android:id="@+id/txtTelefonoEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
-
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/ic_baseline_phone_24"
+            android:text="Tel"/>
+      </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,6 +74,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="110dp"
                 android:layout_height="35dp"
+                android:id="@+id/btnEditarEmpresa"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
                 android:bottomRightRadius="20dp"
                 android:bottomLeftRadius="20dp"
@@ -58,6 +87,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="115dp"
                 android:layout_height="35dp"
+                android:id="@+id/btneliminarEmpresa"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
                 android:bottomRightRadius="20dp"
                 android:bottomLeftRadius="20dp"
@@ -70,7 +100,7 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
+
 
 </com.google.android.material.card.MaterialCardView>

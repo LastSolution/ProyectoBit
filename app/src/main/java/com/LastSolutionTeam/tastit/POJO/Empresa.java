@@ -2,7 +2,6 @@ package com.LastSolutionTeam.tastit.POJO;
 
 import android.content.Context;
 
-import com.LastSolutionTeam.tastit.Adaptadores.EmpresaAdaptador;
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
 
 import java.sql.Connection;
@@ -16,10 +15,20 @@ import java.util.Date;
 public class Empresa {
 
     //atributos
+
      String rut;
      String nombre;
      String telefono;
      String correo;
+     String Logo;
+
+    public String getLogo() {
+        return Logo;
+    }
+
+    public void setLogo(String logo) {
+        Logo = logo;
+    }
 
     //propiedades
     public String getRut() {
@@ -51,7 +60,7 @@ public class Empresa {
     }
 
     //constructor
-    public Empresa(String pRut, String pNom, String pTel, String pCorreo){
+    public Empresa(String pRut, String pNom, String pTel, String pCorreo, String logo){
         rut = pRut;
         nombre = pNom;
         telefono = pTel;
@@ -62,16 +71,17 @@ public class Empresa {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-        Connection Conn= Conexion.ObtenerConexion(context);
+        Connection Conn= Conexion.ObtenerConexion();
 
         if(Conn!=null)
         {
             try {
-                PreparedStatement pst=Conn.prepareStatement("insert into EMPRESAS (rut,nombre,telefono,correo) values (?,?,?,?)");
+                PreparedStatement pst=Conn.prepareStatement("insert into EMPRESAS (rut,nombre,telefono,correo,logo) values (?,?,?,?,?)");
                 pst.setString(1,empresa.getRut());
-                 pst.setString(2,empresa.getNombre());
+                pst.setString(2,empresa.getNombre());
                 pst.setString(3,empresa.getTelefono());
                 pst.setString(4, empresa.getCorreo());
+                pst.setString(5, empresa.getLogo());
                 ret= pst.executeUpdate();
 
 
@@ -93,17 +103,17 @@ public class Empresa {
                 rs.getString("rut"),
                 rs.getString("nombre"),
                 rs.getString("telefono"),
-                rs.getString("correo")
-        );
+                rs.getString("correo"),
+                rs.getString("logo"));
         return empresa;
     }
 
-    public static ArrayList<Empresa> BuscarTodas(Context context) {
+    public static ArrayList<Empresa> BuscarTodas() {
 
         ArrayList<Empresa> empresas=new ArrayList<Empresa>();
         Empresa empresa=null;
         try {
-            Connection cnn = Conexion.ObtenerConexion(context);
+            Connection cnn = Conexion.ObtenerConexion();
             String sql = "SELECT * FROM Empresas";
             PreparedStatement pst = cnn.prepareStatement(sql);
 
@@ -126,7 +136,32 @@ public class Empresa {
         }
         return empresas;
     }
+    public static int EliminarEmpresa(String rut){
 
+        int ret=0;
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        Connection Conn= Conexion.ObtenerConexion();
+
+        if(Conn!=null)
+        {
+            try {
+                PreparedStatement pst=Conn.prepareStatement("delete from EMPRESAS where rut =?");
+                pst.setString(1,rut);
+
+                ret= pst.executeUpdate();
+
+
+            }catch (SQLException E)
+            {
+                return ret;
+            }
+        }else {
+            return 3;
+        }
+        return ret;
+    }
 
 //    @Override	// CTRL + Barra
 //    public void mostrarDatos(String nombreClase) {
