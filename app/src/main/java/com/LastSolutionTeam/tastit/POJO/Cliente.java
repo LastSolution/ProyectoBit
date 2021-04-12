@@ -2,7 +2,7 @@ package com.LastSolutionTeam.tastit.POJO;
 
 public class Cliente {
 
-  /*  //atributos
+    //atributos
     private int id_usuario;
     private int id_cliente;
     private String rut_cliente;

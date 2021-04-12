@@ -63,6 +63,7 @@ public class Usuario {
         tipo = pTipo;
         rut_empresa = pRut;
     }
+
     public Usuario(String pUser, String pPass) {
 
         username = pUser;

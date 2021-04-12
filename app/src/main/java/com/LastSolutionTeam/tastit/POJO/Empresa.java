@@ -15,20 +15,11 @@ import java.util.Date;
 public class Empresa {
 
     //atributos
-
      String rut;
      String nombre;
      String telefono;
      String correo;
      String Logo;
-
-    public String getLogo() {
-        return Logo;
-    }
-
-    public void setLogo(String logo) {
-        Logo = logo;
-    }
 
     //propiedades
     public String getRut() {
@@ -59,14 +50,40 @@ public class Empresa {
         this.correo = correo;
     }
 
+    public String getLogo() {
+        return Logo;
+    }
+    public void setLogo(String logo) {
+        Logo = logo;
+    }
+
     //constructor
-    public Empresa(String pRut, String pNom, String pTel, String pCorreo, String logo){
+    public Empresa(String pRut, String pNom, String pTel, String pCorreo, String pLogo){
         rut = pRut;
         nombre = pNom;
         telefono = pTel;
         correo = pCorreo;
+        Logo = pLogo;
     }
-    public static int IngresarEmpresa( Empresa empresa, Context context ) {
+
+
+    //persistencia
+    private static Empresa CrearObjeto(ResultSet rs) throws SQLException
+    {
+        Empresa empresa = null;
+
+        empresa =new Empresa(
+
+                rs.getString("rut"),
+                rs.getString("nombre"),
+                rs.getString("telefono"),
+                rs.getString("correo"),
+                rs.getString("logo"));
+        return empresa;
+    }
+
+    public static int IngresarEmpresa(Empresa empresa, Context context) {
+
         int ret=0;
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -94,18 +111,32 @@ public class Empresa {
         }
         return ret;
     }
-    private static Empresa CrearObjeto(ResultSet rs) throws SQLException
-    {
-        Empresa empresa = null;
 
-        empresa =new Empresa(
+    public static int EliminarEmpresa(String rut){
 
-                rs.getString("rut"),
-                rs.getString("nombre"),
-                rs.getString("telefono"),
-                rs.getString("correo"),
-                rs.getString("logo"));
-        return empresa;
+        int ret=0;
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        Connection Conn= Conexion.ObtenerConexion();
+
+        if(Conn!=null)
+        {
+            try {
+                PreparedStatement pst=Conn.prepareStatement("delete from EMPRESAS where rut =?");
+                pst.setString(1,rut);
+
+                ret= pst.executeUpdate();
+
+
+            }catch (SQLException E)
+            {
+                return ret;
+            }
+        }else {
+            return 3;
+        }
+        return ret;
     }
 
     public static ArrayList<Empresa> BuscarTodas() {
@@ -136,42 +167,7 @@ public class Empresa {
         }
         return empresas;
     }
-    public static int EliminarEmpresa(String rut){
-
-        int ret=0;
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-
-        Connection Conn= Conexion.ObtenerConexion();
-
-        if(Conn!=null)
-        {
-            try {
-                PreparedStatement pst=Conn.prepareStatement("delete from EMPRESAS where rut =?");
-                pst.setString(1,rut);
-
-                ret= pst.executeUpdate();
 
 
-            }catch (SQLException E)
-            {
-                return ret;
-            }
-        }else {
-            return 3;
-        }
-        return ret;
-    }
 
-//    @Override	// CTRL + Barra
-//    public void mostrarDatos(String nombreClase) {
-//        // TODO Auto-generated method stub		--> polimorfismo
-//        super.mostrarDatos(nombreClase);
-//        System.out.println("Corte: " + corte);
-//    }
-//    @Override
-//    public void hacerDevolucion() {
-//        // TODO Auto-generated method stub
-//        System.out.println("Devolucion de una playera");
-//    }
 }
