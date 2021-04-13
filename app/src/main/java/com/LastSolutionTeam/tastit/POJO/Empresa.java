@@ -19,7 +19,7 @@ public class Empresa {
      String nombre;
      String telefono;
      String correo;
-     String Logo;
+     byte[] Logo;
 
     //propiedades
     public String getRut() {
@@ -50,15 +50,15 @@ public class Empresa {
         this.correo = correo;
     }
 
-    public String getLogo() {
+    public byte[] getLogo() {
         return Logo;
     }
-    public void setLogo(String logo) {
+    public void setLogo(byte[] logo) {
         Logo = logo;
     }
 
     //constructor
-    public Empresa(String pRut, String pNom, String pTel, String pCorreo, String pLogo){
+    public Empresa(String pRut, String pNom, String pTel, String pCorreo, byte[] pLogo){
         rut = pRut;
         nombre = pNom;
         telefono = pTel;
@@ -78,7 +78,7 @@ public class Empresa {
                 rs.getString("nombre"),
                 rs.getString("telefono"),
                 rs.getString("correo"),
-                rs.getString("logo"));
+                rs.getBytes("logo"));
         return empresa;
     }
 
@@ -98,7 +98,7 @@ public class Empresa {
                 pst.setString(2,empresa.getNombre());
                 pst.setString(3,empresa.getTelefono());
                 pst.setString(4, empresa.getCorreo());
-                pst.setString(5, empresa.getLogo());
+                pst.setBytes(5, empresa.getLogo());
                 ret= pst.executeUpdate();
 
 

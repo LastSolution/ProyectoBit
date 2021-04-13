@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.Adaptadores.EmpresaAdaptador;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
+
+import java.io.ByteArrayOutputStream;
 
 public class EmpresaActivity extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class EmpresaActivity extends AppCompatActivity {
     String rutempresa;
     String telempresa;
     String correoempresa;
+    byte[] logo;
 
     private Activity activity;
     public void AbrirAlmacenamiento(View view){
@@ -95,6 +99,21 @@ public class EmpresaActivity extends AppCompatActivity {
         }
     }
 
+    public Bitmap ObtenerImagen(){
+        Logo.buildDrawingCache();
+        Bitmap bitmap = Logo.getDrawingCache();
+        return bitmap;
+    }
+    private   byte[] ImagenBlob(Bitmap bitmap){
+        // tamaño del baos depende del tamaño de tus imagenes en promedio
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 , baos);
+        byte[] blob = baos.toByteArray();
+        return blob;
+
+
+
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empresa);
@@ -107,9 +126,9 @@ public class EmpresaActivity extends AppCompatActivity {
         CorreoEmpresa=(EditText) findViewById(R.id.EditEmpCorreo);
         Titulo=(TextView) findViewById(R.id.tituloEmpresa) ;
         btnAdd_Modify=(Button) findViewById(R.id.BtnEmpresaAdd);
+        //obtiene parametros del intent (si tiene Carga los datos para editar(MODIFICACION))
         Bundle parametros =getIntent().getExtras();
         if(parametros!=null){
-
             nombreempresa=parametros.getString("nombre");
             rutempresa=parametros.getString("rut");
             telempresa=parametros.getString("telefono");
@@ -132,6 +151,7 @@ public class EmpresaActivity extends AppCompatActivity {
                 rutempresa=RutEmpresa.getText().toString();
                 telempresa=TelEmpresa.getText().toString();
                 correoempresa=CorreoEmpresa.getText().toString();
+                logo=ImagenBlob(ObtenerImagen());
 
                 Empresa empresa;
                 empresa =new Empresa(
@@ -139,7 +159,7 @@ public class EmpresaActivity extends AppCompatActivity {
                         nombreempresa,
                         telempresa,
                         correoempresa,
-                        "Logo"
+                        logo
                        );
                if(Empresa.IngresarEmpresa(empresa,context)==1)
                {
@@ -152,6 +172,7 @@ public class EmpresaActivity extends AppCompatActivity {
                }
             }
         });
+
 
     }
 }

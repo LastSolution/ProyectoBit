@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tastit">
-        <activity android:name=".EmpresaActivity"></activity>
+        <activity android:name="EmpresaActivity"></activity>
         <activity
-            android:name=".AbmActivity"
+            android:name="AbmActivity"
             android:label="@string/title_activity_abm" />
-        <activity android:name=".MainActivity">
+        <activity android:name="MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

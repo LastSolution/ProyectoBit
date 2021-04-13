@@ -25,7 +25,9 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="9dp"
-                android:src="@drawable/logotastit"/>
+                android:id="@+id/logoEmpresa"
+                android:src="@drawable/logotastit"
+                />
 
       <LinearLayout
           android:layout_width="wrap_content"
