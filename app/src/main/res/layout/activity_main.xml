@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- suppress ALL -->
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/FondoLogo">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="INICIAR SESION"
-    android:textColor="@color/LetrasLogo"
     android:textStyle="bold"
     android:gravity="center"
     android:textSize="30dp"
-
+    android:textColor="@color/GreenPLight"
     android:layout_marginTop="50dp"/>
 
     <ImageView
@@ -23,29 +21,30 @@
         android:layout_height="155dp"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:background="@drawable/logotastit" />
+        android:background="@drawable/logo" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
-        android:textColorHint="@color/LetrasLogo"
-        android:backgroundTint="@color/LetrasLogo"
         android:textStyle="bold"
+        android:textColorHint="@color/GreenPLight"
+        android:textColor="@color/GreenPLight"
+        app:backgroundTint="@color/GreenPLight"
         android:hint="Usuario"
-        android:textColor="@color/LetrasLogo"
+
         android:id="@+id/etNombre" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        android:textColorHint="@color/LetrasLogo"
-        android:backgroundTint="@color/LetrasLogo"
-        android:textStyle="bold"
-        android:textColor="@color/LetrasLogo"
         android:inputType="textPassword"
+        android:textColor="@color/GreenPLight"
+        android:textColorHint="@color/GreenPLight"
+        android:textColorLink="@color/GreenPLight"
+        app:backgroundTint="@color/GreenPLight"
         android:hint="Password"
         android:id="@+id/Pass" />
 
@@ -57,7 +56,6 @@
         android:layout_marginTop="50dp"
         android:background="@color/LetrasLogo"
         android:text="Ingresar"
-        android:textColor="@color/FondoLogo"
         android:textSize="20dp">
 
     </Button>

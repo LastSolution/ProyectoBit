@@ -69,7 +69,7 @@ public class RestauranteFragment extends Fragment {
     Eadaptador=new EmpresaAdaptador(Empresas,activity );
     ListaEmpresas.setAdapter(Eadaptador);
     Eadaptador.notifyDataSetChanged();
-
+        
 
     }
 }

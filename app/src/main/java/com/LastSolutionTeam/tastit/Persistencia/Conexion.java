@@ -11,7 +11,7 @@ import net.sourceforge.jtds.jdbc.Driver;
 
 public class Conexion {
 
-    private static String IP_PUERTO="192.168.1.7:1433";    // IP:PUERTO
+    private static String IP_PUERTO="3.142.220.175:1433";   // IP:PUERTO
     private static String DATABASE ="TastIT";              // BASE DE DATOS
     private static String INSTANCE ="lastsolution";        // INSTANCIA
     private static String USERNAME ="sa";                  // USER

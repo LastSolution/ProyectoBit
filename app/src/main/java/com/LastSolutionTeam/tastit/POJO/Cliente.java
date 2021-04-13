@@ -12,11 +12,11 @@ public class Cliente {
 
 
     //constructor
-    public Cliente(int pId, String pUser, String pPass, int pTipo, String pRut){
-        id_usuario = pId;
-        username = pUser;
-        password = pPass;
-        tipo = pTipo;
-        rut_empresa = pRut;
-    }*/
+   // public Cliente(int pId, String pUser, String pPass, int pTipo, String pRut){
+      //  id_usuario = pId;
+       // username = pUser;
+        //password = pPass;
+        //tipo = pTipo;
+        //rut_empresa = pRut;
+    //}*/
 }

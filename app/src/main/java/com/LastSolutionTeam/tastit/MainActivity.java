@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     if (USUARIO != null )
                     {
                         Toast.makeText(context, "Ingresado Con Exito", Toast.LENGTH_SHORT).show();
-                     //   LimpiarDatos();
+                     //LimpiarDatos();
 
                         Intent intent = new Intent(v.getContext(), AbmActivity.class);
                         startActivity(intent);

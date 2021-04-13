@@ -58,6 +58,9 @@ public  EmpresaAdaptador(ArrayList<Empresa>empresas, Activity activity){
             @Override
             public void onClick(View v) {
                 Empresa.EliminarEmpresa(empresa.getRut());
+                empresas.remove(position);
+                notifyItemRemoved(position);
+
 
             }
         });

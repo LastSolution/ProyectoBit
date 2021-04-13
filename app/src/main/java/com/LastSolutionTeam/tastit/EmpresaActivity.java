@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LastSolutionTeam.tastit.Adaptadores.EmpresaAdaptador;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
 
 public class EmpresaActivity extends AppCompatActivity {
@@ -140,8 +141,11 @@ public class EmpresaActivity extends AppCompatActivity {
                         correoempresa,
                         "Logo"
                        );
-               if(Empresa.IngresarEmpresa(empresa,context)==1){
+               if(Empresa.IngresarEmpresa(empresa,context)==1)
+               {
                    Toast.makeText(context,"Empresa Ingresada Con Exito",Toast.LENGTH_SHORT);
+                   Intent intent = new Intent(v.getContext(), AbmActivity.class);
+                   startActivity(intent);
                }
              else   {
                    Toast.makeText(context,"Error Al ingresar empresa",Toast.LENGTH_SHORT);
