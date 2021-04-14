@@ -22,4 +22,11 @@
         android:name="com.LastSolutionTeam.tastit.ui.abmcarta.CartaFragment"
         android:label="Cartas"
         tools:layout="@layout/fragment_carta" />
+    <fragment
+        android:id="@+id/navigation_usuarios"
+        android:name="com.LastSolutionTeam.tastit.ui.abmusuarios.UsuariosFragment"
+        android:label="Usuarios"
+        tools:layout="@layout/fragment_abm_usuarios" />
+
+
 </navigation>

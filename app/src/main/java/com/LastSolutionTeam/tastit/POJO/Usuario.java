@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Usuario {
 
@@ -142,6 +143,34 @@ public class Usuario {
         {
             //cnn.close();
         }
+    }
+    public static ArrayList<Usuario> BuscarTodos() {
+
+        ArrayList<Usuario> empresas=new ArrayList<Usuario>();
+        Usuario usuario=null;
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM USUARIOS";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                usuario=Usuario.CrearObjeto(rs);
+                empresas.add(usuario);
+
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return empresas;
     }
 
     public static void EliminarUsuario(Usuario user,Context context) {
