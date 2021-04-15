@@ -1,6 +1,7 @@
 package com.LastSolutionTeam.tastit.POJO;
 
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
+import com.LastSolutionTeam.tastit.POJO.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

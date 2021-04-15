@@ -3,6 +3,7 @@ package com.LastSolutionTeam.tastit.POJO;
 import android.content.Context;
 
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
+import com.LastSolutionTeam.tastit.POJO.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -232,7 +233,7 @@ public class Plato {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                plato=Plato.CrearObjeto(rs);
+                plato = Plato.CrearObjeto(rs);
                 platos.add(plato);
             }
         }

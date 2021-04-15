@@ -3,6 +3,7 @@ package com.LastSolutionTeam.tastit.POJO;
 import android.content.Context;
 
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
+import com.LastSolutionTeam.tastit.POJO.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,7 +56,7 @@ public class Carta {
     }
 
 
-    //constructor
+    //constructores
     public Carta(int pNro, Date pFecha, String pNom, String pImg, int pLocal){
         nro_carta = pNro;
         fecha_carta = pFecha;
@@ -63,6 +64,10 @@ public class Carta {
         imgCarta = pImg;
         nro_local = pLocal;
     }
+    public Carta(){
+
+    }
+
 
 
     //persistencia (privada)
@@ -205,7 +210,7 @@ public class Carta {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                carta=Carta.CrearObjeto(rs);
+                carta = Carta.CrearObjeto(rs);
                 cartas.add(carta);
 
             }

@@ -161,11 +161,10 @@ public class Usuario {
             String sql = "SELECT * FROM USUARIOS";
             PreparedStatement pst = cnn.prepareStatement(sql);
 
-
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                usuario=Usuario.CrearObjeto(rs);
+                usuario = Usuario.CrearObjeto(rs);
                 empresas.add(usuario);
 
             }

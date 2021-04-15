@@ -3,6 +3,7 @@ package com.LastSolutionTeam.tastit.POJO;
 import android.content.Context;
 
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
+import com.LastSolutionTeam.tastit.POJO.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -162,8 +163,7 @@ public class Categoria {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                Categoria cat = null;
-                cat = Categoria.CrearObjeto(rs);
+                Categoria cat = Categoria.CrearObjeto(rs);
                 categorias.add(cat);
             }
         }

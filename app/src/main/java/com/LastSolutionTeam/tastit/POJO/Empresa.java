@@ -3,6 +3,7 @@ package com.LastSolutionTeam.tastit.POJO;
 import android.content.Context;
 
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
+import com.LastSolutionTeam.tastit.POJO.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -148,13 +149,11 @@ public class Empresa {
             String sql = "SELECT * FROM Empresas";
             PreparedStatement pst = cnn.prepareStatement(sql);
 
-
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-             empresa=Empresa.CrearObjeto(rs);
-            empresas.add(empresa);
-
+                empresa = Empresa.CrearObjeto(rs);
+                empresas.add(empresa);
             }
         }
         catch (SQLException ex)
@@ -167,8 +166,8 @@ public class Empresa {
         }
         return empresas;
     }
-    public static Empresa BuscarPorRut(String Rut) {
 
+    public static Empresa BuscarPorRut(String Rut) {
 
         Empresa empresa=null;
         try {
@@ -181,9 +180,7 @@ public class Empresa {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                empresa=Empresa.CrearObjeto(rs);
-
-
+                empresa = Empresa.CrearObjeto(rs);
             }
         }
         catch (SQLException ex)
