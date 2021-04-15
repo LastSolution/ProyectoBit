@@ -77,7 +77,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="115dp"
                 android:layout_height="35dp"
-                android:id="@+id/EliminarUsuario"
+                android:id="@+id/btnEliminarUser"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
                 android:bottomRightRadius="20dp"
                 android:bottomLeftRadius="20dp"

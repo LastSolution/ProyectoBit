@@ -167,6 +167,35 @@ public class Empresa {
         }
         return empresas;
     }
+    public static Empresa BuscarPorRut(String Rut) {
+
+
+        Empresa empresa=null;
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM Empresas where rut=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+
+            pst.setString(0,Rut);
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                empresa=Empresa.CrearObjeto(rs);
+
+
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return empresa;
+    }
 
 
 

@@ -17,7 +17,7 @@ public class EmpresaSpinner {
         Rut = rut;
     }
 
-    public String getNombre() {
+    public String toString() {
         return Nombre;
     }
 

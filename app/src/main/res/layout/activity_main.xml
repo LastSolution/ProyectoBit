@@ -12,17 +12,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="INICIAR SESION"
-
     android:gravity="center"
     android:textSize="30dp"
     android:textColor="@color/GreenPLight"
-    android:layout_marginTop="50dp"/>
+    android:layout_marginTop="30dp"/>
 
     <ImageView
         android:layout_width="223dp"
         android:layout_height="155dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
         android:background="@drawable/logo" />
     <EditText
         android:layout_width="match_parent"
@@ -53,7 +51,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnconectar"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:bottomRightRadius="30dp"

@@ -22,18 +22,25 @@
         android:id="@+id/EtUsername"
         android:hint="Username "
         />
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Etpassword"
-        android:hint="Password " />
+
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/EttipoUsuario"
-        android:hint="Telefono "/>
+        android:hint="Tipo Usuario "/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPassUsuario"
+        android:inputType="textPassword"
+        android:hint="Password "/>
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccione Empresa:"
+        android:layout_marginTop="10dp"/>
     <Spinner
         android:id="@+id/SpinEmpresas"
         android:layout_width="match_parent"
@@ -42,8 +49,8 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/BtnEmpresaAdd"
-        android:layout_marginTop="20dp"
+        android:id="@+id/btnAgregarusuario"
+        android:layout_marginTop="30dp"
         android:text="Agregar"/>
 
 

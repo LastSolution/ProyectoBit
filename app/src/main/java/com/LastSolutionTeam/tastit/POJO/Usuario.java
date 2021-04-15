@@ -64,6 +64,14 @@ public class Usuario {
         tipo = pTipo;
         rut_empresa = pRut;
     }
+    //constructor Sin ID
+    public Usuario( String pUser, String pPass, String pTipo, String pRut) {
+
+        username = pUser;
+        password = pPass;
+        tipo = pTipo;
+        rut_empresa = pRut;
+    }
 
     public Usuario(String pUser, String pPass) {
 
@@ -87,18 +95,17 @@ public class Usuario {
         return user;
     }
 
-    public static void IngresarUsuario(Usuario user, Context context) {
-
+    public static int IngresarUsuario(Usuario user) {
+       int ret=0;
         try {
             Connection cnn = Conexion.ObtenerConexion();
             String sql = "INSERT INTO usuarios (username,password,tipo,empresa) values (?,?,?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, String.valueOf(user.getId_usuario()));
-            pst.setString(2, user.getUsername());
-            pst.setString(3, user.getPassword());
-            pst.setString(4, String.valueOf(user.getTipo()));
-            pst.setString(5, user.getRut_empresa());
-            int ret = pst.executeUpdate();
+            pst.setString(1, user.getUsername());
+            pst.setString(2, user.getPassword());
+            pst.setString(3, String.valueOf(user.getTipo()));
+            pst.setString(4, user.getRut_empresa());
+            ret = pst.executeUpdate();
 
             if (ret == 0)
                 throw new RuntimeException("No se pudo ingresar el usuario!");
@@ -111,6 +118,7 @@ public class Usuario {
         {
             //cnn.close();
         }
+        return ret;
     }
 
     public static void ModificarUsuario(Usuario user) {

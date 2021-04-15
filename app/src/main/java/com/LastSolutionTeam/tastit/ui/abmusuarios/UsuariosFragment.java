@@ -14,10 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.LastSolutionTeam.tastit.Adaptadores.EmpresaAdaptador;
+import com.LastSolutionTeam.tastit.Adaptadores.UsuarioAdaptador;
 import com.LastSolutionTeam.tastit.EmpresaActivity;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Usuario;
 import com.LastSolutionTeam.tastit.R;
+import com.LastSolutionTeam.tastit.UsuariosActivity;
 import com.LastSolutionTeam.tastit.ui.abmrestaurante.RestauranteViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,15 +47,23 @@ public class UsuariosFragment extends Fragment {
         ListarEmpresas();
         inicializaAdaptador();
 
-        FloatingActionButton fab = root.findViewById(R.id.NuevaEmpresa);
+        FloatingActionButton fab = root.findViewById(R.id.FabNuevoUsuario);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), EmpresaActivity.class);
+                Intent myIntent = new Intent(view.getContext(), UsuariosActivity.class);
                 startActivity(myIntent);
             }
         });
 
         return root ;
 }
+    public void ListarEmpresas(){
+        usuario=Usuario.BuscarTodos();
+    }
+    public UsuarioAdaptador Uadaptador;
+    private void inicializaAdaptador(){
+        Uadaptador=new UsuarioAdaptador(usuario,activity );
+        ListaUsuarios.setAdapter(Uadaptador);
+        Uadaptador.notifyDataSetChanged();}
 }
