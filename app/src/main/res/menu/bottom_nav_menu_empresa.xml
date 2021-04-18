@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/food_real"
+        android:title="Platos" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/menu_restaurante"
+        android:title="Carta" />
+
+    <item
+        android:id="@+id/navigation_usuarios"
+        android:title="Usuarios"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        />
+</menu>

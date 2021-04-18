@@ -33,7 +33,9 @@ public class Categoria {
     public void setNombre_categoria(String nombre_categoria) {
         this.nombre_categoria = nombre_categoria;
     }
+    public String toString(){return nombre_categoria;
 
+    }
 
     //constructor
     public Categoria(int pId, String pNom){
@@ -152,7 +154,7 @@ public class Categoria {
         return cat;
     }
 
-    private static ArrayList<Categoria> ListarCategorias() {
+    public static ArrayList<Categoria> ListarCategorias() {
 
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
 

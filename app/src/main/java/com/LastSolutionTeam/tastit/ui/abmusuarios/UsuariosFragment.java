@@ -44,7 +44,7 @@ public class UsuariosFragment extends Fragment {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         ListaUsuarios.setLayoutManager(linearLayoutManager);
-        ListarEmpresas();
+        ListarUsuarios();
         inicializaAdaptador();
 
         FloatingActionButton fab = root.findViewById(R.id.FabNuevoUsuario);
@@ -58,7 +58,7 @@ public class UsuariosFragment extends Fragment {
 
         return root ;
 }
-    public void ListarEmpresas(){
+    public void ListarUsuarios(){
         usuario=Usuario.BuscarTodos();
     }
     public UsuarioAdaptador Uadaptador;

@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tastit">
-        <activity android:name=".UsuariosActivity"></activity>
+        <activity android:name=".PlatosActivity"></activity>
+        <activity android:name=".abm_empresa" />
+        <activity android:name=".UsuariosActivity" />
         <activity android:name=".EmpresaActivity" />
         <activity
             android:name=".AbmActivity"

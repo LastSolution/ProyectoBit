@@ -112,7 +112,33 @@ public class Empresa {
         }
         return ret;
     }
+    public static int ModificarEmpresa(Empresa empresa) {
 
+        int ret=0;
+
+        Connection Conn= Conexion.ObtenerConexion();
+
+        if(Conn!=null)
+        {
+            try {
+                PreparedStatement pst=Conn.prepareStatement("UPDATE EMPRESAS SET rut=?,nombre=?,telefono=?,correo=?,logo=? ");
+                pst.setString(1,empresa.getRut());
+                pst.setString(2,empresa.getNombre());
+                pst.setString(3,empresa.getTelefono());
+                pst.setString(4, empresa.getCorreo());
+                pst.setBytes(5, empresa.getLogo());
+                ret= pst.executeUpdate();
+
+
+            }catch (SQLException E)
+            {
+                return ret;
+            }
+        }else {
+            return 3;
+        }
+        return ret;
+    }
     public static int EliminarEmpresa(String rut){
 
         int ret=0;
@@ -175,7 +201,7 @@ public class Empresa {
             String sql = "SELECT * FROM Empresas where rut=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
 
-            pst.setString(0,Rut);
+            pst.setString(1,Rut);
 
             ResultSet rs = pst.executeQuery();
 

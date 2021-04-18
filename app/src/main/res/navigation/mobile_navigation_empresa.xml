@@ -2,13 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    android:id="@+id/mobile_navigation_empresa"
+    app:startDestination="@+id/navigation_dashboard">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.LastSolutionTeam.tastit.ui.abmrestaurante.RestauranteFragment"
-        android:label="Empresas" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -26,6 +22,4 @@
         android:name="com.LastSolutionTeam.tastit.ui.abmusuarios.UsuariosFragment"
         android:label="Usuarios"
         tools:layout="@layout/fragment_abm_usuarios" />
-
-
 </navigation>

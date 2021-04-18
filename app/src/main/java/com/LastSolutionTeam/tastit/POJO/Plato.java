@@ -18,9 +18,17 @@ public class Plato {
     private String nombre_plato;
     private double precio;
     private int tamanio;
-    private String imagen;
-    private String nombre_carta;
+    private byte[] imagen;
     private int categoria;
+    private String empresa;
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
 
     //propiedades
     public int getId_plato() {
@@ -51,19 +59,13 @@ public class Plato {
         this.tamanio = tamanio;
     }
 
-    public String getImagen() {
+    public byte[] getImagen() {
         return imagen;
     }
-    public void setImagen(String imagen) {
+    public void setImagen(byte[]  imagen) {
         this.imagen = imagen;
     }
 
-    public String getNombre_carta() {
-        return nombre_carta;
-    }
-    public void setNombre_carta(String nombre_carta) {
-        this.nombre_carta = nombre_carta;
-    }
 
     public int getCategoria() {
         return categoria;
@@ -73,48 +75,60 @@ public class Plato {
     }
 
     //constructor
-    public Plato(int pId, String pNom, double pPrecio, int pTam, String pImg, String pCarta, int pCat){
+    public Plato(int pId, String pNom, double pPrecio, int pTam, byte[] pImg, int pCat,String pEmpresa){
         id_plato = pId;
         nombre_plato = pNom;
         precio = pPrecio;
         tamanio = pTam;
         imagen = pImg;
-        nombre_carta = pCarta;
         categoria = pCat;
+        empresa=pEmpresa;
+
+    }
+    public Plato( String pNom, double pPrecio, int pTam, byte[] pImg, int pCat,String pEmpresa){
+
+        nombre_plato = pNom;
+        precio = pPrecio;
+        tamanio = pTam;
+        imagen = pImg;
+        categoria = pCat;
+        empresa=pEmpresa;
+
     }
 
 
     //persistencia (privada)
-    private static Plato CrearObjeto(ResultSet rs) throws SQLException
+    public static Plato CrearObjeto(ResultSet rs) throws SQLException
     {
         Plato plato = null;
 
         plato = new Plato(
                 rs.getInt("id_plato"),
-                rs.getNString("nombre_plato"),
-                rs.getDouble("precio_plato"),
+                rs.getString("nombre_plato"),
+                rs.getDouble("precio"),
                 rs.getInt("tamanio"),
-                rs.getNString("imagen"),
-                rs.getNString("carta"),
-                rs.getInt("categoria")
+                rs.getBytes("imagen"),
+                rs.getInt("categoria"),
+                rs.getString("empresa")
         );
         return plato;
     }
 
-    private static void IngresarPlato(Plato plato, Carta carta, Categoria cat) {
-
+    public static int IngresarPlato(Plato plato) {
+        int ret=0;
         try {
+
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "INSERT INTO platos (nombre_plato,precio,tamanio,imagen,carta,categoria) " +
+            String sql = "INSERT INTO platos (nombre_plato,precio,tamanio,imagen,categoria,empresa) " +
                     "values (?,?,?,?,?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, plato.getNombre_plato());
             pst.setString(2, String.valueOf(plato.getPrecio()));
             pst.setString(3, String.valueOf(plato.getTamanio()));
-            pst.setString(4, plato.getImagen());
-            pst.setString(5, carta.getNombre_carta());
-            pst.setString(6, String.valueOf(cat.getId_categoria()));
-            int ret = pst.executeUpdate();
+            pst.setBytes(4, plato.getImagen());
+            pst.setInt(5,plato.getCategoria());
+            pst.setString(6,plato.getEmpresa());
+            ret = pst.executeUpdate();
 
             if (ret == 0)
                 throw new RuntimeException("No se pudo ingresar el plato!");
@@ -127,9 +141,10 @@ public class Plato {
         {
             //cnn.close();
         }
+        return ret;
     }
 
-    private static void ModificarPlato(Plato plato, Carta carta, Categoria cat) {
+    public static void ModificarPlato(Plato plato, Carta carta, Categoria cat) {
 
         try {
             Connection cnn= Conexion.ObtenerConexion();
@@ -146,7 +161,7 @@ public class Plato {
             pst.setString(2, String.valueOf(plato.getPrecio()));
             pst.setString(3, String.valueOf(plato.getTamanio()));
             pst.setString(4, String.valueOf(cat.getId_categoria()));
-            pst.setString(5, plato.getImagen());
+            pst.setBytes(5, plato.getImagen());
             pst.setString(6, carta.getNombre_carta());
             pst.setString(7, String.valueOf(plato.getNombre_plato()));
 
@@ -165,7 +180,7 @@ public class Plato {
         }
     }
 
-    private static void EliminarPlato(Plato plato) {
+    public static void EliminarPlato(Plato plato) {
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
@@ -187,7 +202,7 @@ public class Plato {
         }
     }
 
-    private static Plato BuscarPlato(String nombre) {
+    public static Plato BuscarPlato(String nombre) {
 
         Plato plato = null;
 
@@ -205,8 +220,8 @@ public class Plato {
                 plato.precio = rs.getDouble(2);
                 plato.tamanio = rs.getInt(3);
                 plato.categoria = rs.getInt(4);
-                plato.imagen = rs.getNString(5);
-                plato.nombre_carta = rs.getNString(6);
+                plato.imagen = rs.getBytes(5);
+
             }
         }
         catch (SQLException ex)
@@ -221,15 +236,42 @@ public class Plato {
     }
 
 
-    private static ArrayList<Plato> ListarPlatos() {
+    public static ArrayList<Plato> ListarPlatos() {
 
         ArrayList<Plato> platos = new ArrayList<Plato>();
         Plato plato = null;
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM Cartas";
+            String sql = "SELECT * FROM platos";
             PreparedStatement pst = cnn.prepareStatement(sql);
 
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                plato = Plato.CrearObjeto(rs);
+                platos.add(plato);
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return platos;
+    }
+    public static ArrayList<Plato> BuscarporCategoriayEmpresa(int categoria,String RutEmpresa) {
+
+        ArrayList<Plato> platos = new ArrayList<Plato>();
+        Plato plato = null;
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM platos where empresa=? and categoria=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, RutEmpresa);
+            pst.setInt(2, categoria);
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
@@ -255,9 +297,7 @@ public class Plato {
         return BuscarPlato(nombre);
     }
 
-    public void Ingresar(Plato plato, Carta carta, Categoria cat) {
-        IngresarPlato(plato, carta, cat);
-    }
+
 
     public void Modificar(Plato plato, Carta carta, Categoria cat) {
         ModificarPlato(plato, carta, cat);

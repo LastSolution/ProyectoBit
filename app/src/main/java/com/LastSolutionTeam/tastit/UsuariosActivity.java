@@ -37,7 +37,6 @@ public class UsuariosActivity extends AppCompatActivity {
         empresaList=new ArrayList<EmpresaSpinner>();
     for (int i=0; i<Lista.size(); i++)
     {
-
         Empresa empresa;
         empresa = Lista.get(i);
         empresaList.add(new EmpresaSpinner(empresa.getRut(),empresa.getNombre()));
@@ -58,7 +57,7 @@ private String EmpresaUsuario(String rut){
         nombreUsuario= (EditText) findViewById(R.id.EtUsername);
         tipoUsuario=(EditText) findViewById(R.id.EttipoUsuario);
         passUsuario=(EditText)findViewById(R.id.etPassUsuario);
-       btnAgregar=(Button) findViewById(R.id.btnAgregarusuario);
+        btnAgregar=(Button) findViewById(R.id.btnAgregarusuario);
 
        btnAgregar.setOnClickListener(new View.OnClickListener() {
            @Override

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.LastSolutionTeam.tastit.AbmActivity;
+import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Usuario;
 
 
@@ -48,11 +49,16 @@ public class MainActivity extends AppCompatActivity {
 
                     if (USUARIO != null )
                     {
-                        Toast.makeText(context, "Ingresado Con Exito", Toast.LENGTH_SHORT).show();
-                     //LimpiarDatos();
-
+                    VarGlobales.usuarioActual=USUARIO;
+                    VarGlobales.empresaActual= Empresa.BuscarPorRut(USUARIO.getRut_empresa());
+                    if(USUARIO.getTipo().equals("Empresa")){
+                        Intent intent = new Intent(v.getContext(), abm_empresa.class);
+                        startActivity(intent);
+                    }if(USUARIO.getTipo().equals("Administrador")){
                         Intent intent = new Intent(v.getContext(), AbmActivity.class);
                         startActivity(intent);
+                    }
+
 
                     }else
                     {

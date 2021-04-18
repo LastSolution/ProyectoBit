@@ -22,19 +22,21 @@
         android:layout_height="155dp"
         android:layout_gravity="center"
         android:background="@drawable/logo" />
+
     <EditText
+        android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
-        android:textStyle="bold"
-        android:textColorHint="@color/GreenPLight"
-        android:textColor="@color/GreenPLight"
-        app:backgroundTint="@color/GreenPLight"
+        android:layout_marginRight="30dp"
         android:hint="Usuario"
+        android:textColor="@color/GreenPLight"
+        android:textColorHint="@color/GreenPLight"
+        android:textStyle="bold"
 
-        android:id="@+id/etNombre" />
+        app:backgroundTint="@color/GreenPLight" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
