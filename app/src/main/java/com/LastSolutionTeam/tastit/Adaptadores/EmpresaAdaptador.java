@@ -57,6 +57,7 @@ public  EmpresaAdaptador(ArrayList<Empresa>empresas, Activity activity){
         empresaViewHolder.txtNombreEmpresa.setText(empresa.getNombre());
         empresaViewHolder.txtRutEmpresa.setText(empresa.getRut());
         empresaViewHolder.txtTelEmpresa.setText(empresa.getTelefono());
+
         if(empresa.getLogo()!=null){
 
             empresaViewHolder.imglogo.setImageBitmap(LogoaBitmap(empresa.getLogo()));
@@ -69,6 +70,10 @@ public  EmpresaAdaptador(ArrayList<Empresa>empresas, Activity activity){
                 myIntent.putExtra("rut",empresa.getRut());
                 myIntent.putExtra("telefono",empresa.getTelefono());
                 myIntent.putExtra("correo",empresa.getCorreo());
+              if(empresa.getLogo()!=null){
+                  myIntent.putExtra("imagen",empresa.getLogo());
+              }
+
                 activity.startActivity(myIntent);
 
             }

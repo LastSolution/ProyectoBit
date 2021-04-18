@@ -126,21 +126,21 @@ public class Categoria {
         }
     }
 
-    private static Categoria BuscarCategoriaPorNombre(String nombre) {
+    public static Categoria BuscarCategoriaPorID(int id_categoria) {
 
         Categoria cat = null;
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM categorias WHERE nombre_categoria=?";
+            String sql = "SELECT * FROM categorias WHERE id_categoria=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, nombre);
+            pst.setInt(1, id_categoria);
 
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                cat.id_categoria = rs.getInt(0);
-                cat.nombre_categoria = rs.getNString(1);
+                cat=new Categoria(rs.getInt(1),rs.getString(2));
+
             }
         }
         catch (SQLException ex)
@@ -182,9 +182,7 @@ public class Categoria {
 
 
     //logica
-    public Categoria Buscar(String nombre) {
-        return BuscarCategoriaPorNombre(nombre);
-    }
+
 
     public void Ingresar(Categoria cat) {
         IngresarCategoria(cat);

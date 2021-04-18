@@ -16,20 +16,13 @@ import com.LastSolutionTeam.tastit.R;
 
 public class CartaFragment extends Fragment {
 
-    private CartaViewModel cartaViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        cartaViewModel =
-                new ViewModelProvider(this).get(CartaViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_carta, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        cartaViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+
         return root;
     }
 }

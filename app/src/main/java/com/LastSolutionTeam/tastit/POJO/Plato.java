@@ -186,7 +186,7 @@ public class Plato {
             Connection cnn = Conexion.ObtenerConexion();
             String sql = "DELETE platos WHERE id_plato=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, String.valueOf(plato.getId_plato()));
+            pst.setInt(1,plato.getId_plato());
             int ret = pst.executeUpdate();
 
             if (ret == 0)

@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -47,6 +48,11 @@ public class EmpresaActivity extends AppCompatActivity {
     byte[] logo;
 
     private Activity activity;
+    private Bitmap convertirlogoBitMap(byte [] logo){
+        Bitmap bmp = BitmapFactory.decodeByteArray(logo, 0, logo.length);
+        return bmp;
+
+    }
     public void AbrirAlmacenamiento(View view){
         SolicitarPermiso();
         Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -140,6 +146,9 @@ public class EmpresaActivity extends AppCompatActivity {
             CorreoEmpresa.setText(correoempresa);
             btnAdd_Modify.setText("Editar");
             Titulo.setText("MODIFICA LOS DATOS");
+            if(parametros.getByteArray("imagen")!=null){
+                Logo.setImageBitmap(convertirlogoBitMap(parametros.getByteArray("imagen")));
+            }
 
         }
 
