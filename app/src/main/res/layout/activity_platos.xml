@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_marginHorizontal="30dp"
+    android:layout_marginHorizontal="5dp"
     >
     <TextView
         android:layout_width="match_parent"
@@ -13,9 +13,9 @@
         android:id="@+id/TITULOPLATO"
         android:text="NUEVO PLATO"
         android:textStyle="bold"
-        android:textSize="35dp"
+        android:textSize="20dp"
         android:gravity="center"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="15dp"/>
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,11 +28,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/etPrecio"
         android:hint="Precio"/>
+
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/descripcionplato"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ettamanioplato"
-        android:hint="Tamaño "/>
+        android:hint="Descripcion"
+        android:maxLength="200"
+        android:lines="4"
+      />
 
 
     <TextView
@@ -55,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnAgregarPlato"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="Agregar"/>
 
 

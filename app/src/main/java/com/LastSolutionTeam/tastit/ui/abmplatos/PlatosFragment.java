@@ -62,7 +62,8 @@ public class PlatosFragment extends Fragment {
             spinEmpresa.setVisibility(View.GONE);
             txtspinEmpresa.setVisibility(View.GONE);
         }
-
+        ListarPlatos(1,RutEmpresa);
+        inicializaAdaptador();
         ListaCategorias=Categoria.ListarCategorias();
         ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(context, android.R.layout.simple_spinner_dropdown_item, ListaCategorias);
         spinCategoria.setAdapter(adapter);
@@ -73,6 +74,7 @@ public class PlatosFragment extends Fragment {
 
                ListarPlatos(categoria.getId_categoria(),RutEmpresa);
                inicializaAdaptador();
+
            }
 
            @Override

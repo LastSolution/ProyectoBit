@@ -67,7 +67,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
             Intent myIntent = new Intent(v.getContext(), PlatosActivity.class);
             myIntent.putExtra("nombre",plato.getNombre_plato());
             myIntent.putExtra("precio",plato.getPrecio());
-            myIntent.putExtra("tamanio",plato.getTamanio());
+            myIntent.putExtra("descripcion",plato.getDescripcion());
             myIntent.putExtra("categoria",plato.getCategoria());
             myIntent.putExtra("imagen",plato.getImagen());
             activity.startActivity(myIntent);
@@ -96,6 +96,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
 
         private TextView txtnombreplato;
         private TextView txtprecioplato;
+        private TextView txtdescripcion;
         private ImageView imgPlato;
         private Button btnmodifusuario;
         private Button btneliminarusuario;
@@ -105,6 +106,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
             super(itemView);
             txtnombreplato    = (TextView) itemView.findViewById(R.id.txtnomplato);
             txtprecioplato    = (TextView) itemView.findViewById(R.id.txtprecioplato);
+            txtdescripcion = (TextView) itemView.findViewById(R.id.descripcionplato);
             btnmodifusuario    = (Button) itemView.findViewById(R.id.btnmodificarplato);
             btneliminarusuario = (Button) itemView.findViewById(R.id.btneliminarplato);
             imgPlato=(ImageView) itemView.findViewById(R.id.cardimgplato);

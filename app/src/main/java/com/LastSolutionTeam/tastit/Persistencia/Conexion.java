@@ -11,14 +11,14 @@ import net.sourceforge.jtds.jdbc.Driver;
 
 public class Conexion {
 
-    private static String IP_PUERTO="18.225.11.3:1433";  // IP:PUERTO
-    private static String DATABASE ="TastIT";              // BASE DE DATOS
-    private static String INSTANCE ="lastsolution";        // INSTANCIA
-    private static String USERNAME ="sa";                  // USER
-    private static String PASSWORD ="Last2021-";           // PASSWORD
+    private static String IP_PUERTO="192.168.1.6";  // IP:PUERTO
+    private static String DATABASE ="TastiT";              // BASE DE DATOS
+    private static String INSTANCE ="SQLEXPRESS";        // INSTANCIA
+    private static String USERNAME ="Psalazar";                  // USER
+    private static String PASSWORD ="asdasd";           // PASSWORD
 
 
-    public static String stringConnection = "jdbc:jtds:sqlserver://"+IP_PUERTO+"/"+
+    public static String stringConnection = "jdbc:jtds:sqlserver://"+IP_PUERTO+";databaseName="+
             DATABASE+";instance="+INSTANCE+";user="+USERNAME+";password="+PASSWORD+"";
 
     public static Connection cnn = null;

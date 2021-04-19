@@ -17,7 +17,7 @@ public class Plato {
     private int id_plato;
     private String nombre_plato;
     private double precio;
-    private int tamanio;
+    private String descripcion;
     private byte[] imagen;
     private int categoria;
     private String empresa;
@@ -52,11 +52,11 @@ public class Plato {
         this.precio = precio;
     }
 
-    public int getTamanio() {
-        return tamanio;
+    public String getDescripcion() {
+        return descripcion;
     }
-    public void setTamanio(int tamanio) {
-        this.tamanio = tamanio;
+    public void setDescripcion(String tamanio) {
+        this.descripcion = tamanio;
     }
 
     public byte[] getImagen() {
@@ -75,21 +75,21 @@ public class Plato {
     }
 
     //constructor
-    public Plato(int pId, String pNom, double pPrecio, int pTam, byte[] pImg, int pCat,String pEmpresa){
+    public Plato(int pId, String pNom, double pPrecio, String desc, byte[] pImg, int pCat,String pEmpresa){
         id_plato = pId;
         nombre_plato = pNom;
         precio = pPrecio;
-        tamanio = pTam;
+        descripcion = desc;
         imagen = pImg;
         categoria = pCat;
         empresa=pEmpresa;
 
     }
-    public Plato( String pNom, double pPrecio, int pTam, byte[] pImg, int pCat,String pEmpresa){
+    public Plato( String pNom, double pPrecio, String desc, byte[] pImg, int pCat,String pEmpresa){
 
         nombre_plato = pNom;
         precio = pPrecio;
-        tamanio = pTam;
+        descripcion = desc;
         imagen = pImg;
         categoria = pCat;
         empresa=pEmpresa;
@@ -106,7 +106,7 @@ public class Plato {
                 rs.getInt("id_plato"),
                 rs.getString("nombre_plato"),
                 rs.getDouble("precio"),
-                rs.getInt("tamanio"),
+                rs.getString("descripcion"),
                 rs.getBytes("imagen"),
                 rs.getInt("categoria"),
                 rs.getString("empresa")
@@ -119,15 +119,15 @@ public class Plato {
         try {
 
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "INSERT INTO platos (nombre_plato,precio,tamanio,imagen,categoria,empresa) " +
+            String sql = "INSERT INTO platos (nombre_plato,precio,imagen,categoria,empresa,descripcion) " +
                     "values (?,?,?,?,?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, plato.getNombre_plato());
             pst.setString(2, String.valueOf(plato.getPrecio()));
-            pst.setString(3, String.valueOf(plato.getTamanio()));
-            pst.setBytes(4, plato.getImagen());
-            pst.setInt(5,plato.getCategoria());
-            pst.setString(6,plato.getEmpresa());
+            pst.setBytes(3, plato.getImagen());
+            pst.setInt(4,plato.getCategoria());
+            pst.setString(5,plato.getEmpresa());
+            pst.setString(6, String.valueOf(plato.getDescripcion()));
             ret = pst.executeUpdate();
 
             if (ret == 0)
@@ -144,31 +144,28 @@ public class Plato {
         return ret;
     }
 
-    public static void ModificarPlato(Plato plato, Carta carta, Categoria cat) {
-
+    public static int ModificarPlato(Plato plato) {
+        int ret=0;
         try {
+
             Connection cnn= Conexion.ObtenerConexion();
-            String sql = "UPDATE cartas " +
+            String sql = "UPDATE platos " +
                     "        SET nombre_plato=?," +
                     "            precio=?," +
-                    "            tamanio=?," +
                     "            categoria=?," +
                     "            imagen=?," +
-                    "            carta=?," +
-                    "        WHERE nro_carta=?";
+                    "            descripcion=?"+
+                    "        WHERE id_plato=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, plato.getNombre_plato());
             pst.setString(2, String.valueOf(plato.getPrecio()));
-            pst.setString(3, String.valueOf(plato.getTamanio()));
-            pst.setString(4, String.valueOf(cat.getId_categoria()));
-            pst.setBytes(5, plato.getImagen());
-            pst.setString(6, carta.getNombre_carta());
-            pst.setString(7, String.valueOf(plato.getNombre_plato()));
+            pst.setInt(3, plato.getCategoria());
+            pst.setBytes(4, plato.getImagen());
+            pst.setString(5, plato.getDescripcion());
+            pst.setInt(6,plato.getId_plato());
 
-            int ret = pst.executeUpdate();
+            ret = pst.executeUpdate();
 
-            if (ret == 0)
-                throw new RuntimeException("No se pudo modificar el plato!");
         }
         catch (SQLException ex)
         {
@@ -178,6 +175,7 @@ public class Plato {
         {
             //cnn.close();
         }
+        return ret;
     }
 
     public static void EliminarPlato(Plato plato) {
@@ -216,9 +214,9 @@ public class Plato {
 
             while(rs.next()){
                 plato.id_plato = rs.getInt(0);
-                plato.nombre_plato = rs.getNString(1);
+                plato.nombre_plato = rs.getString(1);
                 plato.precio = rs.getDouble(2);
-                plato.tamanio = rs.getInt(3);
+                plato.descripcion = rs.getString(3);
                 plato.categoria = rs.getInt(4);
                 plato.imagen = rs.getBytes(5);
 
@@ -298,10 +296,6 @@ public class Plato {
     }
 
 
-
-    public void Modificar(Plato plato, Carta carta, Categoria cat) {
-        ModificarPlato(plato, carta, cat);
-    }
 
     public void Eliminar(Plato plato) {
         EliminarPlato(plato);

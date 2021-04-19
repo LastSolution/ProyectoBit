@@ -30,12 +30,13 @@ public class PlatosActivity extends AppCompatActivity {
 TextView txttitulo;
 EditText etnombre;
 EditText etprecio;
-EditText tamanio;
+EditText descripcion;
 ImageView imgPlato;
 Spinner spinCat;
 Button btnNuevoPlato;
 Context context;
 Categoria categoria;
+int modificar=0;
 private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
 
 
@@ -80,7 +81,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
         txttitulo=(TextView) findViewById(R.id.TITULOPLATO);
         etnombre=(EditText) findViewById(R.id.etNombrePlato);
         etprecio=(EditText) findViewById(R.id.etPrecio);
-        tamanio=(EditText) findViewById(R.id.ettamanioplato);
+        descripcion=(EditText) findViewById(R.id.descripcionplato);
         imgPlato=(ImageView) findViewById(R.id.imgplato);
         spinCat=(Spinner) findViewById(R.id.spinCategorias);
         btnNuevoPlato=(Button) findViewById(R.id.btnAgregarPlato);
@@ -90,11 +91,11 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
         //obtiene parametros del intent (si tiene Carga los datos para editar(MODIFICACION))
         Bundle parametros =getIntent().getExtras();
         if(parametros!=null){
+            modificar=1;
             etnombre.setText(parametros.getString("nombre"));
             etprecio.setText(Double.toString(parametros.getDouble("precio")));
-            tamanio.setText(parametros.getInt("tamanio"));
-            spinCat.setSelection(adapter.getPosition(Categoria.BuscarCategoriaPorID(parametros.getInt("categoria"))));
-           // spinCat.setSelection(ListaCategorias.indexOf(Categoria.BuscarCategoriaPorID(parametros.getInt("categoria"))));
+            descripcion.setText(parametros.getString("descripcion"));
+            spinCat.setSelection(adapter.getPosition(Categoria.BuscarCategoriaPorID(parametros.getInt("categoria")))-1);
             imgPlato.setImageBitmap(convertirlogoBitMap(parametros.getByteArray("imagen")));
 
 
@@ -119,12 +120,22 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
             @Override
             public void onClick(View v) {
                 String precio=etprecio.getText().toString();
-                Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),Integer.parseInt(tamanio.getText().toString()) ,ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.empresaActual.getRut());
-                if(Plato.IngresarPlato(plato)==1){
-                    Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.empresaActual.getRut());
+                if(modificar==0){
+
+                    if(Plato.IngresarPlato(plato)==1){
+                        Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    if(Plato.ModificarPlato(plato)==1){
+                        Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
 
