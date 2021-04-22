@@ -2,11 +2,15 @@ package com.LastSolutionTeam.tastit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Trace;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.POJO.Cliente;
 
@@ -19,7 +23,8 @@ public class NombresClientes extends AppCompatActivity {
     EditText Cliente5;
     EditText Cliente6;
     Button btnAceptar;
-
+    int ClienteVacio=0;
+    Context context;
     int CantidadClientes;
 
     private void OcultarEditText(int Cantidad){
@@ -116,11 +121,18 @@ public class NombresClientes extends AppCompatActivity {
         }
 
     }
-
+    private void ValidarEditVacio(EditText editText){
+        if(editText.getVisibility() == View.VISIBLE) {
+            if(editText.getText().toString()==""){
+                ClienteVacio=1;
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nombres_clientes);
+        context=this;
         Cliente1=(EditText) findViewById(R.id.user1);
         Cliente2=(EditText) findViewById(R.id.user2);
         Cliente3=(EditText) findViewById(R.id.user3);
@@ -130,12 +142,27 @@ public class NombresClientes extends AppCompatActivity {
         btnAceptar=(Button) findViewById(R.id.btnaceptarClientes) ;
 
         Bundle parametros =getIntent().getExtras();
-        CantidadClientes=parametros.getInt("CantClientes");
+        CantidadClientes=parametros.getInt("cantidad");
         OcultarEditText(CantidadClientes);
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                INGRESARCLIENTES(CantidadClientes);
+                ValidarEditVacio(Cliente1);
+                ValidarEditVacio(Cliente2);
+                ValidarEditVacio(Cliente3);
+                ValidarEditVacio(Cliente4);
+                ValidarEditVacio(Cliente5);
+                ValidarEditVacio(Cliente6);
+                if(ClienteVacio==0){
+                    INGRESARCLIENTES(CantidadClientes);
+                    Intent myIntent = new Intent(v.getContext(), Activity_Mesa.class);
+                    myIntent.putExtra("cantidad",CantidadClientes);
+                    startActivity(myIntent);
+                }else{
+                    Toast.makeText(context,"NO PUEDE INGRESAR UN CLIENTE SIN NOMBRE",Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
