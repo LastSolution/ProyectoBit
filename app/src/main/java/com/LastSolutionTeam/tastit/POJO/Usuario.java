@@ -180,13 +180,13 @@ public class Usuario {
         return empresas;
     }
 
-    public static void EliminarUsuario(Usuario user,Context context) {
+    public static void EliminarUsuario(int id) {
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
             String sql = "DELETE usuarios WHERE id_usuario=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, String.valueOf(user.getId_usuario()));
+            pst.setInt(1,id);
             int ret = pst.executeUpdate();
 
             if (ret == 0)

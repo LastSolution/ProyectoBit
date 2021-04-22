@@ -59,19 +59,23 @@ public class Cliente {
         return c;
     }
 
-    private static void IngresarCliente(Cliente c) {
-
+    public static int IngresarCliente(String Nombre,String Rut) {
+            int id=0;
         try {
             Connection cnn = Conexion.ObtenerConexion();
             String sql = "INSERT INTO clientes (rut_cliente, nombre_cliente) " +
                     "values (?,?)";
-            PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, c.getRut_cliente());
-            pst.setString(2, c.getNombre_cliente());
+            PreparedStatement pst = cnn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            pst.setString(1, Nombre);
+            pst.setString(2, Rut);
             int ret = pst.executeUpdate();
-
             if (ret == 0)
                 throw new RuntimeException("No se pudo ingresar el cliente!");
+            ResultSet rs=pst.getGeneratedKeys();
+            if(rs.next()){
+               id=rs.getInt(1);
+            }
+
         }
         catch (SQLException ex)
         {
@@ -81,6 +85,7 @@ public class Cliente {
         {
             //cnn.close();
         }
+        return id;
     }
 
     private static void ModificarCliente(Cliente c) {
@@ -133,7 +138,7 @@ public class Cliente {
         }
     }
 
-    private static Cliente BuscarCliente(String nombre) {
+    public static Cliente BuscarCliente(int id_cliente) {
 
         Cliente c = null;
 
@@ -141,7 +146,7 @@ public class Cliente {
             Connection cnn = Conexion.ObtenerConexion();
             String sql = "SELECT * FROM clientes WHERE nombre_cliente=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, nombre);
+            pst.setInt(1, id_cliente);
 
             ResultSet rs = pst.executeQuery();
 
@@ -190,13 +195,8 @@ public class Cliente {
 
 
     //logica
-    public Cliente Buscar(String nombre) {
-        return BuscarCliente(nombre);
-    }
 
-    public void Ingresar(Cliente cat) {
-        IngresarCliente(cat);
-    }
+
 
     public void Modificar(Cliente cat) {
         ModificarCliente(cat);

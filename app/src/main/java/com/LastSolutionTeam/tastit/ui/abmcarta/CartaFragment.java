@@ -23,6 +23,13 @@ public class CartaFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_carta, container, false);
 
 
+
         return root;
     }
+   public void IniciarModoMesa(View view){
+
+
+
+    }
+
 }

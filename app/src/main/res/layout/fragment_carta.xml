@@ -18,30 +18,19 @@
         tools:context=".ui.abmrestaurante.RestauranteFragment"
         android:orientation="horizontal">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvEmpresas"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
 
-            >
-
-
-        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/NuevaEmpresa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_gravity="bottom|right"
-        android:src="@drawable/ic_baseline_add_24"
-        android:contentDescription="NuevaEmpresa"
-        android:elevation="10dp"
-
-        />
+ <com.google.android.material.button.MaterialButton
+     android:layout_width="match_parent"
+     android:layout_height="70dp"
+     android:layout_gravity="center"
+     android:text="MODO MESA"
+     android:textSize="40dp"
+     android:layout_marginHorizontal="10dp"
+     android:elevation="40dp"
+     android:onClick="IniciarModoMesa"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

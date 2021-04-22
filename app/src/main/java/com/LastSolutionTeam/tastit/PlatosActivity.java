@@ -125,6 +125,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
 
                     if(Plato.IngresarPlato(plato)==1){
                         Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+
                     }else {
                         Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
                     }

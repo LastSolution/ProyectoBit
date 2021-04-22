@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tastit">
-        <activity android:name=".PlatosActivity"></activity>
+        <activity android:name=".NombresClientes"></activity>
+        <activity android:name=".MesaBienvenida" />
+        <activity android:name=".Activity_Mesa" />
+        <activity android:name=".PlatosActivity" />
         <activity android:name=".abm_empresa" />
         <activity android:name=".UsuariosActivity" />
         <activity android:name=".EmpresaActivity" />

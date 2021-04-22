@@ -41,7 +41,14 @@ public class UsuarioAdaptador extends RecyclerView.Adapter<UsuarioAdaptador.Usua
           usuarioViewHolder.TxtUsername.setText(usuario.getUsername());
           usuarioViewHolder.TxtTipo.setText(usuario.getTipo());
           usuarioViewHolder.TxtEmpresa.setText(usuario.getRut_empresa());
-
+            usuarioViewHolder.btnEliminaruser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                Usuario.EliminarUsuario(usuario.getId_usuario());
+                usuarios.remove(position);
+                notifyItemRemoved(position);
+                }
+            });
     }
 
     @Override
@@ -54,14 +61,16 @@ public class UsuarioAdaptador extends RecyclerView.Adapter<UsuarioAdaptador.Usua
         private TextView TxtUsername;
         private TextView TxtTipo;
         private TextView TxtEmpresa;
-        private Button   btnAgregar;
+        private Button btnEliminaruser;
+
 
         public UsuarioViewHolder(@NonNull View itemView) {
             super(itemView);
             TxtUsername=(TextView) itemView.findViewById(R.id.txtUserName);
             TxtTipo=(TextView) itemView.findViewById(R.id.txtTipoUsuario);
             TxtEmpresa=(TextView) itemView.findViewById(R.id.txtEmpresaUsuario);
-            btnAgregar=(Button) itemView.findViewById(R.id.btnEliminarUser);
+            btnEliminaruser=(Button) itemView.findViewById(R.id.btnEliminarUser);
+
 
         }
     }

@@ -8,7 +8,7 @@
     >
 
     <LinearLayout
-        android:layout_width="398dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
@@ -29,23 +29,24 @@
 
             <TextView
                 android:id="@+id/txtnomplato"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="nombreplato"
                 android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/txtprecioplato"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+
                 android:text="precioplato"
                 android:textSize="15dp" />
 
         </LinearLayout>
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/LinearBotones"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -55,7 +56,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnmodificarplato"
                 android:layout_width="60dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 app:icon="@drawable/ic_baseline_refresh_24" />
 
             <com.google.android.material.button.MaterialButton
@@ -63,8 +65,10 @@
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 app:icon="@drawable/ic_baseline_delete_24"
+                android:layout_gravity="right"
                 />
         </LinearLayout>
+
 
     </LinearLayout>
 
