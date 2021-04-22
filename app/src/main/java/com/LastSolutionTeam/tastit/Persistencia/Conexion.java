@@ -11,11 +11,11 @@ import net.sourceforge.jtds.jdbc.Driver;
 
 public class Conexion {
 
-    private static String IP_PUERTO="192.168.1.6";  // IP:PUERTO
+    private static String IP_PUERTO="192.168.0.101";  // IP:PUERTO
     private static String DATABASE ="TastiT";              // BASE DE DATOS
     private static String INSTANCE ="SQLEXPRESS";        // INSTANCIA
-    private static String USERNAME ="Psalazar";                  // USER
-    private static String PASSWORD ="asdasd";           // PASSWORD
+    private static String USERNAME ="tecniprueba";                  // USER
+    private static String PASSWORD ="tak-tul";           // PASSWORD
 
 
     public static String stringConnection = "jdbc:jtds:sqlserver://"+IP_PUERTO+";databaseName="+
