@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="500dp"
+    android:layout_height="500dp"
+    tools:context=".NombresClientes"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+
+    >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/user1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="CLIENTE NUMERO 1"
+        android:visibility="visible" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CLIENTE NUMERO 2"
+        android:id="@+id/user2"
+        android:layout_marginTop="15dp"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CLIENTE NUMERO 3"
+        android:id="@+id/user3"
+        android:layout_marginTop="15dp"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CLIENTE NUMERO 4"
+        android:id="@+id/user4"
+        android:layout_marginTop="15dp"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CLIENTE NUMERO 5"
+        android:id="@+id/user5" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CLIENTE NUMERO 6"
+        android:id="@+id/user6"
+        android:layout_marginTop="15dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ACEPTAR"
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnaceptarClientes"/>
+
+</LinearLayout>
