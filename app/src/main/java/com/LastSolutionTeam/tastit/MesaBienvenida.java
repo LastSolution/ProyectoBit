@@ -20,11 +20,13 @@ public class MesaBienvenida extends AppCompatActivity {
     Spinner SpinComensales;
     Button btnAceptar;
     int cantidadClientes=0;
-    String NombreEmpresa=VarGlobales.empresaActual.getNombre();
+
+    String NombreEmpresa="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesa_bienvenida);
+        NombreEmpresa=VarGlobales.empresaActual.getNombre();
         context=this;
         txtTitulo=(TextView) findViewById(R.id.txrTituloBienvenida);
         SpinComensales=(Spinner) findViewById(R.id.SpinComensales);

@@ -35,23 +35,13 @@
         android:hint="CLIENTE NUMERO 4"
         android:id="@+id/user4"
         android:layout_marginTop="15dp"/>
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="CLIENTE NUMERO 5"
-        android:id="@+id/user5" />
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="CLIENTE NUMERO 6"
-        android:id="@+id/user6"
-        android:layout_marginTop="15dp"/>
+
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ACEPTAR"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/btnaceptarClientes"/>
 
 </LinearLayout>

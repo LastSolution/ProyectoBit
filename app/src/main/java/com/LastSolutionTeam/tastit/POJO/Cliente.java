@@ -1,5 +1,7 @@
 package com.LastSolutionTeam.tastit.POJO;
 
+import androidx.appcompat.widget.DrawableUtils;
+
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
 import com.LastSolutionTeam.tastit.POJO.*;
 
@@ -66,8 +68,8 @@ public class Cliente {
             String sql = "INSERT INTO clientes (rut_cliente, nombre_cliente) " +
                     "values (?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            pst.setString(1, Nombre);
-            pst.setString(2, Rut);
+            pst.setString(1, Rut);
+            pst.setString(2, Nombre);
             int ret = pst.executeUpdate();
             if (ret == 0)
                 throw new RuntimeException("No se pudo ingresar el cliente!");
@@ -144,16 +146,18 @@ public class Cliente {
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM clientes WHERE nombre_cliente=?";
+            String sql = "SELECT * FROM clientes WHERE id_cliente=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setInt(1, id_cliente);
 
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                c.id_cliente = rs.getInt(0);
-                c.rut_cliente = rs.getNString(1);
-                c.nombre_cliente = rs.getNString(2);
+            c=new Cliente(rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3)
+            );
+
             }
         }
         catch (SQLException ex)

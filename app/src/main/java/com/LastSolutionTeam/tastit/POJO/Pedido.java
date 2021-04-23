@@ -15,6 +15,15 @@ public class Pedido {
     private int id_pedido;
     private int estado;
     private double precio_total;
+    private int id_cliente;
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
 
     //propiedades
     public int getId_pedido() {
@@ -39,10 +48,11 @@ public class Pedido {
     }
 
     //constructor
-    public Pedido(int pId, int pEstado, double pPrecio){
-        id_pedido = pId;
+    public Pedido(int pEstado, double pPrecio,int idcliente){
+
         estado = pEstado;
         precio_total = pPrecio;
+        id_cliente=idcliente;
     }
 
 
@@ -52,22 +62,24 @@ public class Pedido {
         Pedido p = null;
 
         p = new Pedido(
-                rs.getInt("id_plato"),
+
                 rs.getInt("estado"),
-                rs.getDouble("precio_total")
+                rs.getDouble("precio_total"),
+                rs.getInt("cliente")
         );
         return p;
     }
 
-    private static void IngresarPedido(Pedido pedido) {
+    public static void IngresarPedido(Pedido pedido) {
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "INSERT INTO pedido (estado,precio_total) " +
-                    "values (?,?)";
+            String sql = "INSERT INTO pedido (estado,precio_total,cliente) " +
+                    "values (?,?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, String.valueOf(pedido.getEstado()));
-            pst.setString(2, String.valueOf(pedido.getPrecio_total()));
+            pst.setInt(1, pedido.getEstado());
+            pst.setDouble(2, pedido.getPrecio_total());
+            pst.setInt(2, pedido.getId_cliente());
             int ret = pst.executeUpdate();
 
             if (ret == 0)
@@ -160,7 +172,7 @@ public class Pedido {
         }
     }
 
-    private static Pedido BuscarPedido(int id) {
+    public static Pedido BuscarPedido(int id) {
 
         Pedido p = null;
 
@@ -188,7 +200,34 @@ public class Pedido {
         }
         return p;
     }
+    public static Pedido BuscarPedidoporcliente(int idcliente) {
 
+        Pedido p = null;
+
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM pedidos WHERE cliente=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, String.valueOf(idcliente));
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                p.id_pedido = rs.getInt(0);
+                p.estado = rs.getInt(1);
+                p.precio_total = rs.getDouble(2);
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return p;
+    }
 
     private static ArrayList<Pedido> ListarPedidos() {
 

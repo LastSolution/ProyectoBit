@@ -200,15 +200,15 @@ public class Plato {
         }
     }
 
-    public static Plato BuscarPlato(String nombre) {
+    public static Plato BuscarPlato(int  id) {
 
         Plato plato = null;
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM platos WHERE nombre_plato=?";
+            String sql = "SELECT * FROM platos WHERE id_plato=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, nombre);
+            pst.setInt(1, id);
 
             ResultSet rs = pst.executeQuery();
 
@@ -289,11 +289,7 @@ public class Plato {
     }
 
 
-    //logica (publica)
-    public Plato Buscar(String nombre)
-    {
-        return BuscarPlato(nombre);
-    }
+
 
 
 
