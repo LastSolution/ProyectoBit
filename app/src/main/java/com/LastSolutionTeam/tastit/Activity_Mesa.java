@@ -3,6 +3,7 @@ package com.LastSolutionTeam.tastit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.LastSolutionTeam.tastit.Adaptadores.MAinAdapter;
@@ -47,7 +48,19 @@ public class Activity_Mesa extends AppCompatActivity {
 
 
         FabCarta=(FloatingActionButton) findViewById(R.id.FabCarta);
+        FabCarta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         CerrarMesa=(FloatingActionButton) findViewById(R.id.FabCerrarMesa);
+        CerrarMesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         Bundle parametros =getIntent().getExtras();
         cantClientes=parametros.getInt("cantidad");
         InicializarListGrupo(cantClientes);
@@ -61,20 +74,26 @@ public class Activity_Mesa extends AppCompatActivity {
                 CargarlistaCliente(VarGlobales.cliente2,listgroup2,ListChild2,User2);
                 CargarlistaCliente(VarGlobales.cliente3,listgroup3,ListChild3,User3);
                 CargarlistaCliente(VarGlobales.cliente4,listgroup4,ListChild4,User4);
+                break;
             case 3:
                 CargarlistaCliente(VarGlobales.cliente1,listgroup1,ListChild1,User1);
                 CargarlistaCliente(VarGlobales.cliente2,listgroup2,ListChild2,User2);
                 CargarlistaCliente(VarGlobales.cliente3,listgroup3,ListChild3,User3);
+                break;
             case 2:
                 CargarlistaCliente(VarGlobales.cliente1,listgroup1,ListChild1,User1);
                 CargarlistaCliente(VarGlobales.cliente2,listgroup2,ListChild2,User2);
+                break;
             case 1:
                 CargarlistaCliente(VarGlobales.cliente1,listgroup1,ListChild1,User1);
+                break;
         }
 
     }
     //VarGlobales.cliente1
     public void CargarlistaCliente(Cliente cliente,ArrayList<String> listgroup,HashMap<String,ArrayList<String>> listchild,ExpandableListView expandableListView){
+        listgroup.clear();
+        listchild.clear();
         listgroup.add(cliente.getNombre_cliente());
         Pedido pedido=Pedido.BuscarPedidoporcliente(cliente.getId_cliente());
 
@@ -88,7 +107,14 @@ public class Activity_Mesa extends AppCompatActivity {
             nomprecio=plato.getNombre_plato()+"  "+plato.getPrecio();
             Nombreyprecio.add(nomprecio);
         }
-        listchild.put(cliente.getNombre_cliente(),Nombreyprecio);
+        if(Nombreyprecio.size()==0){
+            Nombreyprecio.add("No pediste ningun plato");
+            listchild.put(cliente.getNombre_cliente(),Nombreyprecio);
+        }
+        else{
+            listchild.put(cliente.getNombre_cliente(),Nombreyprecio);
+        }
+
         adapter=new MAinAdapter(listgroup,listchild);
         expandableListView.setAdapter(adapter);
 

@@ -32,7 +32,7 @@ public class MesaBienvenida extends AppCompatActivity {
         SpinComensales=(Spinner) findViewById(R.id.SpinComensales);
         btnAceptar=(Button) findViewById(R.id.btnAceptar);
         txtTitulo.setText("BIENVENIDO A "+NombreEmpresa);
-        String[] datos = new String[] {"1", "2", "3", "4", "5","6"};
+        String[] datos = new String[] {"1", "2", "3", "4"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, datos);
 

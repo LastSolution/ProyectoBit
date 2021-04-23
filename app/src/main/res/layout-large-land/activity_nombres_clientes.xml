@@ -2,24 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
+    android:layout_width="500dp"
+    android:layout_height="500dp"
     tools:context=".NombresClientes"
     android:orientation="vertical"
     android:layout_gravity="center"
 
     >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="INGRESEM SUS NOMBRES"
-        android:gravity="center_horizontal"
-        android:textSize="20dp"
-        android:textColor="@color/GreenDark"/>
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/user1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:hint="CLIENTE NUMERO 1"
         android:visibility="visible" />
     <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ACEPTAR"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/btnaceptarClientes"/>
 
 </LinearLayout>

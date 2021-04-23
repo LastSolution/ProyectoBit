@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- suppress ALL -->
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="600dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:layout_marginVertical="@dimen/activity_horizontal_margin"
+    android:layout_gravity="center|top">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="INICIAR SESION"
+    android:gravity="center"
+    android:textSize="30dp"
+    android:textColor="@color/GreenPLight"
+    android:layout_marginTop="30dp"/>
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="@drawable/logo"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:hint="Usuario"
+        android:textColor="@color/GreenPLight"
+        android:textColorHint="@color/GreenPLight"
+        android:textStyle="bold"
+
+        app:backgroundTint="@color/GreenPLight" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:inputType="textPassword"
+        android:textColor="@color/GreenPLight"
+        android:textColorHint="@color/GreenPLight"
+        android:textColorLink="@color/GreenPLight"
+        app:backgroundTint="@color/GreenPLight"
+        android:hint="Password"
+        android:id="@+id/Pass" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnconectar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:bottomRightRadius="30dp"
+        android:bottomLeftRadius="30dp"
+        android:topLeftRadius="30dp"
+        android:topRightRadius="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:elevation="20dp"
+        android:text="Ingresar"
+        android:textSize="20dp">
+
+    </com.google.android.material.button.MaterialButton>
+
+
+</LinearLayout>

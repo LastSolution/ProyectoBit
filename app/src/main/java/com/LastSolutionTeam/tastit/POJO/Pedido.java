@@ -74,12 +74,12 @@ public class Pedido {
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "INSERT INTO pedido (estado,precio_total,cliente) " +
+            String sql = "INSERT INTO pedidos (estado,precio_total,cliente) " +
                     "values (?,?,?)";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setInt(1, pedido.getEstado());
-            pst.setDouble(2, pedido.getPrecio_total());
-            pst.setInt(2, pedido.getId_cliente());
+            pst.setString(2, String.valueOf(pedido.getPrecio_total()));
+            pst.setInt(3, pedido.getId_cliente());
             int ret = pst.executeUpdate();
 
             if (ret == 0)
@@ -213,9 +213,8 @@ public class Pedido {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                p.id_pedido = rs.getInt(0);
-                p.estado = rs.getInt(1);
-                p.precio_total = rs.getDouble(2);
+                p=new Pedido(rs.getInt(1),rs.getDouble(3), rs.getInt(2));
+
             }
         }
         catch (SQLException ex)

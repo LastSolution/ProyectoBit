@@ -10,8 +10,8 @@
     <TextView
         android:id="@+id/txrTituloBienvenida"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:layout_height="81dp"
+        android:textSize="40dp"
         android:textAlignment="center"
         android:layout_marginTop="30dp"
         android:text="BIENVENIDO A ...."
@@ -21,22 +21,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
        >
-
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_marginLeft="30dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
-
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="INGRESE LA CANTIDAD DE COMENSALES:"
-            android:textSize="18dp"
-            android:layout_marginTop="10dp"
+            android:textSize="30dp"
             android:layout_gravity="center"
             android:textStyle="bold"
             android:textColor="@color/GreenSecondDark"/>
@@ -45,14 +43,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/SpinComensales"
             android:layout_gravity="center"
-    android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
             android:textColor="@color/GreenSecondDark"/>
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Aceptar"
             android:layout_gravity="center"
-          android:layout_marginTop="30dp"
+            android:layout_marginLeft="25dp"
             android:id="@+id/btnAceptar"/>
 
     </LinearLayout>

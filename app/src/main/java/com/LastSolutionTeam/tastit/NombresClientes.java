@@ -90,8 +90,6 @@ public class NombresClientes extends AppCompatActivity {
                 VarGlobales.cliente2= Cliente.BuscarCliente(Cliente.IngresarCliente(Nombre2,""));
                 CrearpedidosClientes(VarGlobales.cliente1);
                 CrearpedidosClientes(VarGlobales.cliente2);
-
-
                 break;
             case 1:
                 Nombre1= Cliente1.getText().toString();
