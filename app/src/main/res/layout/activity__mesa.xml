@@ -9,38 +9,42 @@
     <ExpandableListView
         android:id="@+id/user1"
         android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:background="@color/GreenPLight"
+        android:background="@color/cliente1"
         />
     <ExpandableListView
         android:id="@+id/user2"
         android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:background="@color/GreenPLight"
+        android:layout_height="wrap_content"
+        android:background="@color/cliente2"
         />
     <ExpandableListView
         android:id="@+id/user3"
         android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        android:background="@color/GreenPLight"
+        android:background="@color/cliente3"
         />
     <ExpandableListView
         android:id="@+id/user4"
         android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
-        android:background="@color/GreenPLight"
+        android:background="@color/cliente4"
         />
 <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
     android:layout_gravity="center|right"
+    android:layout_marginBottom="16dp"
+    android:layout_marginRight="16dp"
     android:id="@+id/FabCarta"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+    android:layout_marginRight="16dp"
         android:layout_gravity="center|left"
         android:id="@+id/FabCerrarMesa"/>
 

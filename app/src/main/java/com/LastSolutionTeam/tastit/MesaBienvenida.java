@@ -26,7 +26,7 @@ public class MesaBienvenida extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesa_bienvenida);
-        NombreEmpresa=VarGlobales.empresaActual.getNombre();
+        NombreEmpresa=VarGlobales.getEmpresaActual().getNombre();
         context=this;
         txtTitulo=(TextView) findViewById(R.id.txrTituloBienvenida);
         SpinComensales=(Spinner) findViewById(R.id.SpinComensales);

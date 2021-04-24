@@ -47,7 +47,7 @@ public class PlatosFragment extends Fragment {
     private Spinner spinCat;
     private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
     private Context context;
-    private String RutEmpresa=VarGlobales.empresaActual.getRut();
+    private String RutEmpresa=VarGlobales.getEmpresaActual().getRut();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_platos, container, false);
@@ -58,7 +58,7 @@ public class PlatosFragment extends Fragment {
 
         spinCategoria=(Spinner) root.findViewById(R.id.spincategoriaplato);
         txtspinEmpresa=(TextView) root.findViewById(R.id.txtspinEmpresa);
-        if(VarGlobales.usuarioActual.getTipo().equals("Empresa")){
+        if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
             spinEmpresa.setVisibility(View.GONE);
             txtspinEmpresa.setVisibility(View.GONE);
         }

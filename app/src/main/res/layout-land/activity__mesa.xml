@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondomesa"
     tools:context=".Activity_Mesa">
 
     <ExpandableListView
@@ -12,38 +13,49 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:background="@color/GreenPLight" />
-
+        android:background="@color/cliente1"
+            android:layout_marginRight="30dp"
+        />
     <ExpandableListView
         android:id="@+id/user2"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@color/GreenPLight"
+        android:background="@color/cliente2"
+        android:layout_marginLeft="30dp"
         />
     <ExpandableListView
         android:id="@+id/user3"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        android:background="@color/GreenPLight"
+        android:background="@color/cliente3"
+        android:layout_marginRight="30dp"
         />
     <ExpandableListView
         android:id="@+id/user4"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
-        android:background="@color/GreenPLight"
+        android:background="@color/cliente4"
+        android:layout_marginLeft="30dp"
         />
 <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center|right"
+    android:src="@drawable/ic_baseline_add_24"
     android:id="@+id/FabCarta"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|left"
         android:id="@+id/FabCerrarMesa"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginVertical="40dp"
+        android:id="@+id/contenedorfragment"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

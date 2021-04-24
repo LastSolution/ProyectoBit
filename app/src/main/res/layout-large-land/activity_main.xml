@@ -16,21 +16,21 @@
     android:gravity="center"
     android:textSize="30dp"
     android:textColor="@color/GreenPLight"
-    android:layout_marginTop="30dp"/>
+    android:layout_marginTop="15dp"/>
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         android:layout_gravity="center"
-        android:background="@drawable/logo"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="15dp"
+        android:background="@drawable/logo" />
 
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="30dp"
         android:hint="Usuario"
         android:textColor="@color/GreenPLight"

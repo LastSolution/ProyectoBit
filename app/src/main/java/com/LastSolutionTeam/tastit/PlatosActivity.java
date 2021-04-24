@@ -120,7 +120,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
             @Override
             public void onClick(View v) {
                 String precio=etprecio.getText().toString();
-                Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.empresaActual.getRut());
+                Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
                 if(modificar==0){
 
                     if(Plato.IngresarPlato(plato)==1){

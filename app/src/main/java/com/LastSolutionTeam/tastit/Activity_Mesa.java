@@ -1,10 +1,16 @@
 package com.LastSolutionTeam.tastit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainer;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.SurfaceControl;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 
 import com.LastSolutionTeam.tastit.Adaptadores.MAinAdapter;
 import com.LastSolutionTeam.tastit.POJO.Cliente;
@@ -31,19 +37,25 @@ public class Activity_Mesa extends AppCompatActivity {
     HashMap<String,ArrayList<String>> ListChild3=new HashMap<>();
     ArrayList<String> listgroup4= new ArrayList<String>();
     HashMap<String,ArrayList<String>> ListChild4=new HashMap<>();
-    MAinAdapter adapter;
-
+    FrameLayout fragmentContainer;
+    Fragment fragmentcarta;
+    FragmentTransaction transaction;
     FloatingActionButton FabCarta;
     FloatingActionButton CerrarMesa;
+
     int cantClientes=0;
+    MAinAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__mesa);
+        getSupportActionBar().hide();
         User1=(ExpandableListView) findViewById(R.id.user1);
         User2=(ExpandableListView) findViewById(R.id.user2);
         User3=(ExpandableListView) findViewById(R.id.user3);
         User4=(ExpandableListView) findViewById(R.id.user4);
+        fragmentContainer=(FrameLayout) findViewById(R.id.contenedorfragment);
+
 
 
 
@@ -51,7 +63,12 @@ public class Activity_Mesa extends AppCompatActivity {
         FabCarta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fragmentcarta=new FragmentCartaMesa();
+                transaction=getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.contenedorfragment,fragmentcarta);
+                getSupportFragmentManager().beginTransaction().add(R.id.contenedorfragment,fragmentcarta);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         CerrarMesa=(FloatingActionButton) findViewById(R.id.FabCerrarMesa);
@@ -70,27 +87,27 @@ public class Activity_Mesa extends AppCompatActivity {
     public void InicializarListGrupo(int Cantcli){
         switch (Cantcli){
             case 4:
-                CargarlistaCliente(VarGlobales.cliente1,listgroup1,ListChild1,User1);
-                CargarlistaCliente(VarGlobales.cliente2,listgroup2,ListChild2,User2);
-                CargarlistaCliente(VarGlobales.cliente3,listgroup3,ListChild3,User3);
-                CargarlistaCliente(VarGlobales.cliente4,listgroup4,ListChild4,User4);
+                CargarlistaCliente(VarGlobales.getCliente1(),listgroup1,ListChild1,User1);
+                CargarlistaCliente(VarGlobales.getCliente2(),listgroup2,ListChild2,User2);
+                CargarlistaCliente(VarGlobales.getCliente3(),listgroup3,ListChild3,User3);
+                CargarlistaCliente(VarGlobales.getCliente4(),listgroup4,ListChild4,User4);
                 break;
             case 3:
-                CargarlistaCliente(VarGlobales.cliente1,listgroup1,ListChild1,User1);
-                CargarlistaCliente(VarGlobales.cliente2,listgroup2,ListChild2,User2);
-                CargarlistaCliente(VarGlobales.cliente3,listgroup3,ListChild3,User3);
+                CargarlistaCliente(VarGlobales.getCliente1(),listgroup1,ListChild1,User1);
+                CargarlistaCliente(VarGlobales.getCliente2(),listgroup2,ListChild2,User2);
+                CargarlistaCliente(VarGlobales.getCliente3(),listgroup3,ListChild3,User3);
                 break;
             case 2:
-                CargarlistaCliente(VarGlobales.cliente1,listgroup1,ListChild1,User1);
-                CargarlistaCliente(VarGlobales.cliente2,listgroup2,ListChild2,User2);
+                CargarlistaCliente(VarGlobales.getCliente1(),listgroup1,ListChild1,User1);
+                CargarlistaCliente(VarGlobales.getCliente2(),listgroup2,ListChild2,User2);
                 break;
             case 1:
-                CargarlistaCliente(VarGlobales.cliente1,listgroup1,ListChild1,User1);
+                CargarlistaCliente(VarGlobales.getCliente1(),listgroup1,ListChild1,User1);
                 break;
         }
 
     }
-    //VarGlobales.cliente1
+
     public void CargarlistaCliente(Cliente cliente,ArrayList<String> listgroup,HashMap<String,ArrayList<String>> listchild,ExpandableListView expandableListView){
         listgroup.clear();
         listchild.clear();
@@ -118,7 +135,15 @@ public class Activity_Mesa extends AppCompatActivity {
         adapter=new MAinAdapter(listgroup,listchild);
         expandableListView.setAdapter(adapter);
 
+    }
+    public void VerCarta(){
+    FragmentCartaMesa fragmentcarta=FragmentCartaMesa.newInstance();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.fragment_open_enter,R.anim.fragment_open_exit,R.anim.fragment_open_enter,R.anim.fragment_open_exit);
+        transaction.add(R.id.contenedorfragment,fragmentcarta,"BLANK_FRAGMENT");
 
+        transaction.commit();
 
     }
 }

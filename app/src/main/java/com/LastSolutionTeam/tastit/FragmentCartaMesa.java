@@ -7,6 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+
+import com.LastSolutionTeam.tastit.Adaptadores.MAinAdapter;
+import com.LastSolutionTeam.tastit.Adaptadores.MAinAdapterCarta;
+import com.LastSolutionTeam.tastit.POJO.Categoria;
+import com.LastSolutionTeam.tastit.POJO.PedidoPlato;
+import com.LastSolutionTeam.tastit.POJO.Plato;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,51 +25,60 @@ import android.view.ViewGroup;
  */
 public class FragmentCartaMesa extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    ExpandableListView expandableListView;
+    ArrayList<String> listgroup1= new ArrayList<String>();
+    HashMap<String,ArrayList<String>> ListChild1=new HashMap<>();
+    MAinAdapterCarta mAinAdapterCarta;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FragmentCartaMesa() {
-
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentCartaMesa.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentCartaMesa newInstance(String param1, String param2) {
+    public static FragmentCartaMesa newInstance() {
         FragmentCartaMesa fragment = new FragmentCartaMesa();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_carta_mesa, container, false);
+        View view=inflater.inflate(R.layout.fragment_carta_mesa, container, false);
+        expandableListView=(ExpandableListView) view.findViewById(R.id.Carta);
+
+        CargarCarta();
+        return view;
+
+
+
+    }
+    public void CargarCarta(){
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        ArrayList<String>Nombreyprecio=new ArrayList<String>();
+        categorias=Categoria.ListarCategorias();
+        for(int i=0; i<categorias.size();i++){
+            Categoria c=categorias.get(i);
+            listgroup1.add(c.getNombre_categoria());
+            ArrayList<Plato> platos=new ArrayList<Plato>();
+            platos=Plato.BuscarporCategoriayEmpresa(c.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
+            for(int ip=0; i<platos.size();ip++){
+                Plato plato=platos.get(ip);
+                String nomprecio;
+                nomprecio=plato.getNombre_plato()+"  "+plato.getPrecio();
+                Nombreyprecio.add(nomprecio);
+
+            }
+            if(Nombreyprecio.size()==0){
+                Nombreyprecio.add("Aun No hay platos en esta categoria");
+            }
+            ListChild1.put(c.getNombre_categoria(),Nombreyprecio);
+
+        }
+        mAinAdapterCarta=new MAinAdapterCarta(listgroup1,ListChild1);
+        expandableListView.setAdapter(mAinAdapterCarta);
+
 
 
 

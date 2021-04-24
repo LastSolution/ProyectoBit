@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
                     if (USUARIO != null )
                     {
-                    VarGlobales.usuarioActual=USUARIO;
-                    VarGlobales.empresaActual= Empresa.BuscarPorRut(USUARIO.getRut_empresa());
+                    VarGlobales.setUsuarioActual(USUARIO);
+                    VarGlobales.setEmpresaActual(Empresa.BuscarPorRut(USUARIO.getRut_empresa()));
                     if(USUARIO.getTipo().equals("Empresa")){
                         Intent intent = new Intent(v.getContext(), abm_empresa.class);
                         startActivity(intent);
