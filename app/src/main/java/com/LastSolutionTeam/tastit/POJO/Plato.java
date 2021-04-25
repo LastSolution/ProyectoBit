@@ -127,15 +127,13 @@ public class Plato {
             pst.setBytes(3, plato.getImagen());
             pst.setInt(4,plato.getCategoria());
             pst.setString(5,plato.getEmpresa());
-            pst.setString(6, String.valueOf(plato.getDescripcion()));
+            pst.setString(6, plato.getDescripcion());
             ret = pst.executeUpdate();
 
-            if (ret == 0)
-                throw new RuntimeException("No se pudo ingresar el plato!");
         }
         catch (SQLException ex)
         {
-            throw new RuntimeException(ex);
+
         }
         finally
         {
@@ -279,12 +277,9 @@ public class Plato {
         }
         catch (SQLException ex)
         {
-            throw new RuntimeException(ex);
+
         }
-        finally
-        {
-            //cnn.close();
-        }
+
         return platos;
     }
 

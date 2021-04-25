@@ -39,7 +39,9 @@ public class Cliente {
     public void setNombre_cliente(String nombre_cliente) {
         this.nombre_cliente = nombre_cliente;
     }
-
+    public  String toString(){
+        return nombre_cliente;
+    }
 
     //constructor
     public Cliente(int pId, String pRut, String pNom){

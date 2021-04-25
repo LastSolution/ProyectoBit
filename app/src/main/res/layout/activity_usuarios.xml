@@ -22,12 +22,6 @@
         android:id="@+id/EtUsername"
         android:hint="Username "
         />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/EttipoUsuario"
-        android:hint="Tipo Usuario "/>
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,11 +29,24 @@
         android:inputType="textPassword"
         android:hint="Password "/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipo de Usuario"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textspinuser"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spintipoUsuario"
+        android:hint="Tipo Usuario "/>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Seleccione Empresa:"
+        android:id="@+id/textempresa"
         android:layout_marginTop="10dp"/>
     <Spinner
         android:id="@+id/SpinEmpresas"

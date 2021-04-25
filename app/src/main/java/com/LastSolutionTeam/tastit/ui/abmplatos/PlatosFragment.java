@@ -25,6 +25,7 @@ import com.LastSolutionTeam.tastit.Adaptadores.PlatoAdaptador;
 import com.LastSolutionTeam.tastit.Adaptadores.UsuarioAdaptador;
 import com.LastSolutionTeam.tastit.AdaptadoresSpinners.EmpresaSpinner;
 import com.LastSolutionTeam.tastit.POJO.Categoria;
+import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Plato;
 import com.LastSolutionTeam.tastit.POJO.Usuario;
 import com.LastSolutionTeam.tastit.PlatosActivity;
@@ -46,6 +47,7 @@ public class PlatosFragment extends Fragment {
     private TextView txtspinEmpresa;
     private Spinner spinCat;
     private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
+    private ArrayList<Empresa> ListaEmpresas=new ArrayList<Empresa>();
     private Context context;
     private String RutEmpresa=VarGlobales.getEmpresaActual().getRut();
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,6 +63,22 @@ public class PlatosFragment extends Fragment {
         if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
             spinEmpresa.setVisibility(View.GONE);
             txtspinEmpresa.setVisibility(View.GONE);
+        }else {
+            ListaEmpresas = Empresa.BuscarTodas();
+            ArrayAdapter<Empresa> adapter = new ArrayAdapter<Empresa>(context, android.R.layout.simple_spinner_dropdown_item, ListaEmpresas);
+            spinEmpresa.setAdapter(adapter);
+           spinEmpresa.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+               @Override
+               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                   Empresa empresa=(Empresa) parent.getSelectedItem();
+                   RutEmpresa=empresa.getRut();
+               }
+
+               @Override
+               public void onNothingSelected(AdapterView<?> parent) {
+
+               }
+           });
         }
         ListarPlatos(1,RutEmpresa);
         inicializaAdaptador();

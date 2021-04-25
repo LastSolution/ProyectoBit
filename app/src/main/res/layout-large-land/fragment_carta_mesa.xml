@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="800dp"
@@ -7,11 +9,31 @@
     android:layout_gravity="center"
     android:background="@color/GreenPLight">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccione quien va a pedir"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+  <Spinner
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center|top"
+      android:id="@+id/spinclientes"
+      android:layout_marginTop="50dp"
+      android:translationZ="20dp"/>
     <ExpandableListView
         android:id="@+id/Carta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/GreenPLight" />
+        android:background="@color/GreenPLight"
+        android:layout_marginTop="90dp"/>
+    <FrameLayout
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_gravity="center"
+        android:id="@+id/ContenederoFragmentPlato"/>
 
 </FrameLayout>

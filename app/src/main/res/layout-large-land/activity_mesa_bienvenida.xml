@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
      android:layout_width="match_parent"
     android:orientation="vertical"
-
+    android:background="@drawable/fondobienvenida"
     >
 
     <TextView
@@ -16,19 +16,20 @@
         android:layout_marginTop="30dp"
         android:text="BIENVENIDO A ...."
         android:gravity="center_horizontal"
-        android:textColor="@color/GreenSecondDark"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
        >
         <ImageView
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
             android:layout_marginLeft="30dp"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:id="@+id/logoempresabienvenida"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -36,10 +37,12 @@
             android:text="INGRESE LA CANTIDAD DE COMENSALES:"
             android:textSize="30dp"
             android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/GreenSecondDark"/>
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"/>
+
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/SpinComensales"
             android:layout_gravity="center"

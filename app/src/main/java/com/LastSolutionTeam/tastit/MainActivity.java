@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etPass;
     Usuario USUARIO;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

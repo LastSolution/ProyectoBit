@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
@@ -27,17 +27,18 @@
                 android:layout_marginTop="9dp"
                 android:id="@+id/logoEmpresa"
                 android:src="@drawable/logotastit"
+                android:scaleType="fitCenter"
                 />
 
       <LinearLayout
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/txtNomEmpresa"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="10dp"
@@ -48,7 +49,7 @@
 
         <TextView
             android:id="@+id/txtRutEmpresa"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="10dp"
@@ -57,7 +58,7 @@
 
         <TextView
             android:id="@+id/txtTelefonoEmpresa"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="10dp"
@@ -87,7 +88,7 @@
                 android:textSize="10dp"/>
 
             <com.google.android.material.button.MaterialButton
-                android:layout_width="115dp"
+                android:layout_width="120dp"
                 android:layout_height="35dp"
                 android:id="@+id/btneliminarEmpresa"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"

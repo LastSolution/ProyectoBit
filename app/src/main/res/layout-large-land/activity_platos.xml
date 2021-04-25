@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="700dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
@@ -43,11 +43,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Seleccione Categoria:"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"/>jgkj
     <Spinner
         android:id="@+id/spinCategorias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"

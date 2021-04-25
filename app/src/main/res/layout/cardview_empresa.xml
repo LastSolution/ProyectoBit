@@ -27,6 +27,7 @@
                 android:layout_marginTop="9dp"
                 android:id="@+id/logoEmpresa"
                 android:src="@drawable/logotastit"
+                android:scaleType="centerCrop"
                 />
 
       <LinearLayout

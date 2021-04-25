@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentContainer;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.SurfaceControl;
 import android.view.View;
@@ -42,7 +43,7 @@ public class Activity_Mesa extends AppCompatActivity {
     FragmentTransaction transaction;
     FloatingActionButton FabCarta;
     FloatingActionButton CerrarMesa;
-
+    Context context;
     int cantClientes=0;
     MAinAdapter adapter;
     @Override
@@ -50,6 +51,7 @@ public class Activity_Mesa extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__mesa);
         getSupportActionBar().hide();
+        context=this;
         User1=(ExpandableListView) findViewById(R.id.user1);
         User2=(ExpandableListView) findViewById(R.id.user2);
         User3=(ExpandableListView) findViewById(R.id.user3);

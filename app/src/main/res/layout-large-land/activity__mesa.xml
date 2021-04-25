@@ -42,12 +42,14 @@
 <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:src="@drawable/iconcarta"
     android:layout_gravity="center|right"
     android:id="@+id/FabCarta"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|left"
+        android:src="@drawable/iconcierremesa"
         android:id="@+id/FabCerrarMesa" />
     <FrameLayout
         android:layout_width="match_parent"

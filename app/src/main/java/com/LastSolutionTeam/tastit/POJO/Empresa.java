@@ -57,6 +57,9 @@ public class Empresa {
     public void setLogo(byte[] logo) {
         Logo = logo;
     }
+    public String toString(){return nombre;
+
+    }
 
     //constructor
     public Empresa(String pRut, String pNom, String pTel, String pCorreo, byte[] pLogo){
