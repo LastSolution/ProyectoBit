@@ -54,6 +54,13 @@ public class Pedido {
         precio_total = pPrecio;
         id_cliente=idcliente;
     }
+    public Pedido(int id_pedido,int pEstado, double pPrecio,int idcliente){
+
+        this.id_pedido=id_pedido;
+        estado = pEstado;
+        precio_total = pPrecio;
+        id_cliente=idcliente;
+    }
 
 
     //persistencia (privada)
@@ -62,7 +69,7 @@ public class Pedido {
         Pedido p = null;
 
         p = new Pedido(
-
+                rs.getInt("id_pedido"),
                 rs.getInt("estado"),
                 rs.getDouble("precio_total"),
                 rs.getInt("cliente")
@@ -208,12 +215,12 @@ public class Pedido {
             Connection cnn = Conexion.ObtenerConexion();
             String sql = "SELECT * FROM pedidos WHERE cliente=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
-            pst.setString(1, String.valueOf(idcliente));
+            pst.setInt(1, idcliente);
 
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                p=new Pedido(rs.getInt(1),rs.getDouble(3), rs.getInt(2));
+                p = Pedido.CrearObjeto(rs);
 
             }
         }

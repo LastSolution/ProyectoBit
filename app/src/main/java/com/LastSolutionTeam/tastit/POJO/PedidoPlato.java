@@ -59,9 +59,10 @@ public class PedidoPlato {
         return p;
     }
 
-    public void IngresarPedido(PedidoPlato pedidoPlato){
-
+    public static int IngresarPedido(PedidoPlato pedidoPlato){
+        int ret=0;
         try {
+
             Connection cnn = Conexion.ObtenerConexion();
             String sql = "INSERT INTO pedidos_platos (pedido,plato,cantidad) " +
                     "values (?,?,?)";
@@ -69,7 +70,7 @@ public class PedidoPlato {
             pst.setInt(1, pedidoPlato.getIdpedido());
             pst.setInt(2, pedidoPlato.getIdplato());
             pst.setInt(3, pedidoPlato.getCantidad());
-            int ret = pst.executeUpdate();
+            ret = pst.executeUpdate();
 
             if (ret == 0)
                 throw new RuntimeException("No se pudo ingresar el pedido!");
@@ -78,10 +79,7 @@ public class PedidoPlato {
         {
             throw new RuntimeException(ex);
         }
-        finally
-        {
-            //cnn.close();
-        }
+      return ret;
     }
     public static ArrayList<PedidoPlato> ListarPedidos(int idpedido) {
 

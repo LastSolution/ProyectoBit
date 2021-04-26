@@ -7,14 +7,19 @@ import com.LastSolutionTeam.tastit.POJO.Usuario;
 public class VarGlobales {
     private static Usuario usuarioActual;
     private static Empresa empresaActual;
-
+    private static Cliente clientepedidoActual;
     private static Cliente cliente1;
     private static Cliente cliente2;
     private static Cliente cliente3;
     private static Cliente cliente4;
-    private static Cliente cliente5;
-    private static Cliente cliente6;
 
+    public static Cliente getClientepedidoActual() {
+        return clientepedidoActual;
+    }
+
+    public static void setClientepedidoActual(Cliente clientepedidoActual) {
+        VarGlobales.clientepedidoActual = clientepedidoActual;
+    }
     public static Usuario getUsuarioActual() {
         return usuarioActual;
     }

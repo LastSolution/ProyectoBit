@@ -1,6 +1,7 @@
 package com.LastSolutionTeam.tastit.Adaptadores;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.LastSolutionTeam.tastit.FragmentCartaMesa;
 import com.LastSolutionTeam.tastit.Fragment_plato_Mesa;
+import com.LastSolutionTeam.tastit.POJO.Categoria;
+import com.LastSolutionTeam.tastit.POJO.Plato;
 import com.LastSolutionTeam.tastit.R;
 import com.google.android.material.badge.BadgeDrawable;
 
@@ -24,16 +27,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MAinAdapterCarta extends BaseExpandableListAdapter {
-    ArrayList<String>ListGroup;
-    HashMap<String,ArrayList<String>> ListChild;
+    ArrayList<Categoria>ListGroup;
+    HashMap<Categoria,ArrayList<Plato>> ListChild;
     Context context;
     FrameLayout fragmentContainer;
     Fragment fragmentplato;
     FragmentTransaction transaction;
-    public MAinAdapterCarta(ArrayList<String> ListGroup, HashMap<String,ArrayList<String>> ListChild,Context context){
-this.ListGroup=ListGroup;
-this.ListChild=ListChild;
-this.context=context;
+    public MAinAdapterCarta(ArrayList<Categoria> ListGroup, HashMap<Categoria,ArrayList<Plato>> ListChild,Context context){
+    this.ListGroup=ListGroup;
+    this.ListChild=ListChild;
+    this.context=context;
     }
     @Override
     public int getGroupCount() {
@@ -54,7 +57,9 @@ this.context=context;
     public Object getChild(int groupPosition, int childPosition) {
 
 
-        return ListChild.get(ListGroup.get(groupPosition)).get(childPosition);
+            return ListChild.get(ListGroup.get(groupPosition)).get(childPosition);
+
+
     }
 
     @Override
@@ -79,6 +84,7 @@ this.context=context;
         String sGroup=String.valueOf(getGroup(groupPosition));
         textView.setText(sGroup);
         textView.setTypeface(null, Typeface.BOLD);
+        textView.setTextSize(30);
         return convertView;
     }
 
@@ -88,16 +94,19 @@ this.context=context;
         TextView textView=convertView.findViewById(android.R.id.text1);
         String schild=String.valueOf(getChild(groupPosition,childPosition));
         textView.setText(schild);
+        textView.setTextSize(25);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setBackgroundColor(Color.WHITE);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment_plato_Mesa fragmentPlatoMesa=Fragment_plato_Mesa.newInstance();
+                Plato plato= (Plato) getChild(groupPosition,childPosition);
+                Fragment_plato_Mesa fragmentPlatoMesa=Fragment_plato_Mesa.newInstance(plato.getId_plato());
                 fragmentContainer=(FrameLayout) v.findViewById(R.id.ContenederoFragmentPlato);
                 FragmentManager fragmentManager= ((AppCompatActivity)context).getSupportFragmentManager();
                 FragmentTransaction transaction=fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.fragment_open_enter,R.anim.fragment_open_exit,R.anim.fragment_open_enter,R.anim.fragment_open_exit);
                 transaction.add(R.id.contenedorfragment,fragmentPlatoMesa,"BLANK_FRAGMENT");
-
                 transaction.commit();
             }
         });

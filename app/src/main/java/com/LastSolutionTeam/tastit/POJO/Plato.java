@@ -73,7 +73,9 @@ public class Plato {
     public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
-
+    public String toString(){
+        return nombre_plato +"        $"+precio;
+    }
     //constructor
     public Plato(int pId, String pNom, double pPrecio, String desc, byte[] pImg, int pCat,String pEmpresa){
         id_plato = pId;
@@ -211,12 +213,7 @@ public class Plato {
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
-                plato.id_plato = rs.getInt(0);
-                plato.nombre_plato = rs.getString(1);
-                plato.precio = rs.getDouble(2);
-                plato.descripcion = rs.getString(3);
-                plato.categoria = rs.getInt(4);
-                plato.imagen = rs.getBytes(5);
+                plato = Plato.CrearObjeto(rs);
 
             }
         }

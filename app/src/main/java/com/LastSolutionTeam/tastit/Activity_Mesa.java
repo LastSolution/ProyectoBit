@@ -58,9 +58,6 @@ public class Activity_Mesa extends AppCompatActivity {
         User4=(ExpandableListView) findViewById(R.id.user4);
         fragmentContainer=(FrameLayout) findViewById(R.id.contenedorfragment);
 
-
-
-
         FabCarta=(FloatingActionButton) findViewById(R.id.FabCarta);
         FabCarta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +141,6 @@ public class Activity_Mesa extends AppCompatActivity {
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.fragment_open_enter,R.anim.fragment_open_exit,R.anim.fragment_open_enter,R.anim.fragment_open_exit);
         transaction.add(R.id.contenedorfragment,fragmentcarta,"BLANK_FRAGMENT");
-
         transaction.commit();
 
     }

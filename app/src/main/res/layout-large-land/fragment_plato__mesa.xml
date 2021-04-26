@@ -2,19 +2,23 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="350dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment_plato_Mesa"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:id="@+id/frameplato">
 
     <!-- TODO: Update blank fragment layout -->
    <androidx.cardview.widget.CardView
        android:layout_width="350dp"
-       android:layout_height="350dp"
-       android:layout_gravity="center">
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:elevation="30dp"
+       app:cardCornerRadius="50dp">
 
        <LinearLayout
            android:layout_width="350dp"
-           android:layout_height="350dp"
+           android:layout_height="wrap_content"
            android:orientation="vertical">
            <TextView
                android:layout_width="match_parent"
@@ -28,21 +32,23 @@
 
 
            <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
                android:id="@+id/txtdescripcionplatomesa"
-               android:textAlignment="center"
+               android:layout_width="match_parent"
+               android:layout_height="61dp"
+               android:layout_marginTop="20dp"
                android:gravity="center_horizontal"
-               android:textSize="20dp"
-               android:textColor="@color/GreenPLight"
                android:text="Descripcion plato"
-               android:layout_marginTop="20dp"/>
+               android:textAlignment="center"
+               android:textColor="@color/GreenPLight"
+               android:textSize="20dp" />
 
            <ImageView
-               android:layout_width="100dp"
+               android:layout_width="150dp"
                android:layout_height="100dp"
                android:layout_gravity="center"
-               android:layout_marginTop="20dp"/>
+               android:layout_marginTop="10dp"
+               android:id="@+id/imgplatomesa"
+               android:scaleType="centerCrop"/>
            <com.google.android.material.button.MaterialButton
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -50,6 +56,14 @@
                android:id="@+id/btnagregarplatopedido"
                android:text="Pedir plato"
                android:layout_marginHorizontal="40dp"/>
+           <com.google.android.material.button.MaterialButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+               android:id="@+id/btncerrarfragmentplato"
+               android:text="Volver"
+               android:layout_gravity="center"
+             android:layout_marginBottom="10dp"/>
 
        </LinearLayout>
 
