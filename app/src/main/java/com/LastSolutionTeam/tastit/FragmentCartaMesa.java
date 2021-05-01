@@ -1,15 +1,21 @@
 package com.LastSolutionTeam.tastit;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import com.LastSolutionTeam.tastit.Adaptadores.MAinAdapterCarta;
@@ -17,6 +23,7 @@ import com.LastSolutionTeam.tastit.POJO.Categoria;
 import com.LastSolutionTeam.tastit.POJO.Cliente;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Plato;
+import com.google.android.material.badge.BadgeUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +42,19 @@ public class FragmentCartaMesa extends Fragment {
     MAinAdapterCarta mAinAdapterCarta;
     Spinner spinerClientesmesa;
     Cliente clientepedido;
+    Button btncerrar;
+    FrameLayout fragmentContainer;
+    Fragment fragment=this;
+    Context context;
+
+    public void CerrarFragment(View v){
+
+        fragmentContainer=(FrameLayout) v.findViewById(R.id.ContenederoFragmentPlato);
+        FragmentManager fragmentManager= ((AppCompatActivity)context).getSupportFragmentManager();
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        transaction.remove(fragment);
+        transaction.commit();
+    }
     public static FragmentCartaMesa newInstance() {
         FragmentCartaMesa fragment = new FragmentCartaMesa();
         return fragment;
@@ -52,13 +72,21 @@ public class FragmentCartaMesa extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_carta_mesa, container, false);
         expandableListView=(ExpandableListView) view.findViewById(R.id.Carta);
+        context=getActivity();
+        btncerrar =(Button) view.findViewById(R.id.btncerrarcarta);
+        btncerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            CerrarFragment(v);
+            }
+        });
         Empresa empresaactual=null;
         spinerClientesmesa=(Spinner) view.findViewById(R.id.spinclientes);
         CargarClienteASpinner(VarGlobales.getCliente1());
         CargarClienteASpinner(VarGlobales.getCliente2());
         CargarClienteASpinner(VarGlobales.getCliente3());
         CargarClienteASpinner(VarGlobales.getCliente4());
-        ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>(getActivity(), android.R.layout.simple_spinner_dropdown_item, ListaClientes);
+        ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>(getActivity(), R.layout.spinner_textview, ListaClientes);
         spinerClientesmesa.setAdapter(adapter);
         spinerClientesmesa.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

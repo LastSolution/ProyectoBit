@@ -5,36 +5,53 @@
     android:layout_width="match_parent"
     android:layout_marginBottom="55dp"
     android:background="@color/Greensecondlight"
+    android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.abmusuarios.UsuariosFragment"
-        android:orientation="horizontal">
-
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="350dp"
+        android:orientation="vertical"
+        tools:context=".ui.abmusuarios.UsuariosFragment">
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Seleccione Empresa"
+            android:textSize="20dp"
+            android:gravity="center_horizontal" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinerempresausuario"
+            android:layout_gravity="center"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUsuarios"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-
-            >
-
-        </androidx.recyclerview.widget.RecyclerView>
-
+            android:layout_height="515dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="30dp" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/FabNuevoUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="96dp"
         android:layout_margin="16dp"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|center_horizontal"
         android:src="@drawable/ic_baseline_add_24"
         android:contentDescription="Nuevo Usuario"
+        app:fabCustomSize="80dp"
         android:elevation="20dp"
 
         />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

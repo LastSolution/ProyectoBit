@@ -20,6 +20,13 @@
            android:layout_width="350dp"
            android:layout_height="wrap_content"
            android:orientation="vertical">
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:layout_gravity="center"
+               android:layout_marginTop="10dp"
+               android:id="@+id/imgplatomesa"
+               android:scaleType="centerCrop"/>
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -34,7 +41,7 @@
            <TextView
                android:id="@+id/txtdescripcionplatomesa"
                android:layout_width="match_parent"
-               android:layout_height="61dp"
+               android:layout_height="wrap_content"
                android:layout_marginTop="20dp"
                android:gravity="center_horizontal"
                android:text="Descripcion plato"
@@ -42,20 +49,48 @@
                android:textColor="@color/GreenPLight"
                android:textSize="20dp" />
 
-           <ImageView
-               android:layout_width="150dp"
-               android:layout_height="100dp"
-               android:layout_gravity="center"
-               android:layout_marginTop="10dp"
-               android:id="@+id/imgplatomesa"
-               android:scaleType="centerCrop"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="-"
+                    android:id="@+id/btnrestarcantidad"
+                    android:gravity="top" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtcantplato"
+                    android:text="1"/>
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="+"
+                    android:id="@+id/btnSumarCant"
+                    android:textAlignment="gravity"
+                    android:gravity="top"
+                    />
+
+            </LinearLayout>
+
+
+
            <com.google.android.material.button.MaterialButton
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginTop="30dp"
+               android:layout_marginTop="15dp"
                android:id="@+id/btnagregarplatopedido"
                android:text="Pedir plato"
                android:layout_marginHorizontal="40dp"/>
+
            <com.google.android.material.button.MaterialButton
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -64,6 +99,7 @@
                android:text="Volver"
                android:layout_gravity="center"
              android:layout_marginBottom="10dp"/>
+
 
        </LinearLayout>
 

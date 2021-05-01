@@ -45,6 +45,7 @@ public class PlatosFragment extends Fragment {
     private Spinner spinEmpresa;
     private Spinner spinCategoria;
     private TextView txtspinEmpresa;
+    private  Categoria catselect;
     private Spinner spinCat;
     private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
     private ArrayList<Empresa> ListaEmpresas=new ArrayList<Empresa>();
@@ -72,6 +73,11 @@ public class PlatosFragment extends Fragment {
                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                    Empresa empresa=(Empresa) parent.getSelectedItem();
                    RutEmpresa=empresa.getRut();
+                   if(catselect!=null){
+                       ListarPlatos(catselect.getId_categoria(),RutEmpresa);
+                       inicializaAdaptador();
+                   }
+
                }
 
                @Override
@@ -88,9 +94,8 @@ public class PlatosFragment extends Fragment {
         spinCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               Categoria categoria= (Categoria) parent.getSelectedItem();
-
-               ListarPlatos(categoria.getId_categoria(),RutEmpresa);
+               catselect = (Categoria) parent.getSelectedItem();
+               ListarPlatos(catselect.getId_categoria(),RutEmpresa);
                inicializaAdaptador();
 
            }

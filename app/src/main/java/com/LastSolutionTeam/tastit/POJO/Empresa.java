@@ -16,12 +16,19 @@ import java.util.Date;
 public class Empresa {
 
     //atributos
-     String rut;
-     String nombre;
-     String telefono;
-     String correo;
-     byte[] Logo;
+    String rut;
+    String nombre;
+    String telefono;
+    String correo;
+    String Direccion;
+    byte[] Logo;
 
+    public void setDireccion(String direccion) {
+        Direccion = direccion;
+    }
+    public String getDireccion() {
+        return Direccion;
+    }
     //propiedades
     public String getRut() {
         return rut;
@@ -62,12 +69,13 @@ public class Empresa {
     }
 
     //constructor
-    public Empresa(String pRut, String pNom, String pTel, String pCorreo, byte[] pLogo){
+    public Empresa(String pRut, String pNom, String pTel, String pCorreo, byte[] pLogo, String direccion){
         rut = pRut;
         nombre = pNom;
         telefono = pTel;
         correo = pCorreo;
         Logo = pLogo;
+        Direccion=direccion;
     }
 
 
@@ -82,7 +90,8 @@ public class Empresa {
                 rs.getString("nombre"),
                 rs.getString("telefono"),
                 rs.getString("correo"),
-                rs.getBytes("logo"));
+                rs.getBytes("logo"),
+                rs.getString("direccion"));
         return empresa;
     }
 
@@ -97,14 +106,14 @@ public class Empresa {
         if(Conn!=null)
         {
             try {
-                PreparedStatement pst=Conn.prepareStatement("insert into EMPRESAS (rut,nombre,telefono,correo,logo) values (?,?,?,?,?)");
+                PreparedStatement pst=Conn.prepareStatement("insert into EMPRESAS (rut,nombre,telefono,correo,logo,direccion) values (?,?,?,?,?,?)");
                 pst.setString(1,empresa.getRut());
                 pst.setString(2,empresa.getNombre());
                 pst.setString(3,empresa.getTelefono());
                 pst.setString(4, empresa.getCorreo());
                 pst.setBytes(5, empresa.getLogo());
+                pst.setString(6, empresa.getDireccion());
                 ret= pst.executeUpdate();
-
 
             }catch (SQLException E)
             {
@@ -124,12 +133,14 @@ public class Empresa {
         if(Conn!=null)
         {
             try {
-                PreparedStatement pst=Conn.prepareStatement("UPDATE EMPRESAS SET rut=?,nombre=?,telefono=?,correo=?,logo=? ");
+                PreparedStatement pst=Conn.prepareStatement("UPDATE EMPRESAS SET rut=?,nombre=?,telefono=?,correo=?,logo=?,direccion=? where rut=? ");
                 pst.setString(1,empresa.getRut());
                 pst.setString(2,empresa.getNombre());
                 pst.setString(3,empresa.getTelefono());
                 pst.setString(4, empresa.getCorreo());
                 pst.setBytes(5, empresa.getLogo());
+                pst.setString(6, empresa.getDireccion());
+                pst.setString(7,empresa.getRut());
                 ret= pst.executeUpdate();
 
 

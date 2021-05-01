@@ -10,6 +10,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.SurfaceControl;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Activity_Mesa extends AppCompatActivity {
+
 
     ExpandableListView User1;
     ExpandableListView User2;
@@ -43,21 +45,40 @@ public class Activity_Mesa extends AppCompatActivity {
     FragmentTransaction transaction;
     FloatingActionButton FabCarta;
     FloatingActionButton CerrarMesa;
+    Fragment fragmentCierremesa;
+    Fragment Sugerenicafrag;
+    Button btnSugerencia;
     Context context;
-    int cantClientes=0;
+    public static int cantClientes=0;
     MAinAdapter adapter;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__mesa);
         getSupportActionBar().hide();
         context=this;
+
         User1=(ExpandableListView) findViewById(R.id.user1);
         User2=(ExpandableListView) findViewById(R.id.user2);
         User3=(ExpandableListView) findViewById(R.id.user3);
         User4=(ExpandableListView) findViewById(R.id.user4);
         fragmentContainer=(FrameLayout) findViewById(R.id.contenedorfragment);
-
+        btnSugerencia=(Button)findViewById(R.id.btnSugerencia);
+        btnSugerencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sugerenicafrag=new fragment_sugerencia();
+                transaction=getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.contenedorfragment,Sugerenicafrag);
+                getSupportFragmentManager().beginTransaction().add(R.id.contenedorfragment,Sugerenicafrag);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         FabCarta=(FloatingActionButton) findViewById(R.id.FabCarta);
         FabCarta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +87,7 @@ public class Activity_Mesa extends AppCompatActivity {
                 transaction=getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.contenedorfragment,fragmentcarta);
                 getSupportFragmentManager().beginTransaction().add(R.id.contenedorfragment,fragmentcarta);
-                transaction.addToBackStack(null);
+
                 transaction.commit();
             }
         });
@@ -74,7 +95,12 @@ public class Activity_Mesa extends AppCompatActivity {
         CerrarMesa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fragmentCierremesa=new CierreMesa();
+                transaction=getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.contenedorfragment,fragmentCierremesa);
+                getSupportFragmentManager().beginTransaction().add(R.id.contenedorfragment,fragmentCierremesa);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         Bundle parametros =getIntent().getExtras();
@@ -110,25 +136,37 @@ public class Activity_Mesa extends AppCompatActivity {
     public void CargarlistaCliente(Cliente cliente,ArrayList<String> listgroup,HashMap<String,ArrayList<String>> listchild,ExpandableListView expandableListView){
         listgroup.clear();
         listchild.clear();
-        listgroup.add(cliente.getNombre_cliente());
-        Pedido pedido=Pedido.BuscarPedidoporcliente(cliente.getId_cliente());
 
+        Pedido pedido=Pedido.BuscarPedidoporcliente(cliente.getId_cliente());
+        String Clientegroup=cliente.getNombre_cliente()+"       $"+pedido.getPrecio_total();
+        listgroup.add(Clientegroup);
         ArrayList<PedidoPlato> platoscliente=PedidoPlato.ListarPedidos(pedido.getId_pedido());
         ArrayList<String>Nombreyprecio=new ArrayList<String>();
-
+        double Total=0;
         for(int i=0; i<platoscliente.size();i++){
             PedidoPlato p=platoscliente.get(i);
             Plato plato=Plato.BuscarPlato(p.getIdplato());
             String nomprecio;
-            nomprecio=plato.getNombre_plato()+"  "+plato.getPrecio();
+            String NombrePlatoCant;
+            if(p.getCantidad()>1){
+                NombrePlatoCant=plato.getNombre_plato()+" ("+String.valueOf(p.getCantidad()+")");
+                nomprecio=NombrePlatoCant+"     $"+(plato.getPrecio()*p.getCantidad());
+            }else{
+                nomprecio=plato.getNombre_plato()+"     $"+(plato.getPrecio());
+            }
+
             Nombreyprecio.add(nomprecio);
+            Total=Total+ (plato.getPrecio()*p.getCantidad());
+
         }
         if(Nombreyprecio.size()==0){
             Nombreyprecio.add("No pediste ningun plato");
-            listchild.put(cliente.getNombre_cliente(),Nombreyprecio);
+            Nombreyprecio.add("TOTAL:    $0.00");
+            listchild.put(Clientegroup,Nombreyprecio);
         }
         else{
-            listchild.put(cliente.getNombre_cliente(),Nombreyprecio);
+            Nombreyprecio.add("TOTAL:    $"+Total);
+            listchild.put(Clientegroup,Nombreyprecio);
         }
 
         adapter=new MAinAdapter(listgroup,listchild);
@@ -142,6 +180,10 @@ public class Activity_Mesa extends AppCompatActivity {
         transaction.setCustomAnimations(R.anim.fragment_open_enter,R.anim.fragment_open_exit,R.anim.fragment_open_enter,R.anim.fragment_open_exit);
         transaction.add(R.id.contenedorfragment,fragmentcarta,"BLANK_FRAGMENT");
         transaction.commit();
+
+    }
+    public void CerrarMesa(){
+
 
     }
 }

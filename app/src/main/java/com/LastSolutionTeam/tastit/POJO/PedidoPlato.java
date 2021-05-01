@@ -81,6 +81,26 @@ public class PedidoPlato {
         }
       return ret;
     }
+    public static int ModificarCantidad(int cantidad,int idpedido){
+        int ret=0;
+        try {
+
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "update pedidos_platos set cantidad=? where pedido=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setInt(1, cantidad);
+            pst.setInt(2, idpedido);
+            ret = pst.executeUpdate();
+
+            if (ret == 0)
+                throw new RuntimeException("No se pudo agregar cantidad");
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        return ret;
+    }
     public static ArrayList<PedidoPlato> ListarPedidos(int idpedido) {
 
         ArrayList<PedidoPlato> pedidos = new ArrayList<PedidoPlato>();
@@ -108,5 +128,59 @@ public class PedidoPlato {
         }
         return pedidos;
     }
+    public static int VerificarPlatoenPedido(int idpedido,int idplato) {
 
-}
+        int retorno=0;
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM pedidos_platos where pedido=? and plato=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setInt(1, idpedido);
+            pst.setInt(2, idplato);
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+              retorno=1;
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return retorno;
+    }
+    public static PedidoPlato Buscar(int idpedido,int idplato) {
+
+
+        PedidoPlato p = null;
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM pedidos_platos where pedido=? and plato=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setInt(1, idpedido);
+            pst.setInt(2, idplato);
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                p = PedidoPlato.CrearObjeto(rs);
+
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return p;
+    }
+
+ }

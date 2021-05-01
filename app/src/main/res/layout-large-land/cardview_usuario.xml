@@ -12,18 +12,19 @@
     card_view:contentPadding="5dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="380dp"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        >
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
 
            >
                 <TextView
                     android:id="@+id/txtUserName"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
@@ -34,7 +35,7 @@
                     android:text="Username"/>
             <TextView
                 android:id="@+id/txtEmpresaUsuario"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -43,7 +44,7 @@
                 android:text="Empresa"/>
                 <TextView
                     android:id="@+id/txtTipoUsuario"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
@@ -55,22 +56,24 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:layout_gravity="center|right"
+
             >
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="110dp"
                 android:layout_height="35dp"
                 android:id="@+id/ModificarUsuario"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginHorizontal="20dp"
                 android:bottomRightRadius="20dp"
                 android:bottomLeftRadius="20dp"
                 android:topLeftRadius="20dp"
                 android:topRightRadius="20dp"
                 app:icon="@drawable/ic_baseline_refresh_24"
+                android:layout_gravity="center|right"
                 android:text="Editar"
                 android:textSize="10dp"/>
 
@@ -83,6 +86,7 @@
                 android:bottomLeftRadius="20dp"
                 android:topLeftRadius="20dp"
                 android:topRightRadius="20dp"
+                android:layout_gravity="center|right"
                 app:icon="@drawable/ic_baseline_delete_24"
                 android:text="Eliminar"
                 android:textSize="10dp"

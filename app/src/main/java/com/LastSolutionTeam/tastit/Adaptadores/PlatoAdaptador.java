@@ -78,8 +78,9 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
         @Override
         public void onClick(View v) {
         Plato.EliminarPlato(plato);
-            platos.remove(position);
             notifyItemRemoved(position);
+            platos.remove(position);
+
         }
     });
     }

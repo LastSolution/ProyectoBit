@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".fragment_sugerencia"
+    android:layout_gravity="center">
+
+    <!-- TODO: Update blank fragment layout -->
+  <androidx.cardview.widget.CardView
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+      android:layout_gravity="center"
+     >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="70dp"
+              android:layout_gravity="center"
+              android:background="@color/GreenPLight"
+              android:text="Ingrese una Sugerencia"
+              android:textAlignment="center"
+              android:textSize="30dp" />
+
+          <com.google.android.material.textfield.TextInputEditText
+              android:layout_width="match_parent"
+              android:layout_height="300dp"
+              android:inputType="textMultiLine"
+              android:layout_marginVertical="15dp"
+              android:layout_marginHorizontal="15dp"
+              android:hint="SUGERENCIA"
+              android:textSize="20dp"
+              android:id="@+id/etsygerencia"
+              />
+          <Button
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Ingresar"
+              android:id="@+id/btnSugerencia"/>
+          <Button
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="right"
+              android:text="Volcet"
+              android:id="@+id/volversugerencia"/>
+
+
+
+
+      </LinearLayout>
+
+
+  </androidx.cardview.widget.CardView>
+
+</FrameLayout>

@@ -129,18 +129,45 @@ public class Pedido {
 
 
 
-    private static void ModificarPedido(Pedido pedido) {
+    public static void ModificarPedido(Pedido pedido) {
 
         try {
             Connection cnn= Conexion.ObtenerConexion();
             String sql = "UPDATE pedidos " +
                     "        SET estado=?," +
-                    "            precio_total=?," +
+                    "            precio_total=?" +
                     "        WHERE id_pedido=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, String.valueOf(pedido.getEstado()));
             pst.setString(2, String.valueOf(pedido.getPrecio_total()));
             pst.setString(3, String.valueOf(pedido.getId_pedido()));
+
+            int ret = pst.executeUpdate();
+
+            if (ret == 0)
+                throw new RuntimeException("No se pudo modificar el pedido!");
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+    }
+    private static void ModificarPrecioPedido(Pedido pedido) {
+
+        try {
+            Connection cnn= Conexion.ObtenerConexion();
+            String sql = "UPDATE pedidos " +
+                    "        SET " +
+                    "        precio_total=?" +
+                    "        WHERE id_pedido=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+
+            pst.setString(1, String.valueOf(pedido.getPrecio_total()));
+            pst.setString(2, String.valueOf(pedido.getId_pedido()));
 
             int ret = pst.executeUpdate();
 
@@ -262,7 +289,7 @@ public class Pedido {
         return pedidos;
     }
 
-
+  
     //logica (publica)
     public Pedido Buscar(int p)
     {

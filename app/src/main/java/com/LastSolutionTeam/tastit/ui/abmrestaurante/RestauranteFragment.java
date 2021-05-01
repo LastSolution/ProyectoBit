@@ -36,7 +36,7 @@ public class RestauranteFragment extends Fragment {
     private RestauranteViewModel restauranteViewModel;
     private ArrayList<Empresa> Empresas;
     private Activity activity;
-
+    public EmpresaAdaptador Eadaptador;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -61,10 +61,14 @@ public class RestauranteFragment extends Fragment {
 
         return root;
     }
+    public  void CargarYsetearAdaptador(){
+        ListarEmpresas();
+        inicializaAdaptador();
+    }
     public void ListarEmpresas(){
     Empresas=Empresa.BuscarTodas();
     }
-    public EmpresaAdaptador Eadaptador;
+
     private void inicializaAdaptador(){
     Eadaptador=new EmpresaAdaptador(Empresas,activity );
     ListaEmpresas.setAdapter(Eadaptador);

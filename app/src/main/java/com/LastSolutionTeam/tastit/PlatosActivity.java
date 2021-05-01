@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.POJO.Categoria;
+import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Plato;
 
 import java.io.ByteArrayOutputStream;
@@ -33,11 +34,15 @@ EditText etprecio;
 EditText descripcion;
 ImageView imgPlato;
 Spinner spinCat;
+Spinner spinEmp;
+String rutempresa;
 Button btnNuevoPlato;
 Context context;
 Categoria categoria;
+Empresa empresaselect;
 int modificar=0;
 private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
+    private ArrayList<Empresa> ListaEmpresas=new ArrayList<Empresa>();
 
 
     public void AbrirAlmacenamiento(View view){
@@ -84,10 +89,17 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
         descripcion=(EditText) findViewById(R.id.descripcionplato);
         imgPlato=(ImageView) findViewById(R.id.imgplato);
         spinCat=(Spinner) findViewById(R.id.spinCategorias);
+        spinEmp=(Spinner) findViewById(R.id.spinEmpresaPlatos);
+        if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")) {
+        spinEmp.setVisibility(View.GONE);
+        }
         btnNuevoPlato=(Button) findViewById(R.id.btnAgregarPlato);
         ListaCategorias=Categoria.ListarCategorias();
         ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(context, android.R.layout.simple_spinner_dropdown_item, ListaCategorias);
         spinCat.setAdapter(adapter);
+        ListaEmpresas=Empresa.BuscarTodas();
+        ArrayAdapter<Empresa> adapterempresa=new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,ListaEmpresas);
+        spinEmp.setAdapter(adapterempresa);
         //obtiene parametros del intent (si tiene Carga los datos para editar(MODIFICACION))
         Bundle parametros =getIntent().getExtras();
         if(parametros!=null){
@@ -116,26 +128,58 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                 categoria=null;
             }
         });
+        spinEmp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                empresaselect=(Empresa) parent.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         btnNuevoPlato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String precio=etprecio.getText().toString();
-                Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
-                if(modificar==0){
+                if(VarGlobales.getUsuarioActual().getTipo().equals("Administrador")){
+                    Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),empresaselect.getRut());
+                    if(modificar==0){
 
-                    if(Plato.IngresarPlato(plato)==1){
-                        Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                        if(Plato.IngresarPlato(plato)==1){
+                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
 
-                    }else {
-                        Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        if(Plato.ModificarPlato(plato)==1){
+                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 }else{
-                    if(Plato.ModificarPlato(plato)==1){
-                        Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                    Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
+                    if(modificar==0){
+
+                        if(Plato.IngresarPlato(plato)==1){
+                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        if(Plato.ModificarPlato(plato)==1){
+                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
+
 
             }
         });

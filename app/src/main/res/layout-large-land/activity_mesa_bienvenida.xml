@@ -47,7 +47,7 @@
             android:id="@+id/SpinComensales"
             android:layout_gravity="center"
             android:layout_marginLeft="25dp"
-            android:textSize="30dp"
+            android:textSize="50dp"
             android:textColor="@color/black"
             android:textStyle="bold"
             />

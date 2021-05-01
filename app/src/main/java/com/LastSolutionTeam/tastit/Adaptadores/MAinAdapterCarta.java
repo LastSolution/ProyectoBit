@@ -84,7 +84,7 @@ public class MAinAdapterCarta extends BaseExpandableListAdapter {
         String sGroup=String.valueOf(getGroup(groupPosition));
         textView.setText(sGroup);
         textView.setTypeface(null, Typeface.BOLD);
-        textView.setTextSize(30);
+        textView.setTextSize(20);
         return convertView;
     }
 
@@ -94,7 +94,7 @@ public class MAinAdapterCarta extends BaseExpandableListAdapter {
         TextView textView=convertView.findViewById(android.R.id.text1);
         String schild=String.valueOf(getChild(groupPosition,childPosition));
         textView.setText(schild);
-        textView.setTextSize(25);
+        textView.setTextSize(20);
         textView.setTypeface(null, Typeface.BOLD);
         textView.setBackgroundColor(Color.WHITE);
         textView.setOnClickListener(new View.OnClickListener() {

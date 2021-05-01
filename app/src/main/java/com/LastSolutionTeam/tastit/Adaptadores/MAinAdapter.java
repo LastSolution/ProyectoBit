@@ -6,7 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.WrapperListAdapter;
+
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.LastSolutionTeam.tastit.R;
 
@@ -70,18 +76,42 @@ this.ListChild=ListChild;
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        convertView=LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_selectable_list_item,parent,false);
+        if(convertView== null){
+            convertView=View.inflate(parent.getContext(), R.layout.child_listacliente,null);
+
+            if(isLastChild==false){
+                Button btneliminarplato = (Button)convertView.findViewById(R.id.addbutton);
+                btneliminarplato.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+            }
+
+
+        }
+
         TextView textView=convertView.findViewById(android.R.id.text1);
         String schild=String.valueOf( getChild(groupPosition,childPosition));
         textView.setText(schild);
+        textView.setTextSize(18);
+        ViewGroup.LayoutParams params  =  textView.getLayoutParams();
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        textView.setLayoutParams(params);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+
         return convertView;
-    }
+
+
+        }
+
+
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario {
 
@@ -233,6 +234,35 @@ public class Usuario {
             //cnn.close();
         }
         return user;
+    }
+    public static ArrayList<Usuario> BuscarUsuariosEmpresa(String RutEmpresa) {
+
+        ArrayList<Usuario> Usuarios=new ArrayList<Usuario>();
+
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM usuarios WHERE empresa=?";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, RutEmpresa);
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                Usuario usuario=null;
+                usuario = Usuario.CrearObjeto(rs);
+            Usuarios.add(usuario);
+
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return Usuarios;
     }
 
     public static Usuario Login(String username, String password, Context context) {

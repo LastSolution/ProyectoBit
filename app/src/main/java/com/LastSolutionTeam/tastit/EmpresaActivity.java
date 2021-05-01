@@ -35,13 +35,15 @@ public class EmpresaActivity extends AppCompatActivity {
     Context context;
     EditText NomEmpresa;
     EditText RutEmpresa;
+    EditText Direccion;
     EditText TelEmpresa;
     EditText CorreoEmpresa;
     TextView Titulo;
     Button btnAdd_Modify;
     ImageView Logo;
-
+    int Modifica=0;
     String nombreempresa;
+    String DireccionEmpresa;
     String rutempresa;
     String telempresa;
     String correoempresa;
@@ -123,27 +125,32 @@ public class EmpresaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empresa);
-        context=this;
+        context=getApplicationContext();
         activity=this;
         Logo =(ImageView) findViewById(R.id.imgLogo);
         NomEmpresa=(EditText) findViewById(R.id.EditEmpNombre);
         RutEmpresa=(EditText) findViewById(R.id.EditEmpRut);
         TelEmpresa=(EditText) findViewById(R.id.EditEmpTel);
         CorreoEmpresa=(EditText) findViewById(R.id.EditEmpCorreo);
+        Direccion=(EditText) findViewById(R.id.EditDireccion);
         Titulo=(TextView) findViewById(R.id.tituloEmpresa) ;
         btnAdd_Modify=(Button) findViewById(R.id.BtnEmpresaAdd);
+
         //obtiene parametros del intent (si tiene Carga los datos para editar(MODIFICACION))
         Bundle parametros =getIntent().getExtras();
         if(parametros!=null){
+            Modifica=1;
             nombreempresa=parametros.getString("nombre");
             rutempresa=parametros.getString("rut");
             telempresa=parametros.getString("telefono");
             correoempresa=parametros.getString("correo");
-
+            DireccionEmpresa=parametros.getString("direccion");
             NomEmpresa.setText(nombreempresa);
             RutEmpresa.setText(rutempresa);
             TelEmpresa.setText(telempresa);
             CorreoEmpresa.setText(correoempresa);
+            Direccion.setText(DireccionEmpresa);
+
             btnAdd_Modify.setText("Editar");
             Titulo.setText("MODIFICA LOS DATOS");
             if(parametros.getByteArray("imagen")!=null){
@@ -155,10 +162,12 @@ public class EmpresaActivity extends AppCompatActivity {
         btnAdd_Modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            if(Modifica==1){
 
                 nombreempresa=NomEmpresa.getText().toString();
                 rutempresa=RutEmpresa.getText().toString();
                 telempresa=TelEmpresa.getText().toString();
+                DireccionEmpresa=Direccion.getText().toString();
                 correoempresa=CorreoEmpresa.getText().toString();
                 logo=ImagenBlob(ObtenerImagen());
 
@@ -168,17 +177,49 @@ public class EmpresaActivity extends AppCompatActivity {
                         nombreempresa,
                         telempresa,
                         correoempresa,
-                        logo
-                       );
-               if(Empresa.IngresarEmpresa(empresa,context)==1)
-               {
-                   Toast.makeText(context,"Empresa Ingresada Con Exito",Toast.LENGTH_SHORT);
-                   Intent intent = new Intent(v.getContext(), AbmActivity.class);
-                   startActivity(intent);
-               }
-             else   {
-                   Toast.makeText(context,"Error Al ingresar empresa",Toast.LENGTH_SHORT);
-               }
+                        logo,
+                        DireccionEmpresa
+                );
+                if(Empresa.ModificarEmpresa(empresa)==1)
+                {
+                    Toast.makeText(context,"Empresa Modificada Con Exito",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), AbmActivity.class);
+                    startActivity(intent);
+                }
+                else   {
+                    Toast.makeText(context,"Error al modificar empresa",Toast.LENGTH_SHORT).show();
+                }
+
+            }else{
+
+                nombreempresa=NomEmpresa.getText().toString();
+                rutempresa=RutEmpresa.getText().toString();
+                telempresa=TelEmpresa.getText().toString();
+                DireccionEmpresa=Direccion.getText().toString();
+                correoempresa=CorreoEmpresa.getText().toString();
+                logo=ImagenBlob(ObtenerImagen());
+
+                Empresa empresa;
+                empresa =new Empresa(
+                        rutempresa,
+                        nombreempresa,
+                        telempresa,
+                        correoempresa,
+                        logo,
+                        DireccionEmpresa
+                );
+                if(Empresa.IngresarEmpresa(empresa,context)==1)
+                {
+                    Toast.makeText(context,"Empresa Ingresada Con Exito",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), AbmActivity.class);
+                    startActivity(intent);
+                }
+                else   {
+                    Toast.makeText(context,"Error Al ingresar empresa",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
             }
         });
 

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_marginHorizontal="50dp"
+    android:layout_marginHorizontal="300dp"
     >
 <TextView
     android:layout_width="match_parent"
@@ -17,6 +17,7 @@
     android:textStyle="bold"
     android:textSize="35dp"
     android:gravity="center"
+    android:layout_marginHorizontal="30dp"
     android:layout_marginBottom="40dp"/>
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
@@ -29,6 +30,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/EditEmpRut"
         android:hint="Rut " />
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditDireccion"
+        android:hint="Direccion"
+        />
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/fondomesa"
     tools:context=".Activity_Mesa">
 
     <ExpandableListView
         android:id="@+id/user1"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:background="@color/cliente1"
@@ -18,14 +18,14 @@
 
     <ExpandableListView
         android:id="@+id/user2"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@color/cliente2"
         android:layout_marginLeft="40dp"
         />
     <ExpandableListView
         android:id="@+id/user3"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
         android:background="@color/cliente3"
@@ -33,32 +33,63 @@
         />
     <ExpandableListView
         android:id="@+id/user4"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
         android:background="@color/cliente4"
         android:layout_marginLeft="40dp"
         />
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/iconcarta"
-    android:layout_gravity="center|right"
-    android:id="@+id/FabCarta"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/FabCarta"
+        android:layout_width="80dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center|right"
+        app:fabCustomSize="80dp"
+
+        android:src="@drawable/iconcarta" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center|left"
         android:src="@drawable/iconcierremesa"
+        app:fabCustomSize="80dp"
         android:id="@+id/FabCerrarMesa" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deja Tu Sugerencia"
+        android:layout_gravity="top|center"
+        app:cornerRadius="40dp"
+        android:id="@+id/btnSugerencia"/>
+"
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="JUGAR"
+        app:icon="@drawable/ic_baseline_play_arrow_24"
+        android:textColor="@color/red"
+        android:layout_gravity="left"
+        android:layout_marginTop="200dp"
+        app:cornerRadius="30dp"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="OCULTAR MESA"
+        app:icon="@drawable/ic_baseline_block_24"
+        android:layout_gravity="left|bottom"
+        android:layout_marginBottom="200dp"
+        app:cornerRadius="30dp"/>
     <FrameLayout
+        android:id="@+id/contenedorfragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="60dp"
         android:layout_marginVertical="40dp"
-        android:id="@+id/contenedorfragment"
-        android:elevation="30dp"/>
-
+        android:elevation="30dp"
+        app:fabCustomSize="80dp" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

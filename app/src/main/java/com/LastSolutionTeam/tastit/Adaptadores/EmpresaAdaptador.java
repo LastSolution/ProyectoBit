@@ -70,7 +70,10 @@ public  EmpresaAdaptador(ArrayList<Empresa>empresas, Activity activity){
                 myIntent.putExtra("rut",empresa.getRut());
                 myIntent.putExtra("telefono",empresa.getTelefono());
                 myIntent.putExtra("correo",empresa.getCorreo());
+                myIntent.putExtra("direccion",empresa.getDireccion());
+
               if(empresa.getLogo()!=null){
+
                   myIntent.putExtra("imagen",empresa.getLogo());
               }
 
@@ -84,8 +87,6 @@ public  EmpresaAdaptador(ArrayList<Empresa>empresas, Activity activity){
                 Empresa.EliminarEmpresa(empresa.getRut());
                 empresas.remove(position);
                 notifyItemRemoved(position);
-
-
             }
         });
 

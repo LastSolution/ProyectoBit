@@ -1,6 +1,6 @@
 package com.LastSolutionTeam.tastit;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,20 +25,19 @@ import com.LastSolutionTeam.tastit.POJO.Pedido;
 import com.LastSolutionTeam.tastit.POJO.PedidoPlato;
 import com.LastSolutionTeam.tastit.POJO.Plato;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_plato_Mesa#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_plato_Mesa extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "idplato";
 
 
-    // TODO: Rename and change types of parameters
+
     private int idplato;
+    int Cant=1;
+    Button btnsumar;
+    Button btnRestar;
+    TextView txtCantidad;
     Context context;
     Button btnpedir;
     Button Volver;
@@ -48,6 +47,9 @@ public class Fragment_plato_Mesa extends Fragment {
     Plato plato;
     FrameLayout fragmentContainer;
     Fragment fragment=this;
+    Boolean platoYapedido=false;
+    Pedido pedido;
+    int idclientepedido;
     private Bitmap convertirlogoBitMap(byte [] imgplato){
         Bitmap bmp = BitmapFactory.decodeByteArray(imgplato, 0, imgplato.length);
         return bmp;
@@ -60,13 +62,6 @@ public class Fragment_plato_Mesa extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param idplato Parameter 1.
-     * @return A new instance of fragment Fragment_plato_Mesa.
-     */
     // TODO: Rename and change types and number of parameters
     public static Fragment_plato_Mesa newInstance(int idplato) {
         Fragment_plato_Mesa fragment = new Fragment_plato_Mesa();
@@ -90,12 +85,43 @@ public class Fragment_plato_Mesa extends Fragment {
             idplato = getArguments().getInt(ARG_PARAM1);
         }
     }
+    public void SumarCantidad(){
+        Cant++;
+        txtCantidad.setText(String.valueOf(Cant));
+    }
+    public void RestarCantidad(){
+        Cant--;
+        txtCantidad.setText(String.valueOf(Cant));
+    }
+    public Boolean VerificarPlatoEnPedido(int idpedido, int idplato){
+
+        if(PedidoPlato.VerificarPlatoenPedido(idpedido,idplato)==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_plato__mesa, container, false);
         context=getActivity();
+        btnsumar=(Button) view.findViewById(R.id.btnSumarCant);
+        btnsumar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SumarCantidad();
+            }
+        });
+        btnRestar=(Button) view.findViewById(R.id.btnrestarcantidad);
+        btnRestar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RestarCantidad();
+            }
+        });
+        txtCantidad=(TextView)view.findViewById(R.id.txtcantplato);
         txtdescplato=(TextView) view.findViewById(R.id.txtdescripcionplatomesa);
         txtNombreplato=(TextView) view.findViewById(R.id.txtnomplatomesa);
         imgplato=(ImageView) view.findViewById(R.id.imgplatomesa);
@@ -105,20 +131,41 @@ public class Fragment_plato_Mesa extends Fragment {
         txtNombreplato.setText(plato.getNombre_plato());
         txtdescplato.setText(plato.getDescripcion());
         imgplato.setImageBitmap(convertirlogoBitMap(plato.getImagen()));
+        idclientepedido=VarGlobales.getClientepedidoActual().getId_cliente();
+        pedido=Pedido.BuscarPedidoporcliente(idclientepedido);
+        if (VerificarPlatoEnPedido(pedido.getId_pedido(),plato.getId_plato())) {
+        btnpedir.setText("Volver a Pedir");
+        platoYapedido=true;
+        }
+
         btnpedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int idclientepedido=VarGlobales.getClientepedidoActual().getId_cliente();
-                Pedido pedido=Pedido.BuscarPedidoporcliente(idclientepedido);
-                PedidoPlato pedidoPlato=new PedidoPlato(pedido.getId_pedido(),plato.getId_plato(),1);
-                if(PedidoPlato.IngresarPedido(pedidoPlato)!=0) {
+                Cant=Integer.parseInt(txtCantidad.getText().toString());
+               if(platoYapedido==false){
 
-                    Toast.makeText(context, "Ingresado con exito", Toast.LENGTH_SHORT).show();
-                    CerrarFragment(v);
+                   PedidoPlato pedidoPlato=new PedidoPlato(pedido.getId_pedido(),plato.getId_plato(),Cant);
+                   if(PedidoPlato.IngresarPedido(pedidoPlato)!=0) {
+                       pedido.setPrecio_total(pedido.getPrecio_total()+(plato.getPrecio()*Cant));
+                       Pedido.ModificarPedido(pedido);
+                       ((Activity_Mesa) getActivity()).InicializarListGrupo(((Activity_Mesa) getActivity()).cantClientes);
+                       Toast.makeText(context, "Ingresado con exito", Toast.LENGTH_SHORT).show();
+                       CerrarFragment(v);
 
-                }else{
-                    Toast.makeText(getActivity(), "Error al ingresar pedido", Toast.LENGTH_SHORT);
-                }
+                   }else{
+                       Toast.makeText(context, "Error al ingresar pedido", Toast.LENGTH_SHORT).show();
+                   }
+               }else{
+                    PedidoPlato pedidoPlato=PedidoPlato.Buscar(pedido.getId_pedido(),plato.getId_plato());
+                    int cantdelplato=pedidoPlato.getCantidad();
+                    PedidoPlato.ModificarCantidad(Cant+cantdelplato,pedido.getId_pedido());
+                    pedido.setPrecio_total(pedido.getPrecio_total()+(plato.getPrecio()*Cant));
+                    Pedido.ModificarPedido(pedido);
+
+                   ((Activity_Mesa) getActivity()).InicializarListGrupo(((Activity_Mesa) getActivity()).cantClientes);
+                   CerrarFragment(v);
+               }
+
 
             }
         });

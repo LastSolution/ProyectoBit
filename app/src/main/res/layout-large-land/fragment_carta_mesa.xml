@@ -5,10 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="800dp"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragmentCartaMesa"
     android:layout_gravity="center"
-    android:background="@color/GreenPLight">
-
+    android:background="@color/GreenPLight"
+    >
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cerrar"
+        android:layout_gravity="right"
+        android:background="@color/white"
+        android:id="@+id/btncerrarcarta"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,13 +36,15 @@
     <ExpandableListView
         android:id="@+id/Carta"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/GreenPLight"
         android:layout_marginTop="90dp"/>
+
     <FrameLayout
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_gravity="center"
-        android:id="@+id/ContenederoFragmentPlato"/>
+        android:id="@+id/ContenederoFragmentPlato"
+        android:elevation="300dp"/>
 
 </FrameLayout>
