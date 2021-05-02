@@ -7,12 +7,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,13 +27,14 @@ import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.Adaptadores.EmpresaAdaptador;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 
 public class EmpresaActivity extends AppCompatActivity {
 
     private static final int CODIGO_SOLICITO_PERMISO = 1;
-
+    int registro=0;
     Context context;
     EditText NomEmpresa;
     EditText RutEmpresa;
@@ -61,7 +64,15 @@ public class EmpresaActivity extends AppCompatActivity {
         intent.setType("image/");
        startActivityForResult(intent,10);
     }
+    
+    public void mostrarSnackbar(View view, String texto){
 
+        Snackbar snackbar = Snackbar.make(view, texto, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#558b2f"));
+        snackbar.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -138,7 +149,7 @@ public class EmpresaActivity extends AppCompatActivity {
 
         //obtiene parametros del intent (si tiene Carga los datos para editar(MODIFICACION))
         Bundle parametros =getIntent().getExtras();
-        if(parametros!=null){
+        if(parametros!=null && parametros.size()>2){
             Modifica=1;
             nombreempresa=parametros.getString("nombre");
             rutempresa=parametros.getString("rut");
@@ -156,6 +167,10 @@ public class EmpresaActivity extends AppCompatActivity {
             if(parametros.getByteArray("imagen")!=null){
                 Logo.setImageBitmap(convertirlogoBitMap(parametros.getByteArray("imagen")));
             }
+
+        }else if (parametros!=null && parametros.size()==1){
+            registro=parametros.getInt("registro");
+            btnAdd_Modify.setText("Registrarse");
 
         }
 
@@ -182,15 +197,16 @@ public class EmpresaActivity extends AppCompatActivity {
                 );
                 if(Empresa.ModificarEmpresa(empresa)==1)
                 {
-                    Toast.makeText(context,"Empresa Modificada Con Exito",Toast.LENGTH_SHORT).show();
+                    mostrarSnackbar(v,"EMPRESA MODIFICADA CON EXITO");
                     Intent intent = new Intent(v.getContext(), AbmActivity.class);
                     startActivity(intent);
                 }
                 else   {
-                    Toast.makeText(context,"Error al modificar empresa",Toast.LENGTH_SHORT).show();
+                    mostrarSnackbar(v,"ERROR AL MODIFICAR EMPRESA");
+
                 }
 
-            }else{
+            }else {
 
                 nombreempresa=NomEmpresa.getText().toString();
                 rutempresa=RutEmpresa.getText().toString();
@@ -210,19 +226,32 @@ public class EmpresaActivity extends AppCompatActivity {
                 );
                 if(Empresa.IngresarEmpresa(empresa,context)==1)
                 {
-                    Toast.makeText(context,"Empresa Ingresada Con Exito",Toast.LENGTH_SHORT).show();
+
+                    if(registro==1){
+                    mostrarSnackbar(v,"EMPRESA REGISTRADA CON EXITO");
+                    Intent intent = new Intent(v.getContext(), UsuariosActivity.class);
+                    intent.putExtra("empresa",empresa.getRut());
+                    intent.putExtra("registro",1);
+                    startActivity(intent);
+
+                        }else {
+                    mostrarSnackbar(v,"EMPRESA INGRESADA CON EXITO");
                     Intent intent = new Intent(v.getContext(), AbmActivity.class);
                     startActivity(intent);
                 }
+
+
+                }
                 else   {
-                    Toast.makeText(context,"Error Al ingresar empresa",Toast.LENGTH_SHORT).show();
+                    mostrarSnackbar(v,"ERROR AL INGRESAR EMPRESA");
                 }
 
             }
 
-            }
-        });
+
+        };
 
 
+    });
     }
 }

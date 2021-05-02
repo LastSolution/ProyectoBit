@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.LastSolutionTeam.tastit.POJO.Categoria;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Plato;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -78,6 +80,15 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
         return bmp;
 
     }
+    public void mostrarSnackbar(View view, String texto){
+
+        Snackbar snackbar = Snackbar.make(view, texto, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#558b2f"));
+        snackbar.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,16 +159,16 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                     if(modificar==0){
 
                         if(Plato.IngresarPlato(plato)==1){
-                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"PLATO INGRESADO CON EXITO");
 
                         }else {
-                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"ERROR AL INGRESAR PLATO");
                         }
                     }else{
                         if(Plato.ModificarPlato(plato)==1){
-                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"PLATO MODIFICADO CON EXITO");
                         }else {
-                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"ERROR AL MODIFICAR PLATO");
                         }
                     }
 
@@ -166,16 +177,17 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                     if(modificar==0){
 
                         if(Plato.IngresarPlato(plato)==1){
-                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"PLATO INGRESADO CON EXITO");
+
 
                         }else {
-                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"ERROR AL INGRESAR PLATO");
                         }
                     }else{
                         if(Plato.ModificarPlato(plato)==1){
-                            Toast.makeText(context,"Plato ingresado con exito",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"PLATO MODIFICADO CON EXITO");
                         }else {
-                            Toast.makeText(context,"Error al ingresar plato",Toast.LENGTH_SHORT).show();
+                            mostrarSnackbar(v,"ERROR AL MODIFICAR PLATO");
                         }
                     }
                 }

@@ -2,15 +2,57 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="500dp"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CierreMesa"
     android:layout_gravity="center"
-    android:layout_marginVertical="60dp">
+    android:layout_marginVertical="60dp"
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="30dp"
+        app:cardCornerRadius="40dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PEDIDO TOTAL DE MESA"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:textColor="@color/Green_second"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:id="@+id/rvCierreMesa"
+        android:background="@color/white"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textColor="@color/red"
+        android:text="TOTAL  $ "
+        android:id="@+id/txttotalpedido"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACEPTAR"
+        android:layout_gravity="center"
 
+        />
+</LinearLayout>
     <!-- TODO: Update blank fragment layout -->
-   <androidx.recyclerview.widget.RecyclerView
-       android:layout_width="300dp"
-       android:layout_height="400dp"
-       android:layout_gravity="center"/>
 
+    </androidx.cardview.widget.CardView>
 </FrameLayout>

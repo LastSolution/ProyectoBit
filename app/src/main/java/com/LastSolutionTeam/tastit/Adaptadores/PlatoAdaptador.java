@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoViewHolder> {
     ArrayList<Plato> platos;
     Activity activity;
+    int modocierremesa=0;
     private Bitmap convertirlogoBitMap(byte [] imgplato){
         Bitmap bmp = BitmapFactory.decodeByteArray(imgplato, 0, imgplato.length);
         return bmp;
@@ -36,6 +37,11 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
         InputStream inputStream  = new ByteArrayInputStream(imgplato);
         Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
         return bitmap;
+    }
+    public PlatoAdaptador(ArrayList<Plato> platos, Activity activity,int modocierremesa) {
+        this.platos = platos;
+        this.activity = activity;
+        this.modocierremesa=modocierremesa;
     }
     public PlatoAdaptador(ArrayList<Plato> platos, Activity activity) {
         this.platos = platos;
@@ -54,7 +60,10 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
     @Override
     public void onBindViewHolder(@NonNull PlatoViewHolder platoViewHolder, int position) {
     Plato plato=platos.get(position);
-
+    if(modocierremesa==1){
+    platoViewHolder.btneliminarusuario.setVisibility(View.GONE);
+    platoViewHolder.btneliminarusuario.setVisibility(View.GONE);
+    }
     platoViewHolder.txtnombreplato.setText(plato.getNombre_plato());
     platoViewHolder.txtprecioplato.setText( Double.toString(plato.getPrecio()));
         if(plato.getImagen()!=null){

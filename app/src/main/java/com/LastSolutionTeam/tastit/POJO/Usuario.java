@@ -265,7 +265,7 @@ public class Usuario {
         return Usuarios;
     }
 
-    public static Usuario Login(String username, String password, Context context) {
+    public static Usuario Login(String username, String password) {
 
 
         Usuario user=null;
@@ -283,8 +283,6 @@ public class Usuario {
                     user=CrearObjeto(rs);
 
                 }
-            }else{
-                Toast.makeText(context,"Error al conectar",Toast.LENGTH_SHORT);
             }
 
         }
@@ -292,10 +290,7 @@ public class Usuario {
         {
             throw new RuntimeException(ex);
         }
-        finally
-        {
-            //cnn.close();
-        }
+
         return user;
 
     }

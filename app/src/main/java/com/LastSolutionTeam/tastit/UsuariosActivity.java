@@ -5,6 +5,7 @@ import androidx.core.app.NotificationCompatSideChannelService;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.LastSolutionTeam.tastit.AdaptadoresSpinners.EmpresaSpinner;
 import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Usuario;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -33,11 +35,20 @@ public class UsuariosActivity extends AppCompatActivity {
     Button btnAgregar;
     Spinner TipoUsuario;
     TextView textspinuser;
+    String Empresaregistro="";
+    int registro=0;
     private ArrayList<Empresa>ListaEmpresas(){
     ArrayList<Empresa> empresas=Empresa.BuscarTodas();
     return empresas;
 }
+    public void mostrarSnackbar(View view, String texto){
 
+        Snackbar snackbar = Snackbar.make(view, texto, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#558b2f"));
+        snackbar.show();
+    }
     private void CargarSpinnerEmpresas(ArrayList<Empresa> Lista){
         empresaList=new ArrayList<EmpresaSpinner>();
     for (int i=0; i<Lista.size(); i++)
@@ -66,8 +77,11 @@ public class UsuariosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuarios);
-
-
+        Bundle parametros =getIntent().getExtras();
+        if(parametros!=null ){
+        registro=parametros.getInt("registro");
+        Empresaregistro=parametros.getString("empresa");
+         }
         context=this;
         spinner = (Spinner) findViewById(R.id.SpinEmpresas);
         textspinuser=(TextView) findViewById(R.id.textspinuser);
@@ -76,81 +90,108 @@ public class UsuariosActivity extends AppCompatActivity {
         passUsuario=(EditText)findViewById(R.id.etPassUsuario);
         btnAgregar=(Button) findViewById(R.id.btnAgregarusuario);
         txtempresa=(TextView) findViewById(R.id.textempresa);
-        if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
+        if(registro==0){
+            if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
+                TipoUsuario.setVisibility(View.GONE);
+                textspinuser.setVisibility(View.GONE);
+                txtempresa.setVisibility(View.GONE);
+                spinner.setVisibility(View.GONE);
+
+
+            }   else {
+                CargarSpinnerEmpresas(ListaEmpresas());
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        EmpresaSpinner empresaSpinner = (EmpresaSpinner) parent.getSelectedItem();
+                        Rut=empresaSpinner.getRut();
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        Rut=null;
+                    }
+                });
+                CargarSpinnerTipoUser();
+                TipoUsuario.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        TipoUsuarioseleccionado=(String) parent.getSelectedItem();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }
+        }else{
             TipoUsuario.setVisibility(View.GONE);
             textspinuser.setVisibility(View.GONE);
             txtempresa.setVisibility(View.GONE);
             spinner.setVisibility(View.GONE);
-
-
-        }else {
-            CargarSpinnerEmpresas(ListaEmpresas());
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    EmpresaSpinner empresaSpinner = (EmpresaSpinner) parent.getSelectedItem();
-                    Rut=empresaSpinner.getRut();
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    Rut=null;
-                }
-            });
-            CargarSpinnerTipoUser();
-            TipoUsuario.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    TipoUsuarioseleccionado=(String) parent.getSelectedItem();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
         }
+
 
 
            btnAgregar.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Usuario user=null;
-               if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
-                   Rut=VarGlobales.getEmpresaActual().getRut();
-                   user=new Usuario(
-                           nombreUsuario.getText().toString(),
-                           passUsuario.getText().toString(),
-                           "Empresa",
-                           Rut
-                   );
-               }else{
-                  user=new Usuario(
-                           nombreUsuario.getText().toString(),
-                           passUsuario.getText().toString(),
-                           TipoUsuarioseleccionado,
-                           Rut
-                   );
-               }
-
-               if(Usuario.IngresarUsuario(user) !=0){
+               if(registro==0){
                    if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
-                       Toast.makeText(context,"USUARIO INGRESADO CON EXITO",Toast.LENGTH_LONG).show();
-                       Intent intent = new Intent(v.getContext(),abm_empresa.class);
-                       startActivity(intent);
+                       Rut=VarGlobales.getEmpresaActual().getRut();
+                       user=new Usuario(
+                               nombreUsuario.getText().toString(),
+                               passUsuario.getText().toString(),
+                               "Empresa",
+                               Rut
+                       );
                    }else{
-                       Toast.makeText(context,"USUARIO INGRESADO CON EXITO",Toast.LENGTH_LONG).show();
-                       Intent intent = new Intent(v.getContext(),AbmActivity.class);
-                       startActivity(intent);
+                       user=new Usuario(
+                               nombreUsuario.getText().toString(),
+                               passUsuario.getText().toString(),
+                               TipoUsuarioseleccionado,
+                               Rut
+                       );
+                   }
+                   if(Usuario.IngresarUsuario(user) !=0){
+                       if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
+                           mostrarSnackbar(v,"USUARIO INGRESADO CON EXITO");
+                           Intent intent = new Intent(v.getContext(),abm_empresa.class);
+                           startActivity(intent);
+                       }else{
+                           mostrarSnackbar(v,"USUARIO INGRESADO CON EXITO");
+                           Intent intent = new Intent(v.getContext(),AbmActivity.class);
+                           startActivity(intent);
+                       }
+
+                   }else{
+                       mostrarSnackbar(v,"ERROR AL INGRESAR USUARIO");
                    }
 
+
+
                }else{
-                   Toast.makeText(context,"ERROR AL INGRESAR USUARIO",Toast.LENGTH_LONG).show();
+                       user=new Usuario(
+                               nombreUsuario.getText().toString(),
+                               passUsuario.getText().toString(),
+                               "Empresa",
+                               Empresaregistro
+                       );
+                       if(Usuario.IngresarUsuario(user) !=0){
+                           mostrarSnackbar(v,"USUARIO REGISTRADO CON EXITO");
+                           Intent intent = new Intent(v.getContext(),MainActivity.class);
+                           startActivity(intent);
+                       }else{
+                           mostrarSnackbar(v,"ERROR AL REGISTRAR USUARIO");
+                       }
+                   }
                }
-           }
+
        });
 
 

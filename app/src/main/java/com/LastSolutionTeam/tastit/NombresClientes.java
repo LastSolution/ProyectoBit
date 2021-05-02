@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Trace;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.POJO.Cliente;
 import com.LastSolutionTeam.tastit.POJO.Pedido;
+import com.google.android.material.snackbar.Snackbar;
 
 public class NombresClientes extends AppCompatActivity {
 
@@ -108,6 +110,15 @@ public class NombresClientes extends AppCompatActivity {
             }
         }
     }
+    public void mostrarSnackbar(View view, String texto){
+
+        Snackbar snackbar = Snackbar.make(view, texto, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#558b2f"));
+        snackbar.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,7 +148,7 @@ public class NombresClientes extends AppCompatActivity {
                     myIntent.putExtra("cantidad",CantidadClientes);
                     startActivity(myIntent);
                 }else{
-                    Toast.makeText(context,"NO PUEDE INGRESAR UN CLIENTE SIN NOMBRE",Toast.LENGTH_SHORT).show();
+                    mostrarSnackbar(v,"NO SE PUEDE INGRESAR UN CLIENTE SIN NOMBRE");
                 }
 
 

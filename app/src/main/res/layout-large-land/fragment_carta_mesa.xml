@@ -3,13 +3,19 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="800dp"
+    android:layout_width="700dp"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragmentCartaMesa"
     android:layout_gravity="center"
-    android:background="@color/GreenPLight"
+
     >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="30dp"
+        app:cardCornerRadius="40dp">
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,28 +24,35 @@
         android:background="@color/white"
         android:id="@+id/btncerrarcarta"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Seleccione quien va a pedir"
-        android:textSize="30dp"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:gravity="center_horizontal" />
-  <Spinner
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center|top"
-      android:id="@+id/spinclientes"
-      android:layout_marginTop="50dp"
-      android:translationZ="20dp"/>
-    <ExpandableListView
-        android:id="@+id/Carta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/GreenPLight"
-        android:layout_marginTop="90dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccione quien va a pedir"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:id="@+id/spinclientes"
+                android:layout_marginTop="50dp"
+                android:translationZ="20dp"/>
+            <ExpandableListView
+                android:id="@+id/Carta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/GreenPLight"
+                android:layout_marginTop="100dp"
+                android:layout_marginVertical="10dp"/>
+        </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
     <FrameLayout
         android:layout_width="350dp"
         android:layout_height="350dp"

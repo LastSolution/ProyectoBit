@@ -81,15 +81,16 @@ public class PedidoPlato {
         }
       return ret;
     }
-    public static int ModificarCantidad(int cantidad,int idpedido){
+    public static int ModificarCantidad(int cantidad,int idpedido,int idplato){
         int ret=0;
         try {
 
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "update pedidos_platos set cantidad=? where pedido=?";
+            String sql = "update pedidos_platos set cantidad=? where pedido=? and plato=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setInt(1, cantidad);
             pst.setInt(2, idpedido);
+            pst.setInt(3, idplato);
             ret = pst.executeUpdate();
 
             if (ret == 0)

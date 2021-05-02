@@ -28,6 +28,12 @@
         android:id="@+id/etPassUsuario"
         android:inputType="textPassword"
         android:hint="Password "/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPassUsuario2"
+        android:inputType="textPassword"
+        android:hint="Verifique Password "/>
 
     <TextView
         android:layout_width="match_parent"

@@ -2,27 +2,31 @@ package com.LastSolutionTeam.tastit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.LastSolutionTeam.tastit.AbmActivity;
+
+
 import com.LastSolutionTeam.tastit.POJO.Empresa;
 import com.LastSolutionTeam.tastit.POJO.Usuario;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
+    Button btnregistro;
     Button btnconectar;
     EditText etNombre;
     EditText etPass;
     Usuario USUARIO;
     Context context;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +34,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context=this;
+        btnregistro=(Button) findViewById(R.id.btnregistro) ;
+        btnregistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EmpresaActivity.class);
+                intent.putExtra("registro",1);
+                startActivity(intent);
+            }
+        });
         etNombre = (EditText) findViewById(R.id.etNombre);
-
         etPass = (EditText) findViewById(R.id.Pass);
         btnconectar = (Button) findViewById(R.id.btnconectar);
-
         btnconectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
                 String Pass = etPass.getText().toString();
 
-                if (VerificarDatos(Nombre, Pass))
+                if (VerificarDatos(Nombre, Pass)==0)
                 {
 
-                    USUARIO=Usuario.Login(Nombre,Pass,context);
+                    USUARIO=Usuario.Login(Nombre,Pass);
 
                     if (USUARIO != null )
                     {
@@ -63,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
                     }else
                     {
-                        Toast.makeText(context, "NOMBRE O PASS INCORRECTO", Toast.LENGTH_SHORT).show();
+
+                    mostrarSnackbar(v,"NOMBRE O PASS INCORRECTO");
                     }
                 }
                 else
                     {
-                    Toast.makeText(context, "Ingresar todos los datos", Toast.LENGTH_SHORT).show();
+                        mostrarSnackbar(v,"CAMPOS VACIOS, VERIFIQUE");
                     }
 
 
@@ -77,11 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected Boolean VerificarDatos(String NOMBRE, String PASS) {
+    protected int VerificarDatos(String NOMBRE, String PASS) {
         if (NOMBRE.equals("")||PASS.equals("")) {
-            return false;
+            return 1;
         } else {
-            return true;
+            return 0;
         }
     }
     protected void LimpiarDatos()
@@ -89,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
         etNombre.setText("");
         etPass.setText("");
 
+    }
+    @SuppressLint("ResourceAsColor")
+    public void mostrarSnackbar(View view, String texto){
+
+        Snackbar snackbar = Snackbar.make(view, texto, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#558b2f"));
+        snackbar.show();
     }
 }
 

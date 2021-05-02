@@ -34,17 +34,41 @@
         android:id="@+id/etPassUsuario"
         android:inputType="textPassword"
         android:hint="Password "/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPassUsuario2"
+        android:inputType="textPassword"
+        android:hint="Verifique Password"/>
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Seleccione Empresa:"
+        android:text="Tipo de Usuario"
+        android:id="@+id/textspinuser"
+        android:layout_marginHorizontal="90dp"
         android:layout_marginTop="10dp"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spintipoUsuario"
+        android:layout_marginHorizontal="90dp"
+        android:hint="Tipo Usuario "/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="90dp"
+        android:text="Seleccione Empresa:"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textempresa"/>
     <Spinner
         android:id="@+id/SpinEmpresas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="90dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"

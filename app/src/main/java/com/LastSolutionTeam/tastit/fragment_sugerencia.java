@@ -1,6 +1,7 @@
 package com.LastSolutionTeam.tastit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.LastSolutionTeam.tastit.POJO.Sugerencia;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class fragment_sugerencia extends Fragment {
@@ -45,7 +47,15 @@ public class fragment_sugerencia extends Fragment {
         transaction.remove(fragment);
         transaction.commit();
     }
-    @Override
+    public void mostrarSnackbar(View view, String texto){
+
+        Snackbar snackbar = Snackbar.make(view, texto, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#558b2f"));
+        snackbar.show();
+    }
+     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -72,11 +82,10 @@ public class fragment_sugerencia extends Fragment {
             public void onClick(View v) {
                 Sugerencia sugerencia=new Sugerencia(etSugerencia.getText().toString());
                 if (sugerencia.getSugerencia().equals("")){
-
-                    Toast.makeText(context,"Ingrese una sugerencia",Toast.LENGTH_SHORT).show();
+                    mostrarSnackbar(v,"iNGRESE UNA SUGERENCIA");
                 }else{
                     if(Sugerencia.IngresarSugerencia(sugerencia)==1){
-                        Toast.makeText(context,"Gracias por aportar una sugerencia!!",Toast.LENGTH_SHORT).show();
+                        mostrarSnackbar(v,"GRACIAS POR SU SUGERENCIA");
                         CerrarFragment(v);
                     }
 

@@ -4,6 +4,7 @@ package com.LastSolutionTeam.tastit;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.LastSolutionTeam.tastit.POJO.Cliente;
 import com.LastSolutionTeam.tastit.POJO.Pedido;
 import com.LastSolutionTeam.tastit.POJO.PedidoPlato;
 import com.LastSolutionTeam.tastit.POJO.Plato;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class Fragment_plato_Mesa extends Fragment {
@@ -101,6 +103,14 @@ public class Fragment_plato_Mesa extends Fragment {
             return true;
         }
     }
+    public void mostrarSnackbar(View view, String texto){
+
+        Snackbar snackbar = Snackbar.make(view, texto, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#558b2f"));
+        snackbar.show();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -149,19 +159,20 @@ public class Fragment_plato_Mesa extends Fragment {
                        pedido.setPrecio_total(pedido.getPrecio_total()+(plato.getPrecio()*Cant));
                        Pedido.ModificarPedido(pedido);
                        ((Activity_Mesa) getActivity()).InicializarListGrupo(((Activity_Mesa) getActivity()).cantClientes);
-                       Toast.makeText(context, "Ingresado con exito", Toast.LENGTH_SHORT).show();
+                       mostrarSnackbar(v,"PLATO AGREGADO A TU PEDIDO");
+
                        CerrarFragment(v);
 
                    }else{
-                       Toast.makeText(context, "Error al ingresar pedido", Toast.LENGTH_SHORT).show();
+                       mostrarSnackbar(v,"ERROR AL AGREGAR PLATO");
                    }
                }else{
                     PedidoPlato pedidoPlato=PedidoPlato.Buscar(pedido.getId_pedido(),plato.getId_plato());
                     int cantdelplato=pedidoPlato.getCantidad();
-                    PedidoPlato.ModificarCantidad(Cant+cantdelplato,pedido.getId_pedido());
+                    PedidoPlato.ModificarCantidad(Cant+cantdelplato,pedido.getId_pedido(),pedidoPlato.getIdplato());
                     pedido.setPrecio_total(pedido.getPrecio_total()+(plato.getPrecio()*Cant));
                     Pedido.ModificarPedido(pedido);
-
+                   mostrarSnackbar(v,"PLATO CORRECTAMENTE AGREGADO");
                    ((Activity_Mesa) getActivity()).InicializarListGrupo(((Activity_Mesa) getActivity()).cantClientes);
                    CerrarFragment(v);
                }

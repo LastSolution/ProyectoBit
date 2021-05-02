@@ -29,6 +29,7 @@
             android:layout_marginLeft="30dp"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:scaleType="centerCrop"
             android:id="@+id/logoempresabienvenida"
             />
         <TextView
