@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 import com.LastSolutionTeam.tastit.Adaptadores.EmpresaAdaptador;
@@ -40,6 +41,7 @@ public class UsuariosFragment extends Fragment {
     private Activity activity;
     Context context;
     String  RutEmpresa;
+    TextView txtempresa;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class UsuariosFragment extends Fragment {
         ListaUsuarios = root.findViewById(R.id.rvUsuarios);
         context=getActivity();
         activity=getActivity();
+        txtempresa=(TextView) root.findViewById(R.id.txtempresauser);
         spinnerEmpresa=(Spinner) root.findViewById(R.id.spinerempresausuario);
         if(VarGlobales.getUsuarioActual().getTipo().equals("Administrador")){
 
@@ -69,6 +72,7 @@ public class UsuariosFragment extends Fragment {
                 }
             });
         }else{
+            txtempresa.setVisibility(View.GONE);
             spinnerEmpresa.setVisibility(View.GONE);
             RutEmpresa=VarGlobales.getEmpresaActual().getRut();
             ListarUsuarios();

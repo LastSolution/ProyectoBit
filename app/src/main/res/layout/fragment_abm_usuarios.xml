@@ -7,11 +7,26 @@
     android:background="@color/Greensecondlight"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.abmusuarios.UsuariosFragment"
-        android:orientation="horizontal">
-
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        tools:context=".ui.abmusuarios.UsuariosFragment">
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Seleccione Empresa"
+        android:textSize="20dp"
+        android:id="@+id/txtempresauser"
+        android:gravity="center_horizontal" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinerempresausuario"
+            android:layout_gravity="center"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUsuarios"
             android:layout_width="match_parent"
@@ -19,10 +34,9 @@
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
 
             >
-
         </androidx.recyclerview.widget.RecyclerView>
-
     </LinearLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/FabNuevoUsuario"

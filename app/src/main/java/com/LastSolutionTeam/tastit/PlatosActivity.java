@@ -43,6 +43,7 @@ Context context;
 Categoria categoria;
 Empresa empresaselect;
 int modificar=0;
+int idplato=0;
 private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
     private ArrayList<Empresa> ListaEmpresas=new ArrayList<Empresa>();
 
@@ -120,7 +121,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
             descripcion.setText(parametros.getString("descripcion"));
             spinCat.setSelection(adapter.getPosition(Categoria.BuscarCategoriaPorID(parametros.getInt("categoria")))-1);
             imgPlato.setImageBitmap(convertirlogoBitMap(parametros.getByteArray("imagen")));
-
+            idplato=parametros.getInt("idplato");
 
             btnNuevoPlato.setText("MODIFICA LOS DATOS");
             txttitulo.setText("MODIFICAR PLATO");
@@ -155,9 +156,9 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
             public void onClick(View v) {
                 String precio=etprecio.getText().toString();
                 if(VarGlobales.getUsuarioActual().getTipo().equals("Administrador")){
-                    Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),empresaselect.getRut());
-                    if(modificar==0){
 
+                    if(modificar==0){
+                        Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),empresaselect.getRut());
                         if(Plato.IngresarPlato(plato)==1){
                             mostrarSnackbar(v,"PLATO INGRESADO CON EXITO");
 
@@ -165,7 +166,8 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                             mostrarSnackbar(v,"ERROR AL INGRESAR PLATO");
                         }
                     }else{
-                        if(Plato.ModificarPlato(plato)==1){
+                        Plato platom=new Plato(idplato,etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),empresaselect.getRut());
+                        if(Plato.ModificarPlato(platom)==1){
                             mostrarSnackbar(v,"PLATO MODIFICADO CON EXITO");
                         }else {
                             mostrarSnackbar(v,"ERROR AL MODIFICAR PLATO");
@@ -173,9 +175,9 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                     }
 
                 }else{
-                    Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
-                    if(modificar==0){
 
+                    if(modificar==0){
+                        Plato plato=new Plato(etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
                         if(Plato.IngresarPlato(plato)==1){
                             mostrarSnackbar(v,"PLATO INGRESADO CON EXITO");
 
@@ -184,7 +186,8 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                             mostrarSnackbar(v,"ERROR AL INGRESAR PLATO");
                         }
                     }else{
-                        if(Plato.ModificarPlato(plato)==1){
+                        Plato platom=new Plato(idplato,etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
+                        if(Plato.ModificarPlato(platom)==1){
                             mostrarSnackbar(v,"PLATO MODIFICADO CON EXITO");
                         }else {
                             mostrarSnackbar(v,"ERROR AL MODIFICAR PLATO");

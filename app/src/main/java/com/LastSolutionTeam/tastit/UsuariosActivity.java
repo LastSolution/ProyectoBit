@@ -36,6 +36,7 @@ public class UsuariosActivity extends AppCompatActivity {
     Spinner TipoUsuario;
     TextView textspinuser;
     String Empresaregistro="";
+    EditText passusuario2;
     int registro=0;
     private ArrayList<Empresa>ListaEmpresas(){
     ArrayList<Empresa> empresas=Empresa.BuscarTodas();
@@ -83,6 +84,7 @@ public class UsuariosActivity extends AppCompatActivity {
         Empresaregistro=parametros.getString("empresa");
          }
         context=this;
+        passusuario2=(EditText) findViewById(R.id.etPassUsuario2);
         spinner = (Spinner) findViewById(R.id.SpinEmpresas);
         textspinuser=(TextView) findViewById(R.id.textspinuser);
         nombreUsuario= (EditText) findViewById(R.id.EtUsername);
@@ -141,41 +143,44 @@ public class UsuariosActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                Usuario user=null;
-               if(registro==0){
-                   if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
-                       Rut=VarGlobales.getEmpresaActual().getRut();
-                       user=new Usuario(
-                               nombreUsuario.getText().toString(),
-                               passUsuario.getText().toString(),
-                               "Empresa",
-                               Rut
-                       );
-                   }else{
-                       user=new Usuario(
-                               nombreUsuario.getText().toString(),
-                               passUsuario.getText().toString(),
-                               TipoUsuarioseleccionado,
-                               Rut
-                       );
-                   }
-                   if(Usuario.IngresarUsuario(user) !=0){
+
+               if(passUsuario.getText().toString().equals (passusuario2.getText().toString())){
+
+                   if(registro==0){
                        if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
-                           mostrarSnackbar(v,"USUARIO INGRESADO CON EXITO");
-                           Intent intent = new Intent(v.getContext(),abm_empresa.class);
-                           startActivity(intent);
+                           Rut=VarGlobales.getEmpresaActual().getRut();
+                           user=new Usuario(
+                                   nombreUsuario.getText().toString(),
+                                   passUsuario.getText().toString(),
+                                   "Empresa",
+                                   Rut
+                           );
                        }else{
-                           mostrarSnackbar(v,"USUARIO INGRESADO CON EXITO");
-                           Intent intent = new Intent(v.getContext(),AbmActivity.class);
-                           startActivity(intent);
+                           user=new Usuario(
+                                   nombreUsuario.getText().toString(),
+                                   passUsuario.getText().toString(),
+                                   TipoUsuarioseleccionado,
+                                   Rut
+                           );
+                       }
+                       if(Usuario.IngresarUsuario(user) !=0){
+                           if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")){
+                               mostrarSnackbar(v,"USUARIO INGRESADO CON EXITO");
+                               Intent intent = new Intent(v.getContext(),abm_empresa.class);
+                               startActivity(intent);
+                           }else{
+                               mostrarSnackbar(v,"USUARIO INGRESADO CON EXITO");
+                               Intent intent = new Intent(v.getContext(),AbmActivity.class);
+                               startActivity(intent);
+                           }
+
+                       }else{
+                           mostrarSnackbar(v,"ERROR AL INGRESAR USUARIO");
                        }
 
+
+
                    }else{
-                       mostrarSnackbar(v,"ERROR AL INGRESAR USUARIO");
-                   }
-
-
-
-               }else{
                        user=new Usuario(
                                nombreUsuario.getText().toString(),
                                passUsuario.getText().toString(),
@@ -190,7 +195,13 @@ public class UsuariosActivity extends AppCompatActivity {
                            mostrarSnackbar(v,"ERROR AL REGISTRAR USUARIO");
                        }
                    }
+
+
+               }else{
+                   mostrarSnackbar(v,"LOS PASSWORDS NO COINCIDEN");
                }
+               }
+
 
        });
 

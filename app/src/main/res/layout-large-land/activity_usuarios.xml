@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/etPassUsuario2"
         android:inputType="textPassword"
+        android:layout_marginHorizontal="90dp"
         android:hint="Verifique Password"/>
 
     <TextView

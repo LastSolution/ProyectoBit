@@ -1,9 +1,13 @@
 package com.LastSolutionTeam.tastit.Adaptadores;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +16,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.LastSolutionTeam.tastit.EmpresaActivity;
+import com.LastSolutionTeam.tastit.POJO.Cliente;
+import com.LastSolutionTeam.tastit.POJO.Pedido;
 import com.LastSolutionTeam.tastit.POJO.Plato;
-import com.LastSolutionTeam.tastit.POJO.Usuario;
 import com.LastSolutionTeam.tastit.PlatosActivity;
 import com.LastSolutionTeam.tastit.R;
+import com.LastSolutionTeam.tastit.VarGlobales;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -28,6 +35,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
     ArrayList<Plato> platos;
     Activity activity;
     int modocierremesa=0;
+    int idpedido;
     private Bitmap convertirlogoBitMap(byte [] imgplato){
         Bitmap bmp = BitmapFactory.decodeByteArray(imgplato, 0, imgplato.length);
         return bmp;
@@ -42,6 +50,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
         this.platos = platos;
         this.activity = activity;
         this.modocierremesa=modocierremesa;
+        this.idpedido=idpedido;
     }
     public PlatoAdaptador(ArrayList<Plato> platos, Activity activity) {
         this.platos = platos;
@@ -57,12 +66,17 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
 
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull PlatoViewHolder platoViewHolder, int position) {
     Plato plato=platos.get(position);
     if(modocierremesa==1){
+
     platoViewHolder.btneliminarusuario.setVisibility(View.GONE);
-    platoViewHolder.btneliminarusuario.setVisibility(View.GONE);
+    platoViewHolder.btnmodifusuario.setVisibility(View.GONE);
+
+
     }
     platoViewHolder.txtnombreplato.setText(plato.getNombre_plato());
     platoViewHolder.txtprecioplato.setText( Double.toString(plato.getPrecio()));
@@ -79,6 +93,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
             myIntent.putExtra("descripcion",plato.getDescripcion());
             myIntent.putExtra("categoria",plato.getCategoria());
             myIntent.putExtra("imagen",plato.getImagen());
+            myIntent.putExtra("idplato",plato.getId_plato());
             activity.startActivity(myIntent);
 
         }
@@ -120,6 +135,9 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
             btnmodifusuario    = (Button) itemView.findViewById(R.id.btnmodificarplato);
             btneliminarusuario = (Button) itemView.findViewById(R.id.btneliminarplato);
             imgPlato=(ImageView) itemView.findViewById(R.id.cardimgplato);
+
         }
     }
+
+
 }

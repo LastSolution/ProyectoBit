@@ -23,6 +23,7 @@
             android:textAlignment="center"
             android:text="Seleccione Empresa"
             android:textSize="20dp"
+            android:id="@+id/txtempresauser"
             android:gravity="center_horizontal" />
         <Spinner
             android:layout_width="wrap_content"

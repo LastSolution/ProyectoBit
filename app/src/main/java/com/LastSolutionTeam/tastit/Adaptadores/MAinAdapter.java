@@ -76,8 +76,8 @@ this.ListChild=ListChild;
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        if(convertView== null){
-            convertView=View.inflate(parent.getContext(), R.layout.child_listacliente,null);
+
+        convertView=LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_selectable_list_item,parent,false);
 
             if(isLastChild==false){
                 Button btneliminarplato = (Button)convertView.findViewById(R.id.addbutton);
@@ -90,12 +90,11 @@ this.ListChild=ListChild;
             }
 
 
-        }
-
         TextView textView=convertView.findViewById(android.R.id.text1);
         String schild=String.valueOf( getChild(groupPosition,childPosition));
         textView.setText(schild);
-        textView.setTextSize(18);
+        textView.setTextSize(20);
+        textView.setBackgroundColor(Color.WHITE);
         ViewGroup.LayoutParams params  =  textView.getLayoutParams();
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         textView.setLayoutParams(params);

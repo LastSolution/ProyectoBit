@@ -5,29 +5,43 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CierreMesa"
-    android:layout_gravity="center"
-    android:layout_marginVertical="60dp"
+    android:layout_gravity="center|top"
+
     >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:elevation="30dp"
-        app:cardCornerRadius="40dp">
+        android:elevation="50dp"
+        app:cardCornerRadius="30dp">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
     >
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PEDIDO TOTAL DE MESA"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="40dp"
-        android:textColor="@color/Green_second"/>
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PEDIDO TOTAL DE MESA"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/Green_second"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerrar"
+           android:layout_marginLeft="50dp"
+            android:id="@+id/cerrarcierremesa"/>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="400dp"
         android:layout_height="400dp"
@@ -49,6 +63,7 @@
         android:layout_height="wrap_content"
         android:text="ACEPTAR"
         android:layout_gravity="center"
+        android:id="@+id/aceptarcierremesa"
 
         />
 </LinearLayout>
