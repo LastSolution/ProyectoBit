@@ -79,15 +79,8 @@ this.ListChild=ListChild;
 
         convertView=LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_selectable_list_item,parent,false);
 
-            if(isLastChild==false){
-                Button btneliminarplato = (Button)convertView.findViewById(R.id.addbutton);
-                btneliminarplato.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                    }
-                });
-            }
+
 
 
         TextView textView=convertView.findViewById(android.R.id.text1);

@@ -14,7 +14,7 @@ public class Conexion {
     private static String IP_PUERTO="192.168.56.1:1433";  // IP:PUERTO
     private static String DATABASE ="TastiT";              // BASE DE DATOS
     private static String INSTANCE ="SQLEXPRESS";        // INSTANCIA
-    private static String USERNAME ="Psalazar";                  // USER
+    private static String USERNAME ="psalazar";                  // USER
     private static String PASSWORD ="asdasd";           // PASSWORD
 
 
