@@ -156,15 +156,14 @@ public class Empresa {
     public static int EliminarEmpresa(String rut){
 
         int ret=0;
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
         Connection Conn= Conexion.ObtenerConexion();
 
         if(Conn!=null)
         {
             try {
-                PreparedStatement pst=Conn.prepareStatement("delete from EMPRESAS where rut =?");
+
+                PreparedStatement pst=Conn.prepareStatement("UPDATE EMPRESAS SET DELETED=1 where rut =?");
                 pst.setString(1,rut);
 
                 ret= pst.executeUpdate();
@@ -186,7 +185,7 @@ public class Empresa {
         Empresa empresa=null;
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM Empresas";
+            String sql = "SELECT * FROM Empresas WHERE DELETED =0";
             PreparedStatement pst = cnn.prepareStatement(sql);
 
             ResultSet rs = pst.executeQuery();

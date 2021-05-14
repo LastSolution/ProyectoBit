@@ -182,7 +182,7 @@ public class Plato {
 
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "DELETE platos WHERE id_plato=?";
+            String sql = "Update platos set deleted=1 WHERE id_plato=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setInt(1,plato.getId_plato());
             int ret = pst.executeUpdate();
@@ -235,7 +235,7 @@ public class Plato {
         Plato plato = null;
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM platos";
+            String sql = "SELECT * FROM platos where deleted=0";
             PreparedStatement pst = cnn.prepareStatement(sql);
 
             ResultSet rs = pst.executeQuery();
@@ -261,7 +261,7 @@ public class Plato {
         Plato plato = null;
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM platos where empresa=? and categoria=?";
+            String sql = "SELECT * FROM platos where empresa=? and categoria=? and deleted=0";
             PreparedStatement pst = cnn.prepareStatement(sql);
             pst.setString(1, RutEmpresa);
             pst.setInt(2, categoria);

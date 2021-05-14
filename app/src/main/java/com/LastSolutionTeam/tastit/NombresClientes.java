@@ -36,7 +36,6 @@ public class NombresClientes extends AppCompatActivity {
     private void OcultarEditText(int Cantidad){
 
         switch (Cantidad){
-
         case 3:
             Cliente4.setVisibility(View.GONE);
             break;
@@ -61,7 +60,6 @@ public class NombresClientes extends AppCompatActivity {
 
 
         switch (Cantidad){
-
             case 4:
                 Nombre1= Cliente1.getText().toString();
                 Nombre2=Cliente2.getText().toString();
@@ -157,4 +155,5 @@ public class NombresClientes extends AppCompatActivity {
 
 
     }
+
 }

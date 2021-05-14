@@ -6,16 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.WrapperListAdapter;
-
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-
-import com.LastSolutionTeam.tastit.R;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,8 +15,8 @@ public class MAinAdapter extends BaseExpandableListAdapter {
     HashMap<String,ArrayList<String>> ListChild;
 
     public  MAinAdapter( ArrayList<String> ListGroup, HashMap<String,ArrayList<String>> ListChild){
-this.ListGroup=ListGroup;
-this.ListChild=ListChild;
+    this.ListGroup=ListGroup;
+    this.ListChild=ListChild;
     }
     @Override
     public int getGroupCount() {
@@ -78,11 +69,6 @@ this.ListChild=ListChild;
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         convertView=LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_selectable_list_item,parent,false);
-
-
-
-
-
         TextView textView=convertView.findViewById(android.R.id.text1);
         String schild=String.valueOf( getChild(groupPosition,childPosition));
         textView.setText(schild);

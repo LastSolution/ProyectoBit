@@ -72,6 +72,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/txtspinempresa"
             android:text="Seleccione Empresa:"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
@@ -93,6 +94,7 @@
         android:src="@drawable/ic_baseline_image_24"
         android:onClick="AbrirAlmacenamiento"
         android:id="@+id/imgplato"
+      android:scaleType="centerCrop"
         />
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"

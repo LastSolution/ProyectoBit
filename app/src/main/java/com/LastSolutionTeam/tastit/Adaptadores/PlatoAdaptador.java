@@ -14,24 +14,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.LastSolutionTeam.tastit.POJO.Cliente;
 import com.LastSolutionTeam.tastit.POJO.Pedido;
+import com.LastSolutionTeam.tastit.POJO.PedidoPlato;
 import com.LastSolutionTeam.tastit.POJO.Plato;
 import com.LastSolutionTeam.tastit.PlatosActivity;
 import com.LastSolutionTeam.tastit.R;
 import com.LastSolutionTeam.tastit.VarGlobales;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoViewHolder> {
+
+public class
+PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoViewHolder> {
     ArrayList<Plato> platos;
     Activity activity;
     int modocierremesa=0;
@@ -66,27 +67,49 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
 
     }
 
+    private boolean Verificarplatosenpedido(Cliente cliente, int idplato){
+        if(cliente!=null){
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    public void onBindViewHolder(@NonNull PlatoViewHolder platoViewHolder, int position) {
-    Plato plato=platos.get(position);
-    if(modocierremesa==1){
-
-    platoViewHolder.btneliminarusuario.setVisibility(View.GONE);
-    platoViewHolder.btnmodifusuario.setVisibility(View.GONE);
-
+            if(Pedido.BuscarPedidoporclienteyplato(cliente.getId_cliente(),idplato)!=0){
+                return true;
+            }    else{
+                return false;
+            }
+        }else{
+            return false;
+        }
 
     }
-    platoViewHolder.txtnombreplato.setText(plato.getNombre_plato());
-    platoViewHolder.txtprecioplato.setText( Double.toString(plato.getPrecio()));
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void onBindViewHolder(@NonNull PlatoViewHolder platoViewHolder, int position) {
+        Plato plato=platos.get(position);
+        if(modocierremesa==1){
+
+         platoViewHolder.btneliminarusuario.setVisibility(View.GONE);
+         platoViewHolder.btnmodifusuario.setVisibility(View.GONE);
+        /* if(Verificarplatosenpedido(VarGlobales.getCliente1(),plato.getId_plato())){
+             platoViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.cliente1));
+         }else if(Verificarplatosenpedido(VarGlobales.getCliente2(),plato.getId_plato())){
+             platoViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.cliente2));
+         }else if(Verificarplatosenpedido(VarGlobales.getCliente3(),plato.getId_plato())){
+             platoViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.cliente3));
+         }else{
+             platoViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.cliente4));
+         }*/
+                }
+        platoViewHolder.txtnombreplato.setText(plato.getNombre_plato());
+        platoViewHolder.txtprecioplato.setText( Double.toString(plato.getPrecio()));
         if(plato.getImagen()!=null){
 
             platoViewHolder.imgPlato.setImageBitmap(LogoaBitmap(plato.getImagen()));
+
         }
-    platoViewHolder.btnmodifusuario.setOnClickListener(new View.OnClickListener() {
+        platoViewHolder.btnmodifusuario.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             Intent myIntent = new Intent(v.getContext(), PlatosActivity.class);
             myIntent.putExtra("nombre",plato.getNombre_plato());
             myIntent.putExtra("precio",plato.getPrecio());
@@ -101,7 +124,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
     platoViewHolder.btneliminarusuario.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-        Plato.EliminarPlato(plato);
+            Plato.EliminarPlato(plato);
             notifyItemRemoved(position);
             platos.remove(position);
 
@@ -125,7 +148,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
         private ImageView imgPlato;
         private Button btnmodifusuario;
         private Button btneliminarusuario;
-
+        private CardView cardView;
 
         public PlatoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -135,7 +158,7 @@ public class PlatoAdaptador extends RecyclerView.Adapter<PlatoAdaptador.PlatoVie
             btnmodifusuario    = (Button) itemView.findViewById(R.id.btnmodificarplato);
             btneliminarusuario = (Button) itemView.findViewById(R.id.btneliminarplato);
             imgPlato=(ImageView) itemView.findViewById(R.id.cardimgplato);
-
+            cardView=(CardView) itemView.findViewById(R.id.cvplato);
         }
     }
 

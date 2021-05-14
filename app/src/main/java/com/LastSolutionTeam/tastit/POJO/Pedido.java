@@ -3,6 +3,7 @@ package com.LastSolutionTeam.tastit.POJO;
 import com.LastSolutionTeam.tastit.Persistencia.Conexion;
 import com.LastSolutionTeam.tastit.POJO.*;
 
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -206,6 +207,32 @@ public class Pedido {
         }
     }
 
+    private static ArrayList<Pedido> ListarPedidos() {
+
+        ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+        Pedido p = null;
+        try {
+            Connection cnn = Conexion.ObtenerConexion();
+            String sql = "SELECT * FROM Pedidos";
+            PreparedStatement pst = cnn.prepareStatement(sql);
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                p = Pedido.CrearObjeto(rs);
+                pedidos.add(p);
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+        finally
+        {
+            //cnn.close();
+        }
+        return pedidos;
+    }
     public static Pedido BuscarPedido(int id) {
 
         Pedido p = null;
@@ -234,6 +261,8 @@ public class Pedido {
         }
         return p;
     }
+
+
     public static Pedido BuscarPedidoporcliente(int idcliente) {
 
         Pedido p = null;
@@ -260,22 +289,22 @@ public class Pedido {
             //cnn.close();
         }
         return p;
-    }
+    }public static int  BuscarPedidoporclienteyplato(int idcliente, int idplato) {
 
-    private static ArrayList<Pedido> ListarPedidos() {
+       int retorno=0;
 
-        ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-        Pedido p = null;
         try {
             Connection cnn = Conexion.ObtenerConexion();
-            String sql = "SELECT * FROM Pedidos";
+            String sql = "SELECT Id_Pedido FROM pedidos p inner join pedidos_platos pp on pp.pedido=p.id_pedido WHERE p.cliente=? and pp.plato=?";
             PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setInt(1, idcliente);
+            pst.setInt(2, idplato);
 
-            ResultSet rs = pst.executeQuery();
+            ResultSet rs=pst.executeQuery();
 
             while(rs.next()){
-                p = Pedido.CrearObjeto(rs);
-                pedidos.add(p);
+                retorno = rs.getInt(1);
+
             }
         }
         catch (SQLException ex)
@@ -286,10 +315,9 @@ public class Pedido {
         {
             //cnn.close();
         }
-        return pedidos;
+        return retorno;
     }
 
-  
     //logica (publica)
     public Pedido Buscar(int p)
     {

@@ -42,6 +42,7 @@ Button btnNuevoPlato;
 Context context;
 Categoria categoria;
 Empresa empresaselect;
+TextView txtspinempresa;
 int modificar=0;
 int idplato=0;
 private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
@@ -95,6 +96,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_platos);
         context=this;
+        txtspinempresa=(TextView) findViewById(R.id.txtspinempresa);
         txttitulo=(TextView) findViewById(R.id.TITULOPLATO);
         etnombre=(EditText) findViewById(R.id.etNombrePlato);
         etprecio=(EditText) findViewById(R.id.etPrecio);
@@ -104,6 +106,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
         spinEmp=(Spinner) findViewById(R.id.spinEmpresaPlatos);
         if(VarGlobales.getUsuarioActual().getTipo().equals("Empresa")) {
         spinEmp.setVisibility(View.GONE);
+        txtspinempresa.setVisibility(View.GONE);
         }
         btnNuevoPlato=(Button) findViewById(R.id.btnAgregarPlato);
         ListaCategorias=Categoria.ListarCategorias();
@@ -119,10 +122,11 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
             etnombre.setText(parametros.getString("nombre"));
             etprecio.setText(Double.toString(parametros.getDouble("precio")));
             descripcion.setText(parametros.getString("descripcion"));
-            spinCat.setSelection(adapter.getPosition(Categoria.BuscarCategoriaPorID(parametros.getInt("categoria")))-1);
+            spinCat.setSelection(adapter.getPosition(Categoria.BuscarCategoriaPorID(parametros.getInt("categoria"))));
             imgPlato.setImageBitmap(convertirlogoBitMap(parametros.getByteArray("imagen")));
             idplato=parametros.getInt("idplato");
-
+            spinEmp.setVisibility(View.GONE);
+            txtspinempresa.setVisibility(View.GONE);
             btnNuevoPlato.setText("MODIFICA LOS DATOS");
             txttitulo.setText("MODIFICAR PLATO");
         }
@@ -169,6 +173,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                         Plato platom=new Plato(idplato,etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),empresaselect.getRut());
                         if(Plato.ModificarPlato(platom)==1){
                             mostrarSnackbar(v,"PLATO MODIFICADO CON EXITO");
+
                         }else {
                             mostrarSnackbar(v,"ERROR AL MODIFICAR PLATO");
                         }
@@ -189,6 +194,7 @@ private ArrayList<Categoria> ListaCategorias=new ArrayList<Categoria>();
                         Plato platom=new Plato(idplato,etnombre.getText().toString(),Double.parseDouble(precio),descripcion.getText().toString(),ImagenBlob(ObtenerImagen()),categoria.getId_categoria(),VarGlobales.getEmpresaActual().getRut());
                         if(Plato.ModificarPlato(platom)==1){
                             mostrarSnackbar(v,"PLATO MODIFICADO CON EXITO");
+
                         }else {
                             mostrarSnackbar(v,"ERROR AL MODIFICAR PLATO");
                         }

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:text="NUEVA EMPRESA"
         android:textSize="30dp"
+        android:id="@+id/tituloEmpresa"
         android:gravity="center_horizontal" />
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -74,6 +75,7 @@
         android:src="@drawable/ic_baseline_image_24"
         android:onClick="AbrirAlmacenamiento"
         android:id="@+id/imgLogo"
+        android:scaleType="centerCrop"
        />
 
     </LinearLayout>
